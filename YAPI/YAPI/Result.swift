@@ -13,7 +13,7 @@ public enum Result<T, E> {
   case err(E)
 }
 
-extension Result {
+public extension Result {
   func isOk() -> Bool {
     switch self {
     case .ok(_): return true

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */; };
+		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
+		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
+		0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
+		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
+		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
+		0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3NetworkAdapter.swift; sourceTree = "<group>"; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +87,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0846EBA21FBC1544001B0F69 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0846EBA81FBC1CF9001B0F69 /* Adapters */,
+				0846EBA51FBC1CD3001B0F69 /* Authenticators */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0846EBA51FBC1CD3001B0F69 /* Authenticators */ = {
+			isa = PBXGroup;
+			children = (
+				0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */,
+				0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */,
+			);
+			path = Authenticators;
+			sourceTree = "<group>";
+		};
+		0846EBA81FBC1CF9001B0F69 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */,
+				0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +139,7 @@
 		087648AD1FB8FF190058E110 /* project-alpha */ = {
 			isa = PBXGroup;
 			children = (
+				0846EBA21FBC1544001B0F69 /* Network */,
 				087648AE1FB8FF190058E110 /* AppDelegate.swift */,
 				087648B01FB8FF190058E110 /* ViewController.swift */,
 				087648B21FB8FF190058E110 /* Main.storyboard */,
@@ -301,6 +337,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
+				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
+				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
+				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 			);
