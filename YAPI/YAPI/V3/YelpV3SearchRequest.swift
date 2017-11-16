@@ -13,7 +13,7 @@ public final class YelpV3SearchRequest : Request {
   public typealias ResponseType = YelpV3SearchResponse
  
   public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version = .oauth2
+  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth2
   public let path: String = APIEndpoints.Yelp.V3.search
   public let parameters: [String : String]
   public var requestMethod: OAuthSwiftHTTPRequest.Method {

@@ -9,18 +9,21 @@
 import Foundation
 import OAuthSwift
 
-final class GooglePlaceSearchRequest: GoogleRequest {
-  typealias ResponseType = GooglePlaceSearchResponse
+public final class GooglePlaceSearchRequest: GoogleRequest {
+  public typealias ResponseType = GooglePlaceSearchResponse
 
-  let oauthVersion: OAuthSwiftCredential.Version = .oauth1
-  let path: String = APIEndpoints.Google.search
-  let requestMethod: OAuthSwiftHTTPRequest.Method = .GET
+  public let oauthVersion: OAuthSwiftCredential.Version? = nil
+  public let path: String = APIEndpoints.Google.search
+  public let requestMethod: OAuthSwiftHTTPRequest.Method = .GET
   
-  let parameters: [String: String]
-  let session: HTTPClient
+  public let parameters: [String: String]
+  public let session: HTTPClient
   
-  init(with parameters: GooglePlaceSearchParameters, session: HTTPClient = HTTPClient.sharedSession) {
+  init(with params: GooglePlaceSearchParameters, token: GoogleAuthToken, session: HTTPClient = HTTPClient.sharedSession) {
     var parameters = [String: String]()
+    parameters["key"] = token.token
+    parameters.insert(parameter: params.location)
+    parameters.insert(parameter: params.radius)
     
     self.parameters = parameters
     self.session = session

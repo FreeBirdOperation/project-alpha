@@ -1,5 +1,5 @@
 //
-//  YelpCoordinate.swift
+//  Coordinate.swift
 //  YAPI
 //
 //  Created by Daniel Seitz on 11/11/17.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-public struct YelpCoordinate {
+public struct Coordinate {
   private enum Params {
     static let latitude = "latitude"
     static let longitude = "longitude"
@@ -22,7 +22,7 @@ public struct YelpCoordinate {
     return coordinate.longitude
   }
   
-  public init(withDict dict: [String: AnyObject]) throws {
+  init(withDict dict: [String: AnyObject]) throws {
     let latitude: CLLocationDegrees = try dict.parseParam(key: Params.latitude)
     let longitude: CLLocationDegrees = try dict.parseParam(key: Params.longitude)
     

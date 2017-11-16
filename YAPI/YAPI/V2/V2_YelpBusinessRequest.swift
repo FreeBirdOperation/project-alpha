@@ -13,7 +13,7 @@ public final class YelpV2BusinessRequest : Request {
   public typealias ResponseType = YelpV2BusinessResponse
   
   public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version = .oauth1
+  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth1
   public let path: String
   public let parameters: [String : String]
   public let session: HTTPClient

@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class GooglePlaceSearchResponse: Response {
+public final class GooglePlaceSearchResponse: Response {
 
-  let error: YelpResponseError?
+  public let error: YelpResponseError?
 
-  init(withJSON data: [String : AnyObject]) throws {
-    throw NSError()
+  public init(withJSON data: [String : AnyObject]) throws {
+    throw YelpResponseError.failedToParse(cause: ParseError.unknown)
   }
 }

@@ -10,24 +10,29 @@ import Foundation
 
 var systemLoggers: [Logger] = [ConsoleLogger()]
 
-func log(_ severity: Severity, message: String) {
+func log(_ severity: LoggingSeverity, for domain: LoggingDomain = .general, message: String) {
   for logger in systemLoggers {
-    logger.log(severity, message)
+    logger.log(severity, for: domain, message)
   }
 }
 
 protocol Logger {
-  func log(_ severity: Severity, _ message: String)
+  func log( _ severity: LoggingSeverity, for domain: LoggingDomain, _ message: String)
 }
 
-public enum Severity {
+public enum LoggingSeverity {
   case success
   case info
   case warning
   case error
 }
 
-extension Severity: CustomStringConvertible {
+public enum LoggingDomain {
+  case general
+  case network
+}
+
+extension LoggingSeverity: CustomStringConvertible {
   public var description: String {
     switch self {
     case .success: return "SUCCESS"
@@ -39,7 +44,7 @@ extension Severity: CustomStringConvertible {
 }
 
 struct ConsoleLogger: Logger {
-  func log(_ severity: Severity, _ message: String) {
+  func log(_ severity: LoggingSeverity, for domain: LoggingDomain, _ message: String) {
     print("[\(severity.description)]: \(message)")
   }
 }

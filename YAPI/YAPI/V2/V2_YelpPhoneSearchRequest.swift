@@ -13,7 +13,7 @@ public final class YelpV2PhoneSearchRequest : Request {
   public typealias ResponseType = YelpV2PhoneSearchResponse
 
   public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version = .oauth1
+  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth1
   public let path: String = APIEndpoints.Yelp.V2.phone
   public let parameters: [String: String]
   public let session: HTTPClient

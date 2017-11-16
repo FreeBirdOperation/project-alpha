@@ -50,6 +50,7 @@ public final class HTTPClient {
       - Parameter completionHandler: The handler to call with the response information
    */
   func send(_ url: URL, completionHandler handler: @escaping DataTaskResult) {
+    log(.info, for: .network, message: "Sending Request to: \(url)")
     let task = self.session.dataTask(with: url, completionHandler: handler)
     task.resume()
   }
@@ -61,6 +62,7 @@ public final class HTTPClient {
       - Parameter completionHandler: The handler to call with the response information
    */
   func send(_ request: URLRequest, completionHandler handler: @escaping DataTaskResult) {
+    log(.info, for: .network, message: "Sending Request to: \(request)")
     let task = self.session.dataTask(with: request, completionHandler: handler)
     task.resume()
   }

@@ -17,7 +17,7 @@ public final class YelpV3TokenRequest : Request {
   public typealias ResponseType = YelpV3TokenResponse
   
   public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version = .oauth2
+  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth2
   public let path: String = APIEndpoints.Yelp.V3.token
   public let parameters: [String: String]
   public var requestMethod: OAuthSwiftHTTPRequest.Method {

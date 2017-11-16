@@ -11,7 +11,7 @@ import Foundation
 protocol GoogleRequest: Request {}
 
 extension GoogleRequest {
-  var host: String {
+  public var host: String {
     return APIEndpoints.Google.host
   }
 }

@@ -79,6 +79,7 @@ public enum APIFactory {
   static func makeResponse<T: Request>(with data: Data, from request: T) -> Result<T.ResponseType, APIError> {
     do {
       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+      log(.info, for: .network, message: "\(jsonStringify(json))")
       return APIFactory.makeResponse(withJSON: json as! [String: AnyObject], from: request)
     }
     catch {
@@ -181,5 +182,20 @@ extension APIFactory.Yelp.V3 {
   
   public static func makeSearchRequest(with parameters: YelpV3SearchParameters) -> YelpV3SearchRequest {
     return YelpV3SearchRequest(searchParameters: parameters)
+  }
+}
+
+// MARK: Google API
+extension APIFactory.Google {
+  public static func setAppToken(_ token: String) {
+    GoogleAuth.token = GoogleAuthToken(token)
+  }
+  
+  public static func makeSearchRequest(with parameters: GooglePlaceSearchParameters) -> Result<GooglePlaceSearchRequest, RequestError> {
+    guard let token = GoogleAuth.token else {
+      return .err(.failedToGenerateRequest)
+    }
+    
+    return .ok(GooglePlaceSearchRequest(with: parameters, token: token))
   }
 }

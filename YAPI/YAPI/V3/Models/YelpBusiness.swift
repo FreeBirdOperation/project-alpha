@@ -33,7 +33,7 @@ public struct YelpV3Business {
   public let categories: [YelpCategory]
 
   /// The coordinates of this business.
-  public let coordinates: YelpCoordinate
+  public let coordinates: Coordinate
   
   /// Phone number for this business formatted for display
   public let displayPhoneNumber: String?
@@ -80,7 +80,7 @@ public struct YelpV3Business {
     self.categories = try categories.map { try YelpCategory(withDict: $0) }
     
     let coordinates: [String: AnyObject] = try dict.parseParam(key: Params.coordinates)
-    self.coordinates = try YelpCoordinate(withDict: coordinates)
+    self.coordinates = try Coordinate(withDict: coordinates)
     
     self.displayPhoneNumber = try? dict.parseParam(key: Params.display_phone)
     self.distance = try dict.parseParam(key: Params.distance)

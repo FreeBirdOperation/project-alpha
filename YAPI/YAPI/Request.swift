@@ -12,12 +12,17 @@ import OAuthSwift
 
 
 // Cached oauth clients for sending requests
-private var oauth1Client: OAuthSwiftClient? = nil
-private var oauth2Client: OAuthSwiftClient? = nil
-private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwiftClient? {
+private var OAuth1Client: OAuthSwiftClient? = nil
+private var OAuth2Client: OAuthSwiftClient? = nil
+// TODO: Create simple Network Client for API's not requiring OAuth (Google)
+private var SwiftClient: OAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
+private func oAuthClient(for version: OAuthSwiftCredential.Version?) -> OAuthSwiftClient? {
+  guard let version = version else {
+    return SwiftClient
+  }
   switch version {
   case .oauth1:
-    if let client = oauth1Client {
+    if let client = OAuth1Client {
       return client
     }
     else {
@@ -31,11 +36,11 @@ private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwif
           return nil
       }
       let client = OAuthSwiftClient(consumerKey: consumerKey, consumerSecret: consumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret, version: .oauth1)
-      oauth1Client = client
+      OAuth1Client = client
       return client
     }
   case .oauth2:
-    if let client = oauth2Client {
+    if let client = OAuth2Client {
       if let token = AuthKeys.token {
         client.credential.oauthToken = token
       }
@@ -52,7 +57,7 @@ private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwif
       let credential = OAuthSwiftCredential(consumerKey: consumerKey, consumerSecret: consumerSecret)
       credential.version = .oauth2
       let client = OAuthSwiftClient(credential: credential)
-      oauth2Client = client
+      OAuth2Client = client
       return client
     }
   }
@@ -77,7 +82,7 @@ public protocol Request {
   associatedtype ResponseType: Response
   
   /// The version of OAuth to use
-  var oauthVersion: OAuthSwiftCredential.Version { get }
+  var oauthVersion: OAuthSwiftCredential.Version? { get }
   
   /// The hostname of the endpoint
   var host: String { get }
@@ -106,6 +111,12 @@ public protocol Request {
 
 public extension Request {
   public func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
+    self.internalSend(completionHandler: handler)
+  }
+}
+
+internal extension Request {
+  func internalSend(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
     guard let urlRequest = self.generateURLRequest() else {
       handler(.err(RequestError.failedToGenerateRequest))
       return
@@ -135,7 +146,7 @@ public extension Request {
 fileprivate extension Request {
   func generateURLRequest() -> URLRequest? {
     guard
-      let client = oauthClient(for: oauthVersion),
+      let client = oAuthClient(for: oauthVersion),
       let request = client.makeRequest("https://\(self.host)\(self.path)",
                                         method: self.requestMethod,
                                         parameters: self.parameters,
