@@ -9,7 +9,7 @@
 import Foundation
 
 public struct YelpV3TokenParameters {
-  public enum GrantType : String, YelpParameter {
+  public enum GrantType : String, Parameter {
     public var key: String {
       return "grant_type"
     }
@@ -21,7 +21,7 @@ public struct YelpV3TokenParameters {
     case clientCredentials = "client_credentials"
   }
   
-  public struct ClientID : YelpStringParameter {
+  public struct ClientID : StringParameter {
     let internalValue: String
     
     public var key: String {
@@ -29,7 +29,7 @@ public struct YelpV3TokenParameters {
     }
   }
   
-  public struct ClientSecret : YelpStringParameter {
+  public struct ClientSecret : StringParameter {
     let internalValue: String
     
     public var key: String {

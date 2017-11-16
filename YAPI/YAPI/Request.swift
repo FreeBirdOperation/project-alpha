@@ -80,7 +80,7 @@ internal enum YelpEndpoints {
  
     - Usage:
     ```
-      // Given some YelpRequest
+      // Given some Request
  
       // Send the request and handle the response
       yelpRequest.send() { (response, error) in
@@ -88,8 +88,8 @@ internal enum YelpEndpoints {
       }
     ```
  */
-public protocol YelpRequest {
-  associatedtype Response: YelpResponse
+public protocol Request {
+  associatedtype ResponseType: Response
   
   /// The version of OAuth to use
   var oauthVersion: OAuthSwiftCredential.Version { get }
@@ -113,31 +113,31 @@ public protocol YelpRequest {
    Sends the request, calling the given handler with either the yelp response or an error. This can be
    called multiple times to retry sending the request
    
-   - Parameter completionHandler: The block to call when the response returns, takes a YelpResponse? and
+   - Parameter completionHandler: The block to call when the response returns, takes a Response? and
    a YelpError? as arguments, the error can be of YelpResponseError type or YelpRequestError type
    */
-  func send(completionHandler handler: @escaping (_ result: Result<Self.Response, YelpError>) -> Void)
+  func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void)
 }
 
-public extension YelpRequest {
+public extension Request {
   var host: String {
     return yelpHost
   }
 
-  public func send(completionHandler handler: @escaping (_ result: Result<Self.Response, YelpError>) -> Void) {
+  public func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
     guard let urlRequest = self.generateURLRequest() else {
-      handler(.err(YelpRequestError.failedToGenerateRequest))
+      handler(.err(RequestError.failedToGenerateRequest))
       return
     }
     
     self.session.send(urlRequest) {(data, response, error) in
-      var result: Result<Self.Response, YelpError>
+      var result: Result<Self.ResponseType, APIError>
       defer {
         handler(result)
       }
       
       if let err = error {
-        result = Result.err(YelpRequestError.failedToSendRequest(err as NSError))
+        result = Result.err(RequestError.failedToSendRequest(err as NSError))
         return
       }
       
@@ -146,12 +146,12 @@ public extension YelpRequest {
         return
       }
       
-      result = YelpAPIFactory.makeResponse(with: jsonData, from: self)
+      result = APIFactory.makeResponse(with: jsonData, from: self)
     }
   }
 }
 
-fileprivate extension YelpRequest {
+fileprivate extension Request {
   func generateURLRequest() -> URLRequest? {
     guard
       let client = oauthClient(for: oauthVersion),

@@ -1,5 +1,5 @@
 //
-//  YelpParameter.swift
+//  Parameter.swift
 //  YAPI
 //
 //  Created by Daniel Seitz on 9/11/16.
@@ -8,28 +8,28 @@
 
 import Foundation
 
-public protocol YelpParameter : CustomStringConvertible {
+public protocol Parameter : CustomStringConvertible {
   var key: String { get }
   var value: String { get }
 }
 
-protocol YelpBooleanParameter : ExpressibleByBooleanLiteral, YelpParameter {
+protocol BooleanParameter : ExpressibleByBooleanLiteral, Parameter {
   var internalValue: Bool { get }
 }
 
-protocol YelpStringParameter : ExpressibleByStringLiteral, YelpParameter {
+protocol StringParameter : ExpressibleByStringLiteral, Parameter {
   var internalValue: String { get }
 }
 
-protocol YelpIntParameter : ExpressibleByIntegerLiteral, YelpParameter {
+protocol IntParameter : ExpressibleByIntegerLiteral, Parameter {
   var internalValue: Int { get }
 }
 
-protocol YelpDoubleParameter : ExpressibleByFloatLiteral, YelpParameter {
+protocol DoubleParameter : ExpressibleByFloatLiteral, Parameter {
   var internalValue: Double { get }
 }
 
-protocol YelpArrayParameter : ExpressibleByArrayLiteral, YelpParameter {
+protocol ArrayParameter : ExpressibleByArrayLiteral, Parameter {
   associatedtype Element
   
   var internalValue: [Self.Element] { get }
@@ -37,13 +37,13 @@ protocol YelpArrayParameter : ExpressibleByArrayLiteral, YelpParameter {
   init(_ elements: [Self.Element])
 }
 
-extension YelpParameter {
+extension Parameter {
   public var description: String {
     return self.value
   }
 }
 
-extension YelpBooleanParameter {
+extension BooleanParameter {
   public var value: String {
     return String(self.internalValue)
   }
@@ -53,7 +53,7 @@ extension YelpBooleanParameter {
   }
 }
 
-extension YelpStringParameter {
+extension StringParameter {
   public var value: String {
     return self.internalValue
   }
@@ -63,7 +63,7 @@ extension YelpStringParameter {
   }
 }
 
-extension YelpIntParameter {
+extension IntParameter {
   public var value: String {
     return String(self.internalValue)
   }
@@ -73,7 +73,7 @@ extension YelpIntParameter {
   }
 }
 
-extension YelpDoubleParameter {
+extension DoubleParameter {
   public var value: String {
     return String(self.internalValue)
   }
@@ -83,7 +83,7 @@ extension YelpDoubleParameter {
   }
 }
 
-extension YelpArrayParameter {
+extension ArrayParameter {
   public var value: String {
     return self.internalValue.map() { "\($0)" }.joined(separator: ",")
   }

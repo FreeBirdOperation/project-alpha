@@ -10,12 +10,12 @@ import Foundation
 
 /**
     A protocol encapsulating the data recieved in a response from the Yelp api. This will be generated in 
-    the completion handler of network calls, and should be created through the YelpAPIFactory class, not
+    the completion handler of network calls, and should be created through the APIFactory class, not
     through its initializers.
  
     - Usage:
     ```
-      // Given some YelpResponse
+      // Given some Response
       
       // Make sure there was no error
       if yelpResponse.wasSuccessful {
@@ -26,7 +26,7 @@ import Foundation
       }
     ```
  */
-public protocol YelpV2Response : YelpResponse {
+public protocol YelpV2Response : Response {
   /// Suggested bounds in a map to display results in
   var region: YelpRegion? { get }
   

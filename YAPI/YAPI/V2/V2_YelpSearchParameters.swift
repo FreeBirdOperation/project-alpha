@@ -9,7 +9,7 @@
 import Foundation
 
 public struct YelpV2SearchParameters {
-  public enum SearchTerm : String, YelpParameter {
+  public enum SearchTerm : String, Parameter {
     public var key: String {
       return "term"
     }
@@ -22,7 +22,7 @@ public struct YelpV2SearchParameters {
     case drink = "drink"
   }
   
-  public struct Limit : YelpIntParameter {
+  public struct Limit : IntParameter {
     let internalValue: Int
     
     public var key: String {
@@ -34,7 +34,7 @@ public struct YelpV2SearchParameters {
     }
   }
   
-  public struct Offset : YelpIntParameter {
+  public struct Offset : IntParameter {
     let internalValue: Int
     
     public var key: String {
@@ -46,7 +46,7 @@ public struct YelpV2SearchParameters {
     }
   }
   
-  public enum SortMode : Int, YelpParameter {
+  public enum SortMode : Int, Parameter {
     public var key: String {
       return "sort"
     }
@@ -60,7 +60,7 @@ public struct YelpV2SearchParameters {
     case highestRated = 2
   }
   
-  public struct Categories : YelpArrayParameter {
+  public struct Categories : ArrayParameter {
     public typealias Element = String
     
     let internalValue: [Element]
@@ -74,7 +74,7 @@ public struct YelpV2SearchParameters {
     }
   }
   
-  public struct Radius : YelpIntParameter {
+  public struct Radius : IntParameter {
     let internalValue: Int
     
     public var key: String {
@@ -86,7 +86,7 @@ public struct YelpV2SearchParameters {
     }
   }
   
-  public struct Deals : YelpBooleanParameter {
+  public struct Deals : BooleanParameter {
     let internalValue: Bool
     
     public var key: String {

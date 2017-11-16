@@ -9,8 +9,8 @@
 import Foundation
 import OAuthSwift
 
-public final class YelpV2PhoneSearchRequest : YelpRequest {
-  public typealias Response = YelpV2PhoneSearchResponse
+public final class YelpV2PhoneSearchRequest : Request {
+  public typealias ResponseType = YelpV2PhoneSearchResponse
 
   public let oauthVersion: OAuthSwiftCredential.Version = .oauth1
   public let path: String = YelpEndpoints.V2.phone
@@ -23,12 +23,12 @@ public final class YelpV2PhoneSearchRequest : YelpRequest {
   init(phoneSearch: YelpV2PhoneSearchParameters, session: YelpHTTPClient = YelpHTTPClient.sharedSession) {
     var parameters = [String: String]()
     
-    parameters.insertParameter(phoneSearch.phone)
+    parameters.insert(parameter: phoneSearch.phone)
     if let countryCode = phoneSearch.countryCode {
-      parameters.insertParameter(countryCode)
+      parameters.insert(parameter: countryCode)
     }
     if let category = phoneSearch.category {
-      parameters.insertParameter(category)
+      parameters.insert(parameter: category)
     }
     self.parameters = parameters
     self.session = session

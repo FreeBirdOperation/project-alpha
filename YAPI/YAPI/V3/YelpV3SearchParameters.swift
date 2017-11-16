@@ -9,13 +9,13 @@
 import Foundation
 
 public struct YelpV3SearchParameters {
-  public struct Term : YelpStringParameter {
+  public struct Term : StringParameter {
     let internalValue: String
     
     public var key: String = "term"
   }
   
-  public struct Radius : YelpIntParameter {
+  public struct Radius : IntParameter {
     let internalValue: Int
     
     public let key: String = "radius"
@@ -25,7 +25,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Categories : YelpArrayParameter {
+  public struct Categories : ArrayParameter {
     // TODO: Look at coming back and changing this to some Category type?
     public typealias Element = String
     
@@ -38,7 +38,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Locale : YelpParameter {
+  public struct Locale : Parameter {
     let internalValue: Language
     
     public var key: String {
@@ -54,7 +54,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Limit: YelpIntParameter {
+  public struct Limit: IntParameter {
     let internalValue: Int
     public let key: String = "limit"
     
@@ -63,7 +63,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Offset: YelpIntParameter {
+  public struct Offset: IntParameter {
     let internalValue: Int
     public let key: String = "offset"
     
@@ -72,7 +72,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public enum SortMode: String, YelpParameter {
+  public enum SortMode: String, Parameter {
     public var key: String {
       return "sort"
     }
@@ -87,7 +87,7 @@ public struct YelpV3SearchParameters {
     case distance = "distance"
   }
   
-  public struct Price: YelpArrayParameter {
+  public struct Price: ArrayParameter {
     public typealias Element = YelpPrice
     
     let internalValue: [Element]
@@ -108,7 +108,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct OpenNow: YelpBooleanParameter {
+  public struct OpenNow: BooleanParameter {
     let internalValue: Bool
     public let key: String = "open_now"
     
@@ -117,7 +117,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct OpenAt: YelpIntParameter {
+  public struct OpenAt: IntParameter {
     let internalValue: Int
     public let key: String = "open_at"
     
@@ -126,7 +126,7 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Attributes: YelpArrayParameter {
+  public struct Attributes: ArrayParameter {
     public enum Options: String {
       /// Hot and New businesses
       case hotAndNew = "hot_and_new"

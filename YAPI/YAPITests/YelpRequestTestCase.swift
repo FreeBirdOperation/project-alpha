@@ -34,7 +34,7 @@ class YelpV2GenericRequestTestCase : YAPIXCTestCase {
     request.send() { result in
       XCTAssert(result.isErr())
       
-      guard case YelpRequestError.failedToSendRequest(mockError) = result.unwrapErr() else {
+      guard case RequestError.failedToSendRequest(mockError) = result.unwrapErr() else {
         return XCTFail("Wrong error type thrown: \(result.unwrapErr())")
       }
     }
@@ -55,7 +55,7 @@ class YelpV2GenericRequestTestCase : YAPIXCTestCase {
     request.send() { result in
       XCTAssert(result.isErr())
 
-      guard case YelpResponseError.failedToParse(cause: YelpParseError.invalidJson) = result.unwrapErr() else {
+      guard case YelpResponseError.failedToParse(cause: ParseError.invalidJson) = result.unwrapErr() else {
         return XCTFail("Wrong error type given: \(result.unwrapErr())")
       }
     }

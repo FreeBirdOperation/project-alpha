@@ -9,7 +9,7 @@
 import Foundation
 
 extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleByStringLiteral {
-  mutating func insertParameter(_ parameter: YelpParameter?) {
+  mutating func insert(parameter: Parameter?) {
     if
       let parameter = parameter,
       let key = parameter.key as? Key,
@@ -21,7 +21,7 @@ extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleBy
 
 extension Dictionary where Key: StringProtocol {
   func parseParam<ReturnType>(key: Key) throws -> ReturnType {
-    guard let value = self[key] as? ReturnType else { throw YelpParseError.missing(field: key.description) }
+    guard let value = self[key] as? ReturnType else { throw ParseError.missing(field: key.description) }
     return value
   }
 }

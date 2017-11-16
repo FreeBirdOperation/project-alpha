@@ -16,7 +16,7 @@ final class YelpV3NetworkAdapter: NetworkAdapter {
     let radius = YelpV3SearchParameters.Radius(params.distance)
     let location = YelpV3LocationParameter(location: "Portland, OR")
     let yelpSearchParams = YelpV3SearchParameters(location: location, radius: radius)
-    let request = YelpAPIFactory.V3.makeSearchRequest(with: yelpSearchParams)
+    let request = APIFactory.Yelp.V3.makeSearchRequest(with: yelpSearchParams)
     
     request.send { result in
       //                                            \/ This is really dumb...

@@ -11,15 +11,15 @@ import OAuthSwift
 import CoreLocation
 
 /**
-    A YelpRequest that queries the Yelp API's search service. This gives a list of businesses based on 
+    A Request that queries the Yelp API's search service. This gives a list of businesses based on 
     certain parameters like category, type, distance, search location, etc. The number of businesses 
     returned can be limited as well in the parameters. This class is meant to be one-shot, if you want to 
     send another request create a new instance of this class. The query parameters can only be set in the 
-    initializer. Instances of this class should be created through the YelpAPIFactory.
+    initializer. Instances of this class should be created through the APIFactory.
  */
-public final class YelpV2SearchRequest: YelpRequest {
+public final class YelpV2SearchRequest: Request {
   
-  public typealias Response = YelpV2SearchResponse
+  public typealias ResponseType = YelpV2SearchResponse
   
   public let oauthVersion: OAuthSwiftCredential.Version = .oauth1
   public let path: String = YelpEndpoints.V2.search
@@ -33,49 +33,49 @@ public final class YelpV2SearchRequest: YelpRequest {
     var parameters = [String: String]()
     
     // Search Parameters
-    parameters.insertParameter(search.location)
+    parameters.insert(parameter: search.location)
     if let hint = (search.location as? InternalLocation)?.hint {
-      parameters.insertParameter(hint)
+      parameters.insert(parameter: hint)
     }
     if let limit = search.limit {
-      parameters.insertParameter(limit)
+      parameters.insert(parameter: limit)
     }
     if let term = search.term {
-      parameters.insertParameter(term)
+      parameters.insert(parameter: term)
     }
     if let offset = search.offset {
-      parameters.insertParameter(offset)
+      parameters.insert(parameter: offset)
     }
     if let sortMode = search.sortMode {
-      parameters.insertParameter(sortMode)
+      parameters.insert(parameter: sortMode)
     }
     if let categories = search.categories {
-      parameters.insertParameter(categories)
+      parameters.insert(parameter: categories)
     }
     if let radius = search.radius {
-      parameters.insertParameter(radius)
+      parameters.insert(parameter: radius)
     }
     if let filterDeals = search.filterDeals {
-      parameters.insertParameter(filterDeals)
+      parameters.insert(parameter: filterDeals)
     }
     
     // Locale Parameters
     if let locale = locale {
       if let countryCode = locale.countryCode {
-        parameters.insertParameter(countryCode)
+        parameters.insert(parameter: countryCode)
       }
       if let language = locale.language {
-        parameters.insertParameter(language)
+        parameters.insert(parameter: language)
       }
       if let filterLanguage = locale.filterLanguage {
-        parameters.insertParameter(filterLanguage)
+        parameters.insert(parameter: filterLanguage)
       }
     }
     
     // Actionlink Parameters
     if let actionlink = actionlink {
       if let actionlinks = actionlink.actionlinks {
-        parameters.insertParameter(actionlinks)
+        parameters.insert(parameter: actionlinks)
       }
     }
     

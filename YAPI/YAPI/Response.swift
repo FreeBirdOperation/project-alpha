@@ -1,5 +1,5 @@
 //
-//  YelpResponse.swift
+//  Response.swift
 //  YAPI
 //
 //  Created by Daniel Seitz on 9/27/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol YelpResponse {
+public protocol Response {
   init(withJSON data: [String: AnyObject]) throws
 
   /// If the response was recieved without an error
@@ -18,7 +18,7 @@ public protocol YelpResponse {
   var error: YelpResponseError? { get }
 }
 
-extension YelpResponse {
+extension Response {
   public var wasSuccessful: Bool {
     return error == nil
   }
