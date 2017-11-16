@@ -10,13 +10,13 @@ import XCTest
 @testable import YAPI
 
 class YelpHTTPClientTests: YAPIXCTestCase {
-  var subject: YelpHTTPClient!
+  var subject: HTTPClient!
   let session = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    subject = YelpHTTPClient(session: session)
+    subject = HTTPClient(session: session)
   }
   
   override func tearDown() {

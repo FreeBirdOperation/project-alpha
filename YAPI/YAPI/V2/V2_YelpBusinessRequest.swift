@@ -12,15 +12,16 @@ import OAuthSwift
 public final class YelpV2BusinessRequest : Request {
   public typealias ResponseType = YelpV2BusinessResponse
   
+  public let host: String = APIEndpoints.Yelp.host
   public let oauthVersion: OAuthSwiftCredential.Version = .oauth1
   public let path: String
   public let parameters: [String : String]
-  public let session: YelpHTTPClient
+  public let session: HTTPClient
   public var requestMethod: OAuthSwiftHTTPRequest.Method {
     return .GET
   }
   
-  init(businessId: String, locale: YelpV2LocaleParameters? = nil, actionlink: YelpV2ActionlinkParameters? = nil, session: YelpHTTPClient = YelpHTTPClient.sharedSession) {
+  init(businessId: String, locale: YelpV2LocaleParameters? = nil, actionlink: YelpV2ActionlinkParameters? = nil, session: HTTPClient = HTTPClient.sharedSession) {
     var parameters = [String: String]()
     
     // Locale Parameters
@@ -43,7 +44,7 @@ public final class YelpV2BusinessRequest : Request {
       }
     }
     
-    self.path = YelpEndpoints.V2.business + businessId
+    self.path = APIEndpoints.Yelp.V2.business + businessId
     self.parameters = parameters
     self.session = session
   }

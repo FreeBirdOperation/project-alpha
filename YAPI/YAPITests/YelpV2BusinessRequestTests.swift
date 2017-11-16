@@ -10,14 +10,14 @@ import XCTest
 @testable import YAPI
 
 class YelpV2BusinessRequestTests : YAPIXCTestCase {
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   var request: YelpV2BusinessRequest!
   var mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
     request = YelpV2BusinessRequest(businessId: "BUSINESS_ID", session: session)
   }
   
@@ -90,6 +90,6 @@ class YelpV2BusinessRequestTests : YAPIXCTestCase {
   }
   
   func test_BusinessRequest_HasModifiedEndpoint() {
-    XCTAssert(request.path == YelpEndpoints.V2.business + "BUSINESS_ID")
+    XCTAssert(request.path == APIEndpoints.Yelp.V2.business + "BUSINESS_ID")
   }
 }

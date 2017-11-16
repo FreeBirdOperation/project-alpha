@@ -10,14 +10,14 @@ import XCTest
 @testable import YAPI
 
 class YelpV2GenericRequestTestCase : YAPIXCTestCase {
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   var request: YelpV2BusinessRequest!
   let mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
     request = YelpV2BusinessRequest(businessId: "", session: session)
   }
   

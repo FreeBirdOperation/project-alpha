@@ -9,6 +9,28 @@
 import Foundation
 import CoreLocation
 
+internal enum APIEndpoints {
+  internal enum Yelp {
+    internal static let host: String = "api.yelp.com"
+    internal enum V2 {
+      internal static let search: String = "/v2/search/"
+      internal static let business: String = "/v2/business/"
+      internal static let phone: String = "/v2/phone_search/"
+    }
+    
+    internal enum V3 {
+      internal static let token: String = "/oauth2/token"
+      internal static let search: String = "/v3/businesses/search"
+    }
+  }
+  
+  internal enum Google {
+    internal static let host: String = "maps.googleapis.com/maps/api/place"
+    
+    internal static let search: String = "/nearbysearch/json"
+  }
+}
+
 /**
  Factory to generate Yelp requests and responses for use.
  */

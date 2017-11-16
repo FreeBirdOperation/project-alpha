@@ -130,7 +130,7 @@ class YelpAPIFactoryTests: YAPIXCTestCase {
     let reqParams = request.parameters
     
     XCTAssert(reqParams.count == 0)
-    XCTAssert(request.path == YelpEndpoints.V2.business + "businessId")
+    XCTAssert(request.path == APIEndpoints.Yelp.V2.business + "businessId")
   }
   
   func test_Factory_BuildsBusinessRequestWithLocaleParameters() {
@@ -138,7 +138,7 @@ class YelpAPIFactoryTests: YAPIXCTestCase {
     let request = APIFactory.Yelp.V2.makeBusinessRequest(with: "businessId")
     let reqParams = request.parameters
     
-    XCTAssert(request.path == YelpEndpoints.V2.business + "businessId")
+    XCTAssert(request.path == APIEndpoints.Yelp.V2.business + "businessId")
     
     XCTAssert(reqParams["cc"] == "US")
     XCTAssert(reqParams["lang"] == "en")
@@ -152,7 +152,7 @@ class YelpAPIFactoryTests: YAPIXCTestCase {
     let request = APIFactory.Yelp.V2.makeBusinessRequest(with: "businessId")
     let reqParams = request.parameters
     
-    XCTAssert(request.path == YelpEndpoints.V2.business + "businessId")
+    XCTAssert(request.path == APIEndpoints.Yelp.V2.business + "businessId")
     
     XCTAssertNil(reqParams["cc"])
     XCTAssertNil(reqParams["lang"])

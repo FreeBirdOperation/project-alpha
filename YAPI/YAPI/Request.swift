@@ -58,21 +58,6 @@ private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwif
   }
 }
 
-internal let yelpHost: String = "api.yelp.com"
-
-internal enum YelpEndpoints {
-  internal enum V2 {
-    static let search: String = "/v2/search/"
-    static let business: String = "/v2/business/"
-    static let phone: String = "/v2/phone_search/"
-  }
-  
-  internal enum V3 {
-    static let token: String = "/oauth2/token"
-    static let search: String = "/v3/businesses/search"
-  }
-}
-
 /**
     Any request that can be sent to the Yelp API conforms to this protocol. This could include requests to 
     the search API, business API, etc. The sendRequest function will query the Yelp API and return either a 
@@ -94,10 +79,10 @@ public protocol Request {
   /// The version of OAuth to use
   var oauthVersion: OAuthSwiftCredential.Version { get }
   
-  /// The hostname of the yelp endpoint
+  /// The hostname of the endpoint
   var host: String { get }
   
-  /// The path to the yelp api
+  /// The path to the api resource
   var path: String { get }
   
   /// Query parameters to include in the request
@@ -107,7 +92,7 @@ public protocol Request {
   var requestMethod: OAuthSwiftHTTPRequest.Method { get }
   
   /// The http session used to send this request
-  var session: YelpHTTPClient { get }
+  var session: HTTPClient { get }
   
   /**
    Sends the request, calling the given handler with either the yelp response or an error. This can be
@@ -120,10 +105,6 @@ public protocol Request {
 }
 
 public extension Request {
-  var host: String {
-    return yelpHost
-  }
-
   public func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
     guard let urlRequest = self.generateURLRequest() else {
       handler(.err(RequestError.failedToGenerateRequest))

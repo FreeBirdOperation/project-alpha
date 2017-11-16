@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
+
 final class ImageCache {
   static let globalCache = ImageCache()
   
@@ -17,6 +19,9 @@ final class ImageCache {
   
   fileprivate init() {}
   
+  // TODO (dseitz): Uh... I think statics in Swift are automatically synchronized across
+  // threads... So I don't think we need any of these synchronization operations... Let's
+  // do some research
   fileprivate subscript(key: String) -> ImageReference? {
     get {
       var imageReference: ImageReference? = nil
@@ -108,18 +113,16 @@ public final class ImageReference {
   }
   fileprivate var state: ImageReference.State
   
-  fileprivate let session: YelpHTTPClient
+  fileprivate let session: HTTPClient
   
   fileprivate var _cachedImage: UIImage?
   /// A copy of the cached image or nil if no image has been loaded yet
   fileprivate(set) var cachedImage: UIImage? {
     get {
-      guard let imageCopy = self._cachedImage?.cgImage?.copy() else {
-        return nil
-      }
-      return UIImage(cgImage: imageCopy)
+      return getCopyOfCachedImage()
     }
     set {
+      assert(_cachedImage == nil, "Attempted to update a cached image that has already been cached")
       if self._cachedImage == nil {
         self._cachedImage = newValue
       }
@@ -137,15 +140,26 @@ public final class ImageReference {
    
       - Returns: An ImageLoader that is ready to load an image from the url
    */
-  init(from url: URL, session: YelpHTTPClient = YelpHTTPClient.sharedSession) {
+  init(from url: URL, session: HTTPClient = HTTPClient.sharedSession) {
     self.url = url
     self.state = .idle
     self.session = session
   }
   
-  convenience init?(from string: String, session: YelpHTTPClient = YelpHTTPClient.sharedSession) {
+  convenience init?(from string: String, session: HTTPClient = HTTPClient.sharedSession) {
     guard let url = URL(string: string) else { return nil }
     self.init(from: url, session: session)
+  }
+  
+  private func getCopyOfCachedImage(withScale scale: CGFloat = 1.0) -> UIImage? {
+    guard
+      let cachedImage = self._cachedImage,
+      let cgImage = cachedImage.cgImage?.copy()
+      else {
+        return nil
+    }
+    
+    return UIImage(cgImage: cgImage, scale: scale, orientation: cachedImage.imageOrientation)
   }
   
   /**
@@ -159,86 +173,61 @@ public final class ImageReference {
           will be called with the UIImage created and the error will be nil. If there is an error, the 
           image will be nil and an error object will be returned
    */
-  public func load(withScale scale: CGFloat = 1.0, completionHandler handler: @escaping (_ image: UIImage?, _ error: ImageLoadError?) -> Void) {
+  public func load(withScale scale: CGFloat = 1.0,
+                   completionHandler handler: @escaping (ImageLoadResult) -> Void) {
     if self.state == .loading {
-      handler(nil, .loadInProgress)
+      handler(.err(.loadInProgress))
       return
     }
     self.state = .loading
     if let imageReference = ImageCache.globalCache[self.url.absoluteString] {
-      self.cachedImage = imageReference.cachedImage
+      self.cachedImage = imageReference._cachedImage
     }
-    if let image = self.cachedImage {
-      guard let imageCopy = image.cgImage?.copy() else {
-        handler(nil, .copyError)
-        return
-      }
-      handler(UIImage(cgImage: imageCopy, scale: scale, orientation: image.imageOrientation), nil)
+    if let image = getCopyOfCachedImage(withScale: scale) {
+      handler(.ok(image))
       self.state = .idle
       return
     }
     
     self.session.send(self.url) {(data, response, error) in
-      var imageResult: UIImage?
-      var errorResult: ImageLoadError?
+      var result: Result<UIImage, ImageLoadError>
       defer {
         self.state = .idle
-        handler(imageResult, errorResult)
+        handler(result)
       }
       if let err = error {
-        imageResult = nil
-        errorResult = .requestError(err as NSError)
+        result = .err(.requestError(err as NSError))
         return
       }
 
       guard let imageData = data else {
-        imageResult = nil
-        errorResult = .noDataRecieved
+        result = .err(.noDataReceived)
         return
       }
       
-      guard let image = UIImage(data: imageData) else {
-        imageResult = nil
-        errorResult = .invalidData
+      guard let image = UIImage(data: imageData, scale: scale) else {
+        result = .err(.invalidData)
         return
       }
       
       self.cachedImage = image
       ImageCache.globalCache[self.url.absoluteString] = self
-      imageResult = UIImage(data: imageData, scale: scale)
-      errorResult = nil
+      result = .ok(image)
     }
   }
   
 }
 
 
-public enum ImageLoadError: Error, Equatable {
+public enum ImageLoadError: Error {
   /// An error occurred when trying to send the request, check the wrapped NSError object for more details
   case requestError(NSError)
-  /// No data was recieved when trying to load the image
-  case noDataRecieved
-  /// Data was recieved, but it was not an image
+  /// No data was received when trying to load the image
+  case noDataReceived
+  /// Data was received, but it was not an image
   case invalidData
   /// A load is currently in progress, wait for that to finish
   case loadInProgress
   /// Failed to create a valid copy of the cached image
   case copyError
-}
-
-public func ==(lhs: ImageLoadError, rhs: ImageLoadError) -> Bool {
-  switch (lhs, rhs) {
-  case (let .requestError(err1), let .requestError(err2)):
-    return err1.domain == err2.domain && err1.code == err2.code
-  case (.noDataRecieved, .noDataRecieved):
-    return true
-  case (.invalidData, .invalidData):
-    return true
-  case (.loadInProgress, .loadInProgress):
-    return true
-  case (.copyError, .copyError):
-    return true
-  default:
-    return false
-  }
 }

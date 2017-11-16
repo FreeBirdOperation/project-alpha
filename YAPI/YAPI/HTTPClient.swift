@@ -1,5 +1,5 @@
 //
-//  YelpHTTPClient.swift
+//  HTTPClient.swift
 //  Chowroulette
 //
 //  Created by Daniel Seitz on 7/29/16.
@@ -30,12 +30,12 @@ protocol URLSessionDataTaskProtocol {
 }
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
-public final class YelpHTTPClient {
-  static let sharedSession = YelpHTTPClient()
+public final class HTTPClient {
+  static let sharedSession = HTTPClient()
   fileprivate let session: URLSessionProtocol
   
   /**
-      Initialize a new YelpHTTPClient with the session to use for network requests
+      Initialize a new HTTPClient with the session to use for network requests
    
       - Parameter session: The session object to use to make network requests
    */
