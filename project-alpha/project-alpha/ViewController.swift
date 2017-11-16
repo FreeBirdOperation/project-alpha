@@ -34,13 +34,24 @@ class ViewController: UIViewController {
         assertionFailure("Unable to retrieve appId or clientSecret from file")
         return
     }
+    let authToken = YelpV3AuthenticationToken(appId: appId, clientSecret: clientSecret)
     
-    YelpAPIFactory.V3.authenticate(appId: appId, clientSecret: clientSecret) { error in
-      if let error = error {
-        print("\(error)")
+    YelpV3Authenticator.authenticate(with: authToken) { result in
+      guard case .ok(let networkAdapter) = result else {
+        print("Error authenticating: \(result.unwrapErr())")
+        return
       }
-      else {
-        print("Authenticated")
+      
+      let params = SearchParameters(distance: 1000)
+      networkAdapter.makeSearchRequest(with: params) { result in
+        guard case .ok(let businesses) = result else {
+          print("Error in response: \(result.unwrapErr())")
+          return
+        }
+        
+        for business in businesses {
+          print(business.name)
+        }
       }
     }
   }
