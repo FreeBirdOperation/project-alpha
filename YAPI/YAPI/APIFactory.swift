@@ -53,7 +53,7 @@ public enum APIFactory {
    
    - Returns: A valid response object, populated with businesses or an error
    */
-  static func makeResponse<T: Request>(withJSON json: [String: AnyObject], from request: T) -> Result<T.ResponseType, APIError> {
+  private static func makeResponse<T: Request>(withJSON json: [String: AnyObject], from request: T) -> Result<T.ResponseType, APIError> {
     do {
       return try .ok(T.ResponseType.init(withJSON: json))
     }
@@ -79,7 +79,7 @@ public enum APIFactory {
   static func makeResponse<T: Request>(with data: Data, from request: T) -> Result<T.ResponseType, APIError> {
     do {
       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-      log(.info, for: .network, message: "\(jsonStringify(json))")
+      log(.info, for: .network, message: "\(T.ResponseType.self) Received:\n\(jsonStringify(json))")
       return APIFactory.makeResponse(withJSON: json as! [String: AnyObject], from: request)
     }
     catch {

@@ -35,11 +35,9 @@ class ViewController: UIViewController {
         assertionFailure("Unable to retrieve appId or clientSecret from file")
         return
     }
-//    let authToken = YelpV3AuthenticationToken(appId: appId, clientSecret: clientSecret)
-    let authToken = GooglePlaceAuthenticationToken(token: googleKey)
+    let authToken = YelpV3AuthenticationToken(appId: appId, clientSecret: clientSecret)
     
-//    YelpV3Authenticator.authenticate(with: authToken) { result in
-    GooglePlaceAuthenticator.authenticate(with: authToken) { result in
+    YelpV3Authenticator.authenticate(with: authToken) { result in
       guard case .ok(let networkAdapter) = result else {
         print("Error authenticating: \(result.unwrapErr())")
         return

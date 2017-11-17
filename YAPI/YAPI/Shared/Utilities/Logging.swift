@@ -11,6 +11,8 @@ import Foundation
 var systemLoggers: [Logger] = [ConsoleLogger()]
 
 func log(_ severity: LoggingSeverity, for domain: LoggingDomain = .general, message: String) {
+  guard domain.shouldLog else { return }
+
   for logger in systemLoggers {
     logger.log(severity, for: domain, message)
   }
@@ -30,6 +32,19 @@ public enum LoggingSeverity {
 public enum LoggingDomain {
   case general
   case network
+  
+  var envKey: String {
+    switch self {
+    case .general:
+      return "LOG_GENERAL"
+    case .network:
+      return "LOG_NETWORK"
+    }
+  }
+  
+  var shouldLog: Bool {
+    return ProcessInfo.processInfo.environment[self.envKey] != nil
+  }
 }
 
 extension LoggingSeverity: CustomStringConvertible {

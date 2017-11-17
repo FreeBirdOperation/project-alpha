@@ -14,7 +14,7 @@ import OAuthSwift
 // Cached oauth clients for sending requests
 private var OAuth1Client: OAuthSwiftClient? = nil
 private var OAuth2Client: OAuthSwiftClient? = nil
-// TODO: Create simple Network Client for API's not requiring OAuth (Google)
+// FIXME: Create simple Network Client for API's not requiring OAuth (Google)
 private var SwiftClient: OAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
 private func oAuthClient(for version: OAuthSwiftCredential.Version?) -> OAuthSwiftClient? {
   guard let version = version else {
@@ -129,7 +129,7 @@ internal extension Request {
       }
       
       if let err = error {
-        result = Result.err(RequestError.failedToSendRequest(err as NSError))
+        result = .err(RequestError.failedToSendRequest(err as NSError))
         return
       }
       

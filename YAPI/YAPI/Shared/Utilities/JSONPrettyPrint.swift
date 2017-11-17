@@ -12,8 +12,8 @@ func jsonStringify(_ value: Any) -> String {
   if JSONSerialization.isValidJSONObject(value) {
     do {
       let data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-      if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-        return string as String
+      if let string = String(data: data, encoding: String.Encoding.utf8) {
+        return string
       }
     }  catch {
       return ""
