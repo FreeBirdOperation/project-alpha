@@ -10,15 +10,22 @@
 import UIKit
 
 class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var pickerLabelView: UIPickerView!
     
+    
+    @IBOutlet weak var distanceLabel: UITextField!
     let distanceFilter = ["5", "10", "15", "20", "50", "100"]
+    let distancePicker = UIPickerView()
     
     override func viewDidLoad() {
-        pickerLabelView.isHidden = true
+        distancePicker.delegate = self
+        distancePicker.dataSource = self
+        
+        //Binding textfield to picker
+        distanceLabel.inputView = distancePicker
     }
     
+    
+    // These next four functions are for UIPickerViewDelegate and UIPickerViewDataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -33,6 +40,6 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         distanceLabel.text = distanceFilter[row]
-        pickerView.isHidden = true
+        self.view.endEditing(false)
     }
 }
