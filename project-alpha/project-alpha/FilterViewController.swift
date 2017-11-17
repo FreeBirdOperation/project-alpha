@@ -10,13 +10,14 @@
 import UIKit
 
 class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    
+    // Properties
     @IBOutlet weak var distanceLabel: UITextField!
     let distanceFilter = ["5", "10", "15", "20", "50", "100"]
     let distancePicker = UIPickerView()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         distancePicker.delegate = self
         distancePicker.dataSource = self
         
