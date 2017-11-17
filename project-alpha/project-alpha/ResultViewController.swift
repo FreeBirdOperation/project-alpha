@@ -9,8 +9,11 @@
 import UIKit
 
 class ResultViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
+    var passedInfo = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+        label.text = passedInfo
     }
     
     @IBAction func rightSwipe(_ sender: UISwipeGestureRecognizer) {

@@ -24,7 +24,7 @@
                                 <color key="backgroundColor" red="1" green="0.72403214900000001" blue="0.4614064618" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Select"/>
                                 <connections>
-                                    <segue destination="jxW-Fe-wlS" kind="show" identifier="filterToResult" id="d2B-NC-GoV"/>
+                                    <action selector="selectButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2g1-Y8-VD4"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KQv-Je-iyH">
@@ -40,6 +40,7 @@
                     </view>
                     <connections>
                         <outlet property="distanceLabel" destination="KQv-Je-iyH" id="T4H-E0-zMm"/>
+                        <segue destination="jxW-Fe-wlS" kind="show" identifier="segueResult" id="jcJ-b5-G6m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -53,6 +54,15 @@
                     <view key="view" contentMode="scaleToFill" id="hIC-0y-UIS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-bu-Lr9">
+                                <rect key="frame" x="97" y="284" width="180" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="qG2-eO-zaM"/>
@@ -63,6 +73,9 @@
                             <outletCollection property="gestureRecognizers" destination="8FX-Le-6fo" appends="YES" id="6Jz-eD-CiY"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="label" destination="Rif-bu-Lr9" id="0xt-uw-bx0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzR-zp-1Y6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="Rst-dW-mpd" userLabel="Right Swipe Gesture Recognizer">
@@ -86,7 +99,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="970" y="90"/>
+            <point key="canvasLocation" x="968.79999999999995" y="89.505247376311857"/>
         </scene>
     </scenes>
 </document>

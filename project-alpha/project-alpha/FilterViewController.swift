@@ -43,4 +43,17 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         distanceLabel.text = distanceFilter[row]
         self.view.endEditing(false)
     }
+    
+    // action function for select button
+    @IBAction func selectButton(_ sender: Any) {
+        if(distanceLabel.text != ""){
+            performSegue(withIdentifier: "segueResult", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var result = segue.destination as! ResultViewController
+        result.passedInfo = distanceLabel.text!
+    }
+    
 }
