@@ -8,15 +8,36 @@
 
 import UIKit
 
+struct placeData {
+    var name: String
+    var price: Int
+    var distance: Int
+    var number: Int
+    
+    init(name: String, price: Int, distance: Int, number: Int){
+        self.name = name
+        self.price = price
+        self.distance = distance
+        self.number = number
+    }
+}
+
 class ResultViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     var passedInfo = String()
     
-    
+    var dummyData = [placeData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = passedInfo
+        randomDataGenerator(num: Int(label.text!)!)
+    }
+    
+    private func randomDataGenerator(num: Int){
+        for index in 0...num{
+            dummyData.append(placeData(name: "Testing Restaurant", price: 4, distance: index+3, number: index))
+        }
     }
     
     @IBAction func rightSwipe(_ sender: UISwipeGestureRecognizer) {
