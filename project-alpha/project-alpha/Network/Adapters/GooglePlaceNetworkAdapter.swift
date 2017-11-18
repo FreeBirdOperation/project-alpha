@@ -9,11 +9,18 @@
 import Foundation
 import YAPI
 
+extension GoogleEstablishment: BusinessModel {}
+
 final class GooglePlaceNetworkAdapter: NetworkAdapter {
-  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (Result<[BusinessModel], Error>) -> Void) {
+  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let locationParam = GooglePlaceSearchParameters.Location(latitude: 45.509761, longitude: -122.679809)
     let radiusParam = GooglePlaceSearchParameters.Radius(params.distance)
-    let searchParams = GooglePlaceSearchParameters(location: locationParam, radius: radiusParam)
+    let keywordParam = GooglePlaceSearchParameters.Keyword("drinks")
+    let typeParam = GooglePlaceSearchParameters.PlaceType.restaurant
+    let searchParams = GooglePlaceSearchParameters(location: locationParam,
+                                                   radius: radiusParam,
+                                                   keyword: keywordParam,
+                                                   type: typeParam)
     
     let result = APIFactory.Google.makeSearchRequest(with: searchParams)
     
@@ -22,7 +29,7 @@ final class GooglePlaceNetworkAdapter: NetworkAdapter {
       completionHandler(.err(error))
     case .ok(let request):
       request.send { result in
-        print(result)
+        completionHandler(result.map { $0.results })
       }
     }
   }

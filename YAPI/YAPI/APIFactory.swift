@@ -25,9 +25,10 @@ internal enum APIEndpoints {
   }
   
   internal enum Google {
-    internal static let host: String = "maps.googleapis.com/maps/api/place"
+    internal static let host: String = "maps.googleapis.com"
     
-    internal static let search: String = "/nearbysearch/json"
+    internal static let search: String = "/maps/api/place/nearbysearch/json"
+    internal static let photo: String = "/maps/api/place/photo"
   }
 }
 

@@ -15,7 +15,7 @@ public protocol Response {
   var wasSuccessful: Bool { get }
   
   /// The error recieved in the response, or nil if there was no error
-  var error: YelpResponseError? { get }
+  var error: APIError? { get }
 }
 
 extension Response {

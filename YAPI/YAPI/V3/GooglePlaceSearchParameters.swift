@@ -42,6 +42,39 @@ public struct GooglePlaceSearchParameters {
     }
   }
   
+  public struct Keyword: StringParameter {
+    public typealias UnicodeScalarLiteralType = Character
+    public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
+
+    public let key: String = "keyword"
+    
+    let internalValue: String
+
+    public init(stringLiteral value: StringLiteralType) {
+      self.internalValue = value
+    }
+    
+    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
+      self.internalValue = "\(value)"
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
+      self.internalValue = value
+    }
+  }
+  
+  public enum PlaceType: String, Parameter {
+    public var key: String {
+      return "type"
+    }
+    
+    public var value: String {
+      return self.rawValue
+    }
+    
+    case restaurant = "restaurant"
+  }
+  
   /// The latitude/longitude around which to retrieve place information.
   public let location: Location
   
@@ -49,9 +82,21 @@ public struct GooglePlaceSearchParameters {
   /// The maximum allowed radius is 50 000 meters.
   public let radius: Radius
   
+  /// A term to be matched against all content that Google has indexed for this
+  /// place, including but not limited to name, type, and address, as well as
+  /// customer reviews and other third-party content.
+  public let keyword: Keyword?
+  
+  /// Restricts the results to places matching the specified type.
+  public let type: PlaceType?
+  
   public init(location: Location,
-              radius: Radius) {
+              radius: Radius,
+              keyword: Keyword? = nil,
+              type: PlaceType? = nil) {
     self.location = location
     self.radius = radius
+    self.keyword = keyword
+    self.type = type
   }
 }

@@ -44,6 +44,7 @@ final class ImageCache {
       Flush all images in the cache
    */
   func flush() {
+    log(.info, for: .imageLoading, message: "Image cache was flushed")
     self.writeLock() {
       self.imageCache.removeAll()
     }
@@ -105,8 +106,7 @@ final class ImageCache {
       imageReference.cachedImage // COULD BE NIL HERE EVEN IF THE IMAGE WILL BE SUCCESSFULLY LOADED
     ```
  */
-public final class ImageReference {
-  
+public class ImageReference {
   fileprivate enum State {
     case idle
     case loading
@@ -176,48 +176,67 @@ public final class ImageReference {
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
     if self.state == .loading {
+      // TODO (dseitz): Instead of forcing the user to handle this, we could shove off
+      // the request to a background thread that waits for a signal from the loading
+      // reference so the fact that there is already a load going on is opaque to the user.
+      // I'm not quite sure how to signal between threads, maybe there is some condvar
+      // primitive in the standard library? It should be a solvable problem, though it is
+      // not high priority right now.
+      //
+      // Essentially it would work by handing off a block that calls the handler with the
+      // cached image (or some error, not sure how we would get the error context if the
+      // loading thread failed...). Once the loading thread finishes, it signals all waiting
+      // threads that an image is cached and ready. Those threads then run, grab the image,
+      // and call their handler with the result.
+      log(.warning, for: .imageLoading, message: "Attempting to load an image from \(self.url) when a request is already in flight, wait for the previous request to finish before attempting to load again")
       handler(.err(.loadInProgress))
       return
     }
     self.state = .loading
-    if let imageReference = ImageCache.globalCache[self.url.absoluteString] {
-      self.cachedImage = imageReference._cachedImage
+    if
+      let imageReference = ImageCache.globalCache[self.url.absoluteString],
+      self.cachedImage == nil {
+        self.cachedImage = imageReference._cachedImage
     }
     if let image = getCopyOfCachedImage(withScale: scale) {
+      log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
       handler(.ok(image))
       self.state = .idle
       return
     }
     
-    self.session.send(self.url) {(data, response, error) in
+    self.session.send(self.url) { data, response, error in
       var result: Result<UIImage, ImageLoadError>
       defer {
         self.state = .idle
         handler(result)
       }
       if let err = error {
+        log(.error, for: .network, message: "Error loading image from \(self.url): \(err)")
         result = .err(.requestError(err as NSError))
         return
       }
 
       guard let imageData = data else {
+        log(.error, for: .network, message: "Error loading image from \(self.url): No data was received")
         result = .err(.noDataReceived)
         return
       }
       
       guard let image = UIImage(data: imageData, scale: scale) else {
+        log(.error, for: .network, message: "Error loading image from \(self.url): Invalid data format")
         result = .err(.invalidData)
         return
       }
       
       self.cachedImage = image
       ImageCache.globalCache[self.url.absoluteString] = self
+      
+      log(.success, for: .network, message: "Image loaded from \(self.url)")
       result = .ok(image)
     }
   }
-  
 }
-
 
 public enum ImageLoadError: Error {
   /// An error occurred when trying to send the request, check the wrapped NSError object for more details

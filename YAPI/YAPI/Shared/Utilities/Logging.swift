@@ -8,9 +8,9 @@
 
 import Foundation
 
-var systemLoggers: [Logger] = [ConsoleLogger()]
+private var systemLoggers: [Logger] = [ConsoleLogger()]
 
-func log(_ severity: LoggingSeverity, for domain: LoggingDomain = .general, message: String) {
+public func log(_ severity: LoggingSeverity, for domain: LoggingDomain = .general, message: String) {
   guard domain.shouldLog else { return }
 
   for logger in systemLoggers {
@@ -18,7 +18,11 @@ func log(_ severity: LoggingSeverity, for domain: LoggingDomain = .general, mess
   }
 }
 
-protocol Logger {
+public func add(logger: Logger) {
+  systemLoggers.append(logger)
+}
+
+public protocol Logger {
   func log( _ severity: LoggingSeverity, for domain: LoggingDomain, _ message: String)
 }
 
@@ -32,17 +36,20 @@ public enum LoggingSeverity {
 public enum LoggingDomain {
   case general
   case network
+  case imageLoading
   
-  var envKey: String {
+  private var envKey: String {
     switch self {
     case .general:
       return "LOG_GENERAL"
     case .network:
       return "LOG_NETWORK"
+    case .imageLoading:
+      return "LOG_IMAGES"
     }
   }
   
-  var shouldLog: Bool {
+  fileprivate var shouldLog: Bool {
     return ProcessInfo.processInfo.environment[self.envKey] != nil
   }
 }
@@ -60,6 +67,6 @@ extension LoggingSeverity: CustomStringConvertible {
 
 struct ConsoleLogger: Logger {
   func log(_ severity: LoggingSeverity, for domain: LoggingDomain, _ message: String) {
-    print("[\(severity.description)]: \(message)")
+    print("\n[\(severity.description)]: \(message)\n")
   }
 }

@@ -14,12 +14,11 @@ import OAuthSwift
 // Cached oauth clients for sending requests
 private var OAuth1Client: OAuthSwiftClient? = nil
 private var OAuth2Client: OAuthSwiftClient? = nil
-// FIXME: Create simple Network Client for API's not requiring OAuth (Google)
-private var SwiftClient: OAuthSwiftClient = OAuthSwiftClient(consumerKey: "", consumerSecret: "")
 private func oAuthClient(for version: OAuthSwiftCredential.Version?) -> OAuthSwiftClient? {
   guard let version = version else {
-    return SwiftClient
+    return nil
   }
+
   switch version {
   case .oauth1:
     if let client = OAuth1Client {
@@ -145,16 +144,27 @@ internal extension Request {
 
 fileprivate extension Request {
   func generateURLRequest() -> URLRequest? {
-    guard
-      let client = oAuthClient(for: oauthVersion),
-      let request = client.makeRequest("https://\(self.host)\(self.path)",
-                                        method: self.requestMethod,
-                                        parameters: self.parameters,
-                                        headers: nil,
-                                        body: nil) else {
-      return nil
-    }
     
-    return try? request.makeRequest()
+    if let client = oAuthClient(for: oauthVersion) {
+      guard
+        let request = client.makeRequest("https://\(self.host)\(self.path)",
+                                         method: self.requestMethod,
+                                         parameters: self.parameters,
+                                         headers: nil,
+                                         body: nil) else {
+        return nil
+      }
+    
+      return try? request.makeRequest()
+    }
+    else {
+      var components = URLComponents()
+      components.scheme = "https"
+      components.host = self.host
+      components.path = self.path
+      components.queryItems = self.parameters.map { URLQueryItem(name: $0, value: $1) }
+      
+      return components.url.map { URLRequest(url: $0) }
+    }
   }
 }

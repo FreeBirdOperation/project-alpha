@@ -9,6 +9,8 @@
 import Foundation
 import YAPI
 
+typealias SearchResult = Result<[BusinessModel], APIError>
+
 struct SearchParameters {
   var distance: Int
 }
@@ -18,5 +20,5 @@ protocol BusinessModel {
 }
 
 protocol NetworkAdapter {
-  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (Result<[BusinessModel], Error>) -> Void)
+  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void)
 }

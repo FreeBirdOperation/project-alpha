@@ -118,6 +118,9 @@ public enum ParseError: APIError {
   // A piece of data was not recognized
   case invalid(field: String, value: String)
   
+  // The decoder failed to decode the response object
+  case decoderFailed(cause: Error)
+  
   // The cause of the failure is unknown
   case unknown
   
@@ -129,6 +132,8 @@ public enum ParseError: APIError {
       return "A required field <\(field)> was missing in the response"
     case .invalid(field: let field, value: let value):
       return "A piece of data was not recognized <\(field): \(value)>"
+    case .decoderFailed(cause: let cause):
+      return "The decoder failed to decode the response object: <\(cause)>"
     case .unknown:
       return "The cause of the failure is unknown"
     }

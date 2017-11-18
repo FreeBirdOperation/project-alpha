@@ -9,12 +9,14 @@
 import Foundation
 import YAPI
 
+extension YelpBusiness: BusinessModel {}
+
 final class YelpV2NetworkAdapter: NetworkAdapter {
-  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (Result<[BusinessModel], Error>) -> Void) {
+  func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let searchParams = YelpV2SearchParameters(location: YelpSearchLocation("Portland, OR"))
     let result = APIFactory.Yelp.V2.makeSearchRequest(with: searchParams)
     result.send { result in
-      
+      completionHandler(result.map { $0.businesses ?? [] })
     }
   }
   

@@ -24,7 +24,7 @@ public final class YelpV3TokenResponse : YelpV3Response {
   public let tokenType: TokenType?
   public let expiresIn: Int?
   
-  public let error: YelpResponseError?
+  public let error: APIError?
   
   public init(withJSON data: [String: AnyObject]) throws {
     if let error = data["error"] as? [String: AnyObject] {

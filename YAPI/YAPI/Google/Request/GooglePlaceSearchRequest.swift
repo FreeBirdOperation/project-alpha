@@ -24,6 +24,8 @@ public final class GooglePlaceSearchRequest: GoogleRequest {
     parameters["key"] = token.token
     parameters.insert(parameter: params.location)
     parameters.insert(parameter: params.radius)
+    parameters.insert(parameter: params.keyword)
+    parameters.insert(parameter: params.type)
     
     self.parameters = parameters
     self.session = session

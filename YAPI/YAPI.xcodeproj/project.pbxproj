@@ -93,6 +93,8 @@
 		08E0F6871FBD9C18004C3D24 /* GoogleAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6861FBD9C18004C3D24 /* GoogleAuthentication.swift */; };
 		08E0F6891FBDA157004C3D24 /* GoogleTokenParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6881FBDA157004C3D24 /* GoogleTokenParameter.swift */; };
 		08E0F6931FBDB706004C3D24 /* JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6921FBDB706004C3D24 /* JSONPrettyPrint.swift */; };
+		08E0F6961FBEB592004C3D24 /* GoogleEstablishment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6951FBEB592004C3D24 /* GoogleEstablishment.swift */; };
+		08E0F6991FC01B4F004C3D24 /* GoogleResponseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6981FC01B4F004C3D24 /* GoogleResponseErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +211,8 @@
 		08E0F6861FBD9C18004C3D24 /* GoogleAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleAuthentication.swift; path = Google/Authentication/GoogleAuthentication.swift; sourceTree = "<group>"; };
 		08E0F6881FBDA157004C3D24 /* GoogleTokenParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleTokenParameter.swift; path = Google/Request/Parameters/GoogleTokenParameter.swift; sourceTree = "<group>"; };
 		08E0F6921FBDB706004C3D24 /* JSONPrettyPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONPrettyPrint.swift; path = Shared/Utilities/JSONPrettyPrint.swift; sourceTree = "<group>"; };
+		08E0F6951FBEB592004C3D24 /* GoogleEstablishment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleEstablishment.swift; path = Google/Models/GoogleEstablishment.swift; sourceTree = "<group>"; };
+		08E0F6981FC01B4F004C3D24 /* GoogleResponseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleResponseErrors.swift; path = Google/Errors/GoogleResponseErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +659,8 @@
 		08E0F6771FBD617A004C3D24 /* Google */ = {
 			isa = PBXGroup;
 			children = (
+				08E0F6971FC01B24004C3D24 /* Errors */,
+				08E0F6941FBE78FA004C3D24 /* Models */,
 				08E0F6851FBD9BF1004C3D24 /* Authentication */,
 				08E0F6791FBD6188004C3D24 /* Response */,
 				08E0F6781FBD6184004C3D24 /* Request */,
@@ -695,6 +701,22 @@
 				08E0F6861FBD9C18004C3D24 /* GoogleAuthentication.swift */,
 			);
 			name = Authentication;
+			sourceTree = "<group>";
+		};
+		08E0F6941FBE78FA004C3D24 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				08E0F6951FBEB592004C3D24 /* GoogleEstablishment.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		08E0F6971FC01B24004C3D24 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				08E0F6981FC01B4F004C3D24 /* GoogleResponseErrors.swift */,
+			);
+			name = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -864,6 +886,7 @@
 				087A2FD11D9D8414005AA466 /* APIFactory.swift in Sources */,
 				089CC6B91D9AE7F00018F1D1 /* V2_YelpBusinessResponse.swift in Sources */,
 				08025B3E1DA3FE20001636DB /* YelpV3Localization.swift in Sources */,
+				08E0F6991FC01B4F004C3D24 /* GoogleResponseErrors.swift in Sources */,
 				08E0F67F1FBD6398004C3D24 /* GoogleRequest.swift in Sources */,
 				083C5E711D772AC200132923 /* HTTPClient.swift in Sources */,
 				089CC6B81D9AE7F00018F1D1 /* V2_YelpResponse.swift in Sources */,
@@ -883,6 +906,7 @@
 				089CC6D41D9AE84C0018F1D1 /* V2_YelpBusinessDataModels.swift in Sources */,
 				089CC6C21D9AE81B0018F1D1 /* V2_YelpPhoneSearchRequest.swift in Sources */,
 				089CC6C31D9AE81B0018F1D1 /* V2_YelpBusinessRequest.swift in Sources */,
+				08E0F6961FBEB592004C3D24 /* GoogleEstablishment.swift in Sources */,
 				08025B2B1DA30C0B001636DB /* YelpV3TokenResponse.swift in Sources */,
 				087490361FB813A50072E539 /* YelpBusiness.swift in Sources */,
 				08E0F67D1FBD61C7004C3D24 /* GooglePlaceSearchResponse.swift in Sources */,

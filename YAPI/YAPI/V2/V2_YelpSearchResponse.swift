@@ -12,7 +12,7 @@ public final class YelpV2SearchResponse : YelpV2Response {
   public let region: YelpRegion?
   public let total: Int?
   public let businesses: [YelpBusiness]?
-  public let error: YelpResponseError?
+  public let error: APIError?
   
   public init(withJSON data: [String: AnyObject]) {
     if let error = data["error"] as? [String: AnyObject] {
