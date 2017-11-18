@@ -26,12 +26,19 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     var passedInfo = String()
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+    
     var dummyData = [placeData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = passedInfo
         randomDataGenerator(num: Int(label.text!)!)
+        
+        
     }
     
     private func randomDataGenerator(num: Int){
