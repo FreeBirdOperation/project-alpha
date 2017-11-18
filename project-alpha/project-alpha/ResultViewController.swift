@@ -11,6 +11,9 @@ import UIKit
 class ResultViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     var passedInfo = String()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = passedInfo
@@ -28,7 +31,7 @@ class ResultViewController: UIViewController {
         self.view.backgroundColor = .green
     }
     
-    @IBAction func downSwipe(_ sender: UISwipeGestureRecognizer) {
-        self.view.backgroundColor = .purple
-    }
+    //@IBAction func downSwipe(_ sender: UISwipeGestureRecognizer) {
+    //    self.view.backgroundColor = .purple
+    //}
 }

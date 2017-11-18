@@ -47,6 +47,30 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="89.505247376311857"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="cyb-we-RzS">
+            <objects>
+                <viewController id="fTj-it-IR5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f6O-LN-gVo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maybe View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCo-zu-ahT">
+                                <rect key="frame" x="141" y="323" width="93" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="afr-Fc-E85"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CqS-Y3-3iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1886" y="90"/>
+        </scene>
         <!--Result View Controller-->
         <scene sceneID="gtp-hQ-JkM">
             <objects>
@@ -96,6 +120,7 @@
                 <swipeGestureRecognizer direction="down" id="8FX-Le-6fo" userLabel="Down Swipe Gesture Recognizer">
                     <connections>
                         <action selector="downSwipe:" destination="jxW-Fe-wlS" id="8QO-yb-6kK"/>
+                        <segue destination="fTj-it-IR5" kind="show" id="IbL-J5-YHr"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
