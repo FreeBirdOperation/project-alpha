@@ -57,13 +57,12 @@ class ResultViewController: UIViewController {
         }
     }
     
-    /*
     private func openMaps(placeName: String, latitude: Double, longitude: Double){
         self.view.backgroundColor = .blue
         let lat:CLLocationDegrees = latitude
         let long:CLLocationDegrees = longitude
         
-        let regionDistance: CLLocationDistance = 1000; //?
+        let regionDistance: CLLocationDistance = 1000;
         let cordinates = CLLocationCoordinate2DMake(lat, long)
         let regionSpan = MKCoordinateRegionMakeWithDistance(cordinates, regionDistance, regionDistance)
         
@@ -74,26 +73,11 @@ class ResultViewController: UIViewController {
         mapItem.name = placeName
         mapItem.openInMaps(launchOptions: options)
     }
-    */
+    
     
     // SWIPE FUNCTIONS
     @IBAction func rightSwipe(_ sender: UISwipeGestureRecognizer) {
-        //self.view.backgroundColor = .blue
-        
-        // Keep for now. 
-        let latitude:CLLocationDegrees = 45.533211
-        let longitude:CLLocationDegrees = -122.847043
-        
-        let regionDistance: CLLocationDistance = 1000; //?
-        let cordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(cordinates, regionDistance, regionDistance)
-        
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-        
-        let placemark = MKPlacemark(coordinate: cordinates)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "Krispy Kreme Doughnuts"
-        mapItem.openInMaps(launchOptions: options)
+        openMaps(placeName: "Krispy Kreme Doughnuts", latitude: 45.533211, longitude: -122.847043)
     }
     
     @IBAction func leftSwipe(_ sender: UISwipeGestureRecognizer) {
