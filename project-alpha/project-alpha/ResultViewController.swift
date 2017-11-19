@@ -105,12 +105,4 @@ class ResultViewController: UIViewController {
             self.view.backgroundColor = .red
         }
     }
-
-    @IBAction func upSwipe(_ sender: UISwipeGestureRecognizer) {
-        self.view.backgroundColor = .green
-    }
-    
-    //@IBAction func downSwipe(_ sender: UISwipeGestureRecognizer) {
-    //    self.view.backgroundColor = .purple
-    //}
 }
