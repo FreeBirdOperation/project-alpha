@@ -121,14 +121,14 @@ internal extension Request {
       return
     }
     
-    self.session.send(urlRequest) {(data, response, error) in
+    self.session.send(urlRequest) { data, response, error in
       var result: Result<Self.ResponseType, APIError>
       defer {
         handler(result)
       }
       
       if let err = error {
-        result = .err(RequestError.failedToSendRequest(err as NSError))
+        result = .err(RequestError.failedToSendRequest(cause: err))
         return
       }
       
@@ -137,7 +137,7 @@ internal extension Request {
         return
       }
       
-      result = APIFactory.makeResponse(with: jsonData, from: self)
+      result = APIFactory.makeResponse(for: Self.self, with: jsonData)
     }
   }
 }

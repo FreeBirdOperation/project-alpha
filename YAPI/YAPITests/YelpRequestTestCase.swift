@@ -29,13 +29,16 @@ class YelpV2GenericRequestTestCase : YAPIXCTestCase {
   }
   
   func test_SendRequest_WhereRequestErrors_GivesTheError() {
-    let mockError = NSError(domain: "error", code: 0, userInfo: nil)
+    let mockError = MockError()
     mockSession.nextError = mockError
     request.send() { result in
       XCTAssert(result.isErr())
       
-      guard case RequestError.failedToSendRequest(mockError) = result.unwrapErr() else {
-        return XCTFail("Wrong error type thrown: \(result.unwrapErr())")
+      guard
+        case RequestError.failedToSendRequest(cause: let error) = result.unwrapErr(),
+        error is MockError
+        else {
+          return XCTFail("Wrong error type thrown: \(result.unwrapErr())")
       }
     }
   }

@@ -21,12 +21,48 @@ class ImageReferenceTests: YAPIXCTestCase {
   }
   
   override func tearDown() {
-    ImageCache.globalCache.flush()
+    ImageReference.globalCache.flush()
     
     mockSession.nextData = nil
     mockSession.nextError = nil
+    mockSession.asyncAfter = nil
     
     super.tearDown()
+  }
+  
+  func test_Init_WithInvalidURLStringFails() {
+    let imageReference = ImageReference(from: "")
+    
+    XCTAssertNil(imageReference)
+  }
+  
+  // This test may be deprecated/modified soon
+  func test_LoadImage_WhileLoadIsInFlight_ReturnsError() {
+    mockSession.asyncAfter = .milliseconds(100)
+    mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
+    var image: UIImage? = nil
+    let expect = expectation(description: "The image load finished")
+    let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image = result.unwrap()
+      expect.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isErr())
+      
+      guard case .loadInProgress = result.unwrapErr() else {
+        return XCTFail("Error was wrong type")
+      }
+    }
+    
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
+      XCTAssertNotNil(image)
+    }
   }
   
   func test_LoadImage_LoadsAnImageFromValidData() {
@@ -117,7 +153,7 @@ class ImageReferenceTests: YAPIXCTestCase {
     }
   }
   
-  func test_FlushCache_RemovesAllImagesFromTheCache() {
+  func test_LoadImage_StoresImagesInGlobalCache() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let url = URL(string: "http://s3-media3.fl.yelpcdn.com/asdf.jpg")!
     let url2 = URL(string: "http://s3-media3.fl.yelpcdn.com/qwer.jpg")!
@@ -129,13 +165,8 @@ class ImageReferenceTests: YAPIXCTestCase {
         XCTAssert(result.isOk())
         XCTAssert(result2.isOk())
         
-        XCTAssert(ImageCache.globalCache.contains(url) == true)
-        XCTAssert(ImageCache.globalCache.contains(url2) == true)
-        
-        ImageCache.globalCache.flush()
-        
-        XCTAssert(ImageCache.globalCache.contains(url) == false)
-        XCTAssert(ImageCache.globalCache.contains(url2) == false)
+        XCTAssert(ImageReference.globalCache.contains(imageReference) == true)
+        XCTAssert(ImageReference.globalCache.contains(imageReference2) == true)
       }
     }
   }

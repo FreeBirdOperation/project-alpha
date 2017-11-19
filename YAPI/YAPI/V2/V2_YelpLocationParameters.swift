@@ -57,7 +57,7 @@ public struct YelpSearchLocation : InternalLocation, StringParameter {
     self.init(location: location, coordinateHint: hint?.coordinate)
   }
   
-  init(location: String, coordinateHint hint: CLLocationCoordinate2D? = nil) {
+  init(location: String, coordinateHint hint: CLLocationCoordinate2D?) {
     self.internalValue = location
     if let hint = hint {
       self.hint = Hint(coordinate: hint)

@@ -45,6 +45,12 @@ public enum APIFactory {
   }
   /// Google API Namespace
   public enum Google {}
+  
+  // Injection for testing purposes
+  static var session: HTTPClient? = nil
+  static var currentSession: HTTPClient {
+    return session ?? HTTPClient.sharedSession
+  }
 
   /**
    Build a response from the JSON body recieved from making a request.
@@ -54,7 +60,7 @@ public enum APIFactory {
    
    - Returns: A valid response object, populated with businesses or an error
    */
-  private static func makeResponse<T: Request>(withJSON json: [String: AnyObject], from request: T) -> Result<T.ResponseType, APIError> {
+  private static func makeResponse<T: Request>(for type: T.Type, withJSON json: [String: AnyObject]) -> Result<T.ResponseType, APIError> {
     do {
       return try .ok(T.ResponseType.init(withJSON: json))
     }
@@ -77,11 +83,11 @@ public enum APIFactory {
    
    - Returns: A valid response object, or nil if the data cannot be parsed
    */
-  static func makeResponse<T: Request>(with data: Data, from request: T) -> Result<T.ResponseType, APIError> {
+  static func makeResponse<T: Request>(for type: T.Type, with data: Data) -> Result<T.ResponseType, APIError> {
     do {
       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
       log(.info, for: .network, message: "\(T.ResponseType.self) Received:\n\(jsonStringify(json))")
-      return APIFactory.makeResponse(withJSON: json as! [String: AnyObject], from: request)
+      return APIFactory.makeResponse(for: type, withJSON: json as! [String: AnyObject])
     }
     catch {
       return .err(YelpResponseError.failedToParse(cause: .invalidJson(cause: error)))
@@ -126,7 +132,7 @@ extension APIFactory.Yelp.V2 {
    - Returns: A fully formed request that can be sent immediately
    */
   public static func makeSearchRequest(with parameters: YelpV2SearchParameters) -> YelpV2SearchRequest {
-    return YelpV2SearchRequest(search: parameters, locale: self.localeParameters, actionlink: self.actionlinkParameters)
+    return YelpV2SearchRequest(search: parameters, locale: self.localeParameters, actionlink: self.actionlinkParameters, session: APIFactory.currentSession)
   }
   
   /**
@@ -137,7 +143,7 @@ extension APIFactory.Yelp.V2 {
    - Returns: A fully formed request that can be sent immediately
    */
   public static func makeBusinessRequest(with businessId: String) -> YelpV2BusinessRequest {
-    return YelpV2BusinessRequest(businessId: businessId, locale: self.localeParameters, actionlink: self.actionlinkParameters)
+    return YelpV2BusinessRequest(businessId: businessId, locale: self.localeParameters, actionlink: self.actionlinkParameters, session: APIFactory.currentSession)
   }
   
   /**
@@ -148,7 +154,7 @@ extension APIFactory.Yelp.V2 {
    - Returns: A fully formed request that can be sent immediately
    */
   public static func makePhoneSearchRequest(with parameters: YelpV2PhoneSearchParameters) -> YelpV2PhoneSearchRequest {
-    return YelpV2PhoneSearchRequest(phoneSearch: parameters)
+    return YelpV2PhoneSearchRequest(phoneSearch: parameters, session: APIFactory.currentSession)
   }
 }
 
@@ -178,11 +184,11 @@ extension APIFactory.Yelp.V3 {
   }
   
   private static func makeTokenRequest(with parameters: YelpV3TokenParameters) -> YelpV3TokenRequest {
-    return YelpV3TokenRequest(token: parameters)
+    return YelpV3TokenRequest(token: parameters, session: APIFactory.currentSession)
   }
   
   public static func makeSearchRequest(with parameters: YelpV3SearchParameters) -> YelpV3SearchRequest {
-    return YelpV3SearchRequest(searchParameters: parameters)
+    return YelpV3SearchRequest(searchParameters: parameters, session: APIFactory.currentSession)
   }
 }
 
@@ -197,6 +203,6 @@ extension APIFactory.Google {
       return .err(.failedToGenerateRequest)
     }
     
-    return .ok(GooglePlaceSearchRequest(with: parameters, token: token))
+    return .ok(GooglePlaceSearchRequest(with: parameters, token: token, session: APIFactory.currentSession))
   }
 }

@@ -19,15 +19,15 @@ public protocol APIError: Error, CustomStringConvertible {}
 public enum RequestError: APIError {
   /// The request was unable to be generated, possibly a malformed url
   case failedToGenerateRequest
-  /// The request failed to send for some reason, see the wrapped NSError for details
-  case failedToSendRequest(NSError)
+  /// The request failed to send for some reason, see the wrapped Error for details
+  case failedToSendRequest(cause: Error)
   
   public var description: String {
     switch self {
     case .failedToGenerateRequest:
       return "Failed to generate the Network Request for some reason"
-    case let .failedToSendRequest(err):
-      return "Failed to send request (\(err.code))"
+    case .failedToSendRequest(cause: let cause):
+      return "Failed to send request (\(cause))"
     }
   }
 }

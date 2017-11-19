@@ -53,6 +53,20 @@ public extension Result {
     }
   }
   
+  func flatMap<U>(_ op: (T) -> Result<U, E>) -> Result<U, E> {
+    switch self {
+    case .ok(let val): return op(val)
+    case .err(let error): return .err(error)
+    }
+  }
+  
+  func flatMapErr<F>(_ op: (E) -> Result<T, F>) -> Result<T, F> {
+    switch self {
+    case .ok(let val): return .ok(val)
+    case .err(let error): return op(error)
+    }
+  }
+  
   func and<U>(_ res: Result<U, E>) -> Result<U, E> {
     guard case .err(let error) = self else {
       return res

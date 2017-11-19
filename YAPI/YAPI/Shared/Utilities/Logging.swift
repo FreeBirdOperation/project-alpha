@@ -37,6 +37,7 @@ public enum LoggingDomain {
   case general
   case network
   case imageLoading
+  case caching
   
   private var envKey: String {
     switch self {
@@ -46,6 +47,8 @@ public enum LoggingDomain {
       return "LOG_NETWORK"
     case .imageLoading:
       return "LOG_IMAGES"
+    case .caching:
+      return "LOG_CACHE"
     }
   }
   

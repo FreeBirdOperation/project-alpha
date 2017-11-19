@@ -80,7 +80,7 @@ public struct GooglePlaceSearchParameters {
   
   /// Defines the distance (in meters) within which to return place results.
   /// The maximum allowed radius is 50 000 meters.
-  public let radius: Radius
+  public let radius: Radius?
   
   /// A term to be matched against all content that Google has indexed for this
   /// place, including but not limited to name, type, and address, as well as
@@ -91,7 +91,7 @@ public struct GooglePlaceSearchParameters {
   public let type: PlaceType?
   
   public init(location: Location,
-              radius: Radius,
+              radius: Radius? = nil,
               keyword: Keyword? = nil,
               type: PlaceType? = nil) {
     self.location = location

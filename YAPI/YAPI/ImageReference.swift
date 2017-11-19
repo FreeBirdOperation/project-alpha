@@ -11,77 +11,6 @@ import UIKit
 
 public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
 
-final class ImageCache {
-  static let globalCache = ImageCache()
-  
-  fileprivate var imageCache = [String: ImageReference]()
-  fileprivate let cacheAccessQueue = DispatchQueue(label: "CacheAcess", attributes: .concurrent)
-  
-  fileprivate init() {}
-  
-  // TODO (dseitz): Uh... I think statics in Swift are automatically synchronized across
-  // threads... So I don't think we need any of these synchronization operations... Let's
-  // do some research
-  fileprivate subscript(key: String) -> ImageReference? {
-    get {
-      var imageReference: ImageReference? = nil
-      self.readLock() {
-        imageReference = self.imageCache[key]
-      }
-      return imageReference
-    }
-    set {
-      guard let imageReference = newValue else {
-        return
-      }
-      self.writeLock() {
-        self.imageCache[key] = imageReference
-      }
-    }
-  }
-  
-  /**
-      Flush all images in the cache
-   */
-  func flush() {
-    log(.info, for: .imageLoading, message: "Image cache was flushed")
-    self.writeLock() {
-      self.imageCache.removeAll()
-    }
-  }
-
-  /**
-      Check if an image for a given url is stored in the cache
-   
-      - Parameter url: The url to check for
-   
-      - Returns: true if the image is in the cache, false if it is not
-   */
-  func contains(_ url: URL) -> Bool {
-    return self[url.absoluteString] != nil
-  }
-  
-  /**
-      Check if an image for a given image reference is stored in the cache
-   
-      - Parameter imageReference: The image reference to check for
-   
-      - Returns: true if the image is in the cache, false if it is not
-   */
-  func contains(_ imageReference: ImageReference) -> Bool {
-    return self[imageReference.url.absoluteString] != nil
-  }
-  
-  fileprivate func readLock(_ block: () -> Void) {
-    self.cacheAccessQueue.sync(execute: block)
-  }
-  
-  fileprivate func writeLock(_ block: () -> Void) {
-    self.cacheAccessQueue.sync(flags: .barrier, execute: block)
-  }
-  
-}
-
 /**
     A class representing an image retrieved from a network source. After being loaded an ImageReference 
     instance will contain a cachedImage property that allows you to access a copy of the image that was 
@@ -107,6 +36,8 @@ final class ImageCache {
     ```
  */
 public class ImageReference {
+  static let globalCache: Cache<ImageReference> = Cache(identifier: "Image Cache")
+
   fileprivate enum State {
     case idle
     case loading
@@ -194,7 +125,7 @@ public class ImageReference {
     }
     self.state = .loading
     if
-      let imageReference = ImageCache.globalCache[self.url.absoluteString],
+      let imageReference = ImageReference.globalCache[self.cacheKey],
       self.cachedImage == nil {
         self.cachedImage = imageReference._cachedImage
     }
@@ -230,11 +161,21 @@ public class ImageReference {
       }
       
       self.cachedImage = image
-      ImageCache.globalCache[self.url.absoluteString] = self
+      ImageReference.globalCache.insert(self)
       
       log(.success, for: .network, message: "Image loaded from \(self.url)")
       result = .ok(image)
     }
+  }
+}
+
+extension ImageReference: Cacheable {
+  var isCacheable: Bool {
+    return _cachedImage != nil
+  }
+  
+  var cacheKey: CacheKey {
+    return CacheKey(url.absoluteString)
   }
 }
 

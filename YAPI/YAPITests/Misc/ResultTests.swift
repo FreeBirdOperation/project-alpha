@@ -9,6 +9,8 @@
 import XCTest
 @testable import YAPI
 
+private typealias TestResult<T> = Result<T, String>
+
 class ResultTests: XCTestCase {
   
   func test_Result_isOk() {
@@ -48,9 +50,40 @@ class ResultTests: XCTestCase {
     XCTAssertEqual(x.map({ $0 * 2 }).intoOk(), 10)
   }
   
+  func test_Result_map_withErr() {
+    let x: TestResult<Int> = .err("Oops")
+    
+    XCTAssertEqual(x.map { $0 * 2 }.intoErr(), "Oops")
+  }
+  
   func test_Result_mapErr() {
     let x: Result<Int, String> = .err("Hello")
     XCTAssertEqual(x.mapErr({ "\($0), World" }).intoErr(), "Hello, World")
+  }
+  
+  func test_Result_mapErr_withOk() {
+    let x: TestResult<Int> = .ok(5)
+    XCTAssertEqual(x.mapErr { "\($0), World" }.intoOk(), 5)
+  }
+  
+  func test_Result_flatMap() {
+    let x: TestResult<Int> = .ok(5)
+    XCTAssertEqual(x.flatMap { .ok($0 * 2) }.intoOk(), 10)
+  }
+  
+  func test_Result_flatMap_withErr() {
+    let x: TestResult<Int> = .err("Oops")
+    XCTAssertEqual(x.flatMap { .ok($0 * 2) }.intoErr(), "Oops")
+  }
+  
+  func test_Result_flatMapErr() {
+    let x: TestResult<Int> = .err("Hello")
+    XCTAssertEqual(x.flatMapErr { .err("\($0), World") }.intoErr(), "Hello, World")
+  }
+  
+  func test_Result_flatMapErr_withOk() {
+    let x: TestResult<Int> = .ok(5)
+    XCTAssertEqual(x.flatMapErr { .err("\($0), World") }.intoOk(), 5)
   }
   
   func test_Result_and() {
@@ -111,6 +144,51 @@ class ResultTests: XCTestCase {
     XCTAssertEqual(ok.orElse(err).orElse(sq).intoOk(), 2)
     XCTAssertEqual(error.orElse(sq).orElse(err).intoOk(), 9)
     XCTAssertEqual(error.orElse(err).orElse(err).intoErr(), 3)
+  }
+  
+  func test_Result_unwrapOr() {
+    let x: TestResult<Int> = .ok(5)
+    
+    XCTAssertEqual(x.unwrap(or: 10), 5)
+  }
+  
+  func test_Result_unwrapOr_withErr() {
+    let x: TestResult<Int> = .err("Oops")
+    
+    XCTAssertEqual(x.unwrap(or: 10), 10)
+  }
+  
+  func test_Result_unwrapOrElse() {
+    let x: TestResult<Int> = .ok(10)
+    let count: (String) -> Int = { $0.count }
+    
+    XCTAssertEqual(x.unwrap(orElse: count), 10)
+  }
+  
+  func test_Result_unwrapOrElse_withErr() {
+    let x: TestResult<Int> = .err("Hello")
+    let count: (String) -> Int = { $0.count }
+    
+    XCTAssertEqual(x.unwrap(orElse: count ), 5)
+  }
+  
+  // We can't do a test for the err case because it will just crash the test harness...
+  func test_Result_unwrap() {
+    let x: TestResult<Int> = .ok(5)
+    
+    XCTAssertEqual(x.unwrap(), 5)
+  }
+  
+  func test_Result_expect() {
+    let x: TestResult<Int> = .ok(5)
+    
+    XCTAssertEqual(x.expect(message: "Should never happen"), 5)
+  }
+  
+  func test_Result_unwrapErr() {
+    let x: TestResult<Int> = .err("Oops")
+    
+    XCTAssertEqual(x.unwrapErr(), "Oops")
   }
 }
 

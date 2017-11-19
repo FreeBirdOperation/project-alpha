@@ -21,3 +21,12 @@ func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> 
     print("Assertion with message: \(message()) in file: \(file) at line: \(line)")
   }
 }
+
+func assertionFailure(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+  if Asserts.shouldAssert {
+    Swift.assertionFailure(message, file: file, line: line)
+  }
+  else {
+    print("Assertion Failure with message: \(message()) in file: \(file) at line: \(line)")
+  }
+}
