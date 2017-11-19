@@ -11,39 +11,74 @@ import XCTest
 
 class ImageReferenceTests: YAPIXCTestCase {
   
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   let mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
   }
   
   override func tearDown() {
-    ImageCache.globalCache.flush()
+    ImageReference.globalCache.flush()
     
     mockSession.nextData = nil
     mockSession.nextError = nil
+    mockSession.asyncAfter = nil
     
     super.tearDown()
+  }
+  
+  func test_Init_WithInvalidURLStringFails() {
+    let imageReference = ImageReference(from: "")
+    
+    XCTAssertNil(imageReference)
+  }
+  
+  // This test may be deprecated/modified soon
+  func test_LoadImage_WhileLoadIsInFlight_ReturnsError() {
+    mockSession.asyncAfter = .milliseconds(100)
+    mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
+    var image: UIImage? = nil
+    let expect = expectation(description: "The image load finished")
+    let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image = result.unwrap()
+      expect.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isErr())
+      
+      guard case .loadInProgress = result.unwrapErr() else {
+        return XCTFail("Error was wrong type")
+      }
+    }
+    
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
+      XCTAssertNotNil(image)
+    }
   }
   
   func test_LoadImage_LoadsAnImageFromValidData() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
-    imageReference.load() { (image, error) -> Void in
-      XCTAssertNotNil(image)
-      XCTAssertNil(error)
+    imageReference.load() { (result) -> Void in
+      XCTAssert(result.isOk())
     }
   }
   
   func test_LoadImage_LoadsAnImageFromValidData_CachesTheImage() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
-    imageReference.load() { (image, error) -> Void in }
+    imageReference.load() { (result) -> Void in }
     let imageReference2 = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
-    imageReference2.load() { (image, error) -> Void in }
+    imageReference2.load() { (result) -> Void in }
     XCTAssertNotNil(imageReference.cachedImage)
     XCTAssertNotNil(imageReference2.cachedImage)
   }
@@ -51,11 +86,12 @@ class ImageReferenceTests: YAPIXCTestCase {
   func test_LoadImage_LoadsAnImageFromInvalidData_GivesAnError() {
     mockSession.nextData = Data()
     let imageReference = ImageReference(from: URL(fileURLWithPath: ""), session: session)
-    imageReference.load() { (image, error) -> Void in
-      XCTAssertNil(image)
-      XCTAssertNotNil(error)
+    imageReference.load() { (result) -> Void in
+      XCTAssert(result.isErr())
       
-      XCTAssert(error! == .invalidData)
+      guard case .invalidData = result.unwrapErr() else {
+        return XCTFail("Error was wrong type")
+      }
     }
   }
   
@@ -63,21 +99,23 @@ class ImageReferenceTests: YAPIXCTestCase {
     let mockError = NSError(domain: "error", code: 0, userInfo: nil)
     mockSession.nextError = mockError
     let imageReference = ImageReference(from: URL(fileURLWithPath: ""), session: session)
-    imageReference.load() { (image, error) -> Void in
-      XCTAssertNil(image)
-      XCTAssertNotNil(error)
+    imageReference.load() { (result) -> Void in
+      XCTAssert(result.isErr())
       
-      XCTAssert(error! == .requestError(mockError))
+      guard case .requestError(mockError) = result.unwrapErr() else {
+        return XCTFail("Error was wrong type")
+      }
     }
   }
   
   func test_LoadImage_RecievesNoData_GivesAnError() {
     let imageReference = ImageReference(from: URL(fileURLWithPath: ""), session: session)
-    imageReference.load() { (image, error) -> Void in
-      XCTAssertNil(image)
-      XCTAssertNotNil(error)
+    imageReference.load() { (result) -> Void in
+      XCTAssert(result.isErr())
       
-      XCTAssert(error! == .noDataRecieved)
+      guard case .noDataReceived = result.unwrapErr() else {
+        return XCTFail("Error was wrong type")
+      }
     }
   }
   
@@ -86,15 +124,16 @@ class ImageReferenceTests: YAPIXCTestCase {
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
     let imageReference2 = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
     
-    imageReference.load() { (image, error) -> Void in
-      imageReference2.load() { (image2, error2) -> Void in
-        XCTAssertNotNil(image)
-        XCTAssertNil(error)
-        XCTAssertNotNil(image2)
-        XCTAssertNil(error2)
+    imageReference.load() { (result) -> Void in
+      imageReference2.load() { (result2) -> Void in
+        XCTAssert(result.isOk())
+        XCTAssert(result2.isOk())
         
-        let imageData = UIImagePNGRepresentation(image!)!
-        let imageData2 = UIImagePNGRepresentation(image2!)!
+        let image = result.unwrap()
+        let image2 = result2.unwrap()
+        
+        let imageData = UIImagePNGRepresentation(image)!
+        let imageData2 = UIImagePNGRepresentation(image2)!
         let cachedImageData = UIImagePNGRepresentation(imageReference.cachedImage!)!
         let cachedImageData2 = UIImagePNGRepresentation(imageReference2.cachedImage!)!
         
@@ -114,27 +153,20 @@ class ImageReferenceTests: YAPIXCTestCase {
     }
   }
   
-  func test_FlushCache_RemovesAllImagesFromTheCache() {
+  func test_LoadImage_StoresImagesInGlobalCache() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let url = URL(string: "http://s3-media3.fl.yelpcdn.com/asdf.jpg")!
     let url2 = URL(string: "http://s3-media3.fl.yelpcdn.com/qwer.jpg")!
     let imageReference = ImageReference(from: url, session: session)
     let imageReference2 = ImageReference(from: url2, session: session)
     
-    imageReference.load() { (image, error) -> Void in
-      imageReference2.load() { (image2, error2) -> Void in
-        XCTAssertNotNil(image)
-        XCTAssertNil(error)
-        XCTAssertNotNil(image2)
-        XCTAssertNil(error2)
+    imageReference.load() { (result) -> Void in
+      imageReference2.load() { (result2) -> Void in
+        XCTAssert(result.isOk())
+        XCTAssert(result2.isOk())
         
-        XCTAssert(ImageCache.globalCache.contains(url) == true)
-        XCTAssert(ImageCache.globalCache.contains(url2) == true)
-        
-        ImageCache.globalCache.flush()
-        
-        XCTAssert(ImageCache.globalCache.contains(url) == false)
-        XCTAssert(ImageCache.globalCache.contains(url2) == false)
+        XCTAssert(ImageReference.globalCache.contains(imageReference) == true)
+        XCTAssert(ImageReference.globalCache.contains(imageReference2) == true)
       }
     }
   }
@@ -143,12 +175,13 @@ class ImageReferenceTests: YAPIXCTestCase {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
     
-    imageReference.load() { (image, error) -> Void in
+    imageReference.load() { (result) -> Void in
       let cachedImage = imageReference.cachedImage
       
       XCTAssertNotNil(cachedImage)
-      XCTAssertNotNil(image)
-      XCTAssertNil(error)
+      XCTAssert(result.isOk())
+      
+      let image = result.unwrap()
       
       // These seem wierd, but we're asserting that the cachedImage property is returning copies of the 
       // image, not the same reference
@@ -162,18 +195,20 @@ class ImageReferenceTests: YAPIXCTestCase {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
     
-    imageReference.load(withScale: 0.5) { (image, error) -> Void in
-      XCTAssertNotNil(image)
-      XCTAssertNil(error)
+    imageReference.load(withScale: 0.5) { (result) -> Void in
+      XCTAssert(result.isOk())
       
-      XCTAssert(image!.scale == 0.5)
+      let image = result.unwrap()
+      
+      XCTAssert(image.scale == 0.5)
     }
     
-    imageReference.load(withScale: 1.5) { (image, error) -> Void in
-      XCTAssertNotNil(image)
-      XCTAssertNil(error)
+    imageReference.load(withScale: 1.5) { (result) -> Void in
+      XCTAssert(result.isOk())
       
-      XCTAssert(image!.scale == 1.5)
+      let image = result.unwrap()
+      
+      XCTAssert(image.scale == 1.5)
     }
   }
 }

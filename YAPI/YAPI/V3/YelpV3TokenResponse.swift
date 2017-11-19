@@ -24,7 +24,7 @@ public final class YelpV3TokenResponse : YelpV3Response {
   public let tokenType: TokenType?
   public let expiresIn: Int?
   
-  public let error: YelpResponseError?
+  public let error: APIError?
   
   public init(withJSON data: [String: AnyObject]) throws {
     if let error = data["error"] as? [String: AnyObject] {
@@ -36,16 +36,16 @@ public final class YelpV3TokenResponse : YelpV3Response {
     
     if self.error == nil {
       guard let accessToken = data[Params.access_token] as? String else {
-        throw YelpParseError.missing(field: Params.access_token)
+        throw ParseError.missing(field: Params.access_token)
       }
       guard let rawTokenType = data[Params.token_type] as? String else {
-        throw YelpParseError.missing(field: Params.token_type)
+        throw ParseError.missing(field: Params.token_type)
       }
       guard let expiresIn = data[Params.expires_in] as? Int else {
-        throw YelpParseError.missing(field: Params.expires_in)
+        throw ParseError.missing(field: Params.expires_in)
       }
       guard let tokenType = TokenType(rawValue: rawTokenType) else {
-        throw YelpParseError.invalid(field: Params.token_type, value: rawTokenType)
+        throw ParseError.invalid(field: Params.token_type, value: rawTokenType)
       }
       self.accessToken = accessToken
       self.tokenType = tokenType

@@ -12,7 +12,7 @@ public final class YelpV2BusinessResponse : YelpV2Response {
   public let region: YelpRegion? = nil
   public let total: Int? = nil
   public let businesses: [YelpBusiness]?
-  public let error: YelpResponseError?
+  public let error: APIError?
   
   public init(withJSON data: [String: AnyObject]) {
     if let error = data["error"] as? [String: AnyObject] {

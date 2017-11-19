@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     /*
     let parameters = YelpV3TokenParameters(grantType: .clientCredentials, clientId: "YvxjDSJzUHNbMDcxZ-1XTQ", clientSecret: "l79vZwLjzgoO9Gt6N6Gs6H5NJ85VBL1OOksSpfZTuvbcYzpqeGr3jzT7XNbYzBy5")
-    let tokenAuthRequest = YelpAPIFactory.V3.makeTokenRequest(with: parameters)
+    let tokenAuthRequest = APIFactory.V3.makeTokenRequest(with: parameters)
     tokenAuthRequest.send { (response, error) in
       if let error = error {
         print(error)
@@ -27,14 +27,14 @@ class ViewController: UIViewController {
     }
     */
     let searchParameters = YelpV3SearchParameters(location: YelpV3LocationParameter(location: "Portland, OR"), limit: 40)
-    YelpAPIFactory.V3.authenticate(appId: appId, clientSecret: clientSecret) { error in
+    APIFactory.V3.authenticate(appId: appId, clientSecret: clientSecret) { error in
       if let error = error {
         print("Error: \(error)")
       }
       else {
         print("Authenticated!")
 //        let searchParameters = YelpV3SearchParameters(location: YelpV3LocationParameter(latitude: 45.509523, longitude: -122.679544))
-        let request = YelpAPIFactory.V3.makeSearchRequest(with: searchParameters)
+        let request = APIFactory.V3.makeSearchRequest(with: searchParameters)
         request.send { result in
           switch result {
           case .ok(let response):
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         }
       }
     }
-    let unauthedRequest = YelpAPIFactory.V3.makeSearchRequest(with: searchParameters)
+    let unauthedRequest = APIFactory.V3.makeSearchRequest(with: searchParameters)
     
     unauthedRequest.send { result in
       

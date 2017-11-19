@@ -14,7 +14,7 @@ enum YelpCountryCodeParameter : String {
   case canada = "CA"
 }
 
-extension YelpCountryCodeParameter : YelpParameter {
+extension YelpCountryCodeParameter : Parameter {
   var key: String {
     return "cc"
   }

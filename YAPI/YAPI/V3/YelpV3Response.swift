@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol YelpV3Response : YelpResponse {}
+public protocol YelpV3Response : Response {}
 
 extension YelpV3Response {
   static func parse(error dict: [String: AnyObject]) -> YelpResponseError {

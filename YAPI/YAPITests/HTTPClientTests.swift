@@ -1,5 +1,5 @@
 //
-//  YelpHTTPClientTests.swift
+//  HTTPClientTests.swift
 //  Chowroulette
 //
 //  Created by Daniel Seitz on 7/29/16.
@@ -9,14 +9,14 @@
 import XCTest
 @testable import YAPI
 
-class YelpHTTPClientTests: YAPIXCTestCase {
-  var subject: YelpHTTPClient!
+class HTTPClientTests: YAPIXCTestCase {
+  var subject: HTTPClient!
   let session = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    subject = YelpHTTPClient(session: session)
+    subject = HTTPClient(session: session)
   }
   
   override func tearDown() {
@@ -29,19 +29,16 @@ class YelpHTTPClientTests: YAPIXCTestCase {
   func test_Send_RequestsTheURL() {
     let url = URL(string: "http://yelp.com")!
     
-    subject.send(url) { (_, _, _) -> Void in }
+    subject.send(url) { _, _, _ -> Void in }
     
     XCTAssertNotNil(session.lastURL)
     XCTAssert(session.lastURL == url)
   }
   
-  func test_Send_StartsTheRequest() {
-    let dataTask = MockURLSessionDataTask()
-    session.nextDataTask = dataTask
+  func test_Send_StartsTheRequest() {    
+    subject.send(URL(fileURLWithPath: "")) { _, _, _ -> Void in }
     
-    subject.send(URL(fileURLWithPath: "")) { (_, _, _) -> Void in }
-    
-    XCTAssert(dataTask.resumeWasCalled)
+    XCTAssertEqual(session.nextDataTask?.resumeWasCalled, true)
   }
   
   func test_Send_WithResponseData_ReturnsTheData() {
@@ -60,7 +57,7 @@ class YelpHTTPClientTests: YAPIXCTestCase {
     session.nextError = NSError(domain: "error", code: 0, userInfo: nil)
     
     var error: Error?
-    subject.send(URL(fileURLWithPath: "")) { (_, _, theError) -> Void in
+    subject.send(URL(fileURLWithPath: "")) { _, _, theError -> Void in
       error = theError
     }
     

@@ -23,6 +23,10 @@
 		A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */; };
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
+		08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F68A1FBDA4AA004C3D24 /* YelpV2Authenticator.swift */; };
+		08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F68C1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift */; };
+		08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F68E1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift */; };
+		08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6901FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		08E0F68A1FBDA4AA004C3D24 /* YelpV2Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV2Authenticator.swift; sourceTree = "<group>"; };
+		08E0F68C1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV2NetworkAdapter.swift; sourceTree = "<group>"; };
+		08E0F68E1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlaceNetworkAdapter.swift; sourceTree = "<group>"; };
+		08E0F6901FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlaceAuthenticator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,8 @@
 			children = (
 				0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */,
 				0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */,
+				08E0F68A1FBDA4AA004C3D24 /* YelpV2Authenticator.swift */,
+				08E0F6901FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift */,
 			);
 			path = Authenticators;
 			sourceTree = "<group>";
@@ -116,6 +126,8 @@
 			children = (
 				0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */,
 				0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */,
+				08E0F68C1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift */,
+				08E0F68E1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -351,10 +363,14 @@
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
+				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
+				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
+				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
+				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,12 +12,16 @@ import OAuthSwift
 
 
 // Cached oauth clients for sending requests
-private var oauth1Client: OAuthSwiftClient? = nil
-private var oauth2Client: OAuthSwiftClient? = nil
-private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwiftClient? {
+private var OAuth1Client: OAuthSwiftClient? = nil
+private var OAuth2Client: OAuthSwiftClient? = nil
+private func oAuthClient(for version: OAuthSwiftCredential.Version?) -> OAuthSwiftClient? {
+  guard let version = version else {
+    return nil
+  }
+
   switch version {
   case .oauth1:
-    if let client = oauth1Client {
+    if let client = OAuth1Client {
       return client
     }
     else {
@@ -31,11 +35,11 @@ private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwif
           return nil
       }
       let client = OAuthSwiftClient(consumerKey: consumerKey, consumerSecret: consumerSecret, oauthToken: token, oauthTokenSecret: tokenSecret, version: .oauth1)
-      oauth1Client = client
+      OAuth1Client = client
       return client
     }
   case .oauth2:
-    if let client = oauth2Client {
+    if let client = OAuth2Client {
       if let token = AuthKeys.token {
         client.credential.oauthToken = token
       }
@@ -52,24 +56,9 @@ private func oauthClient(for version: OAuthSwiftCredential.Version) -> OAuthSwif
       let credential = OAuthSwiftCredential(consumerKey: consumerKey, consumerSecret: consumerSecret)
       credential.version = .oauth2
       let client = OAuthSwiftClient(credential: credential)
-      oauth2Client = client
+      OAuth2Client = client
       return client
     }
-  }
-}
-
-internal let yelpHost: String = "api.yelp.com"
-
-internal enum YelpEndpoints {
-  internal enum V2 {
-    static let search: String = "/v2/search/"
-    static let business: String = "/v2/business/"
-    static let phone: String = "/v2/phone_search/"
-  }
-  
-  internal enum V3 {
-    static let token: String = "/oauth2/token"
-    static let search: String = "/v3/businesses/search"
   }
 }
 
@@ -80,7 +69,7 @@ internal enum YelpEndpoints {
  
     - Usage:
     ```
-      // Given some YelpRequest
+      // Given some Request
  
       // Send the request and handle the response
       yelpRequest.send() { (response, error) in
@@ -88,16 +77,16 @@ internal enum YelpEndpoints {
       }
     ```
  */
-public protocol YelpRequest {
-  associatedtype Response: YelpResponse
+public protocol Request {
+  associatedtype ResponseType: Response
   
   /// The version of OAuth to use
-  var oauthVersion: OAuthSwiftCredential.Version { get }
+  var oauthVersion: OAuthSwiftCredential.Version? { get }
   
-  /// The hostname of the yelp endpoint
+  /// The hostname of the endpoint
   var host: String { get }
   
-  /// The path to the yelp api
+  /// The path to the api resource
   var path: String { get }
   
   /// Query parameters to include in the request
@@ -107,37 +96,39 @@ public protocol YelpRequest {
   var requestMethod: OAuthSwiftHTTPRequest.Method { get }
   
   /// The http session used to send this request
-  var session: YelpHTTPClient { get }
+  var session: HTTPClient { get }
   
   /**
    Sends the request, calling the given handler with either the yelp response or an error. This can be
    called multiple times to retry sending the request
    
-   - Parameter completionHandler: The block to call when the response returns, takes a YelpResponse? and
+   - Parameter completionHandler: The block to call when the response returns, takes a Response? and
    a YelpError? as arguments, the error can be of YelpResponseError type or YelpRequestError type
    */
-  func send(completionHandler handler: @escaping (_ result: Result<Self.Response, YelpError>) -> Void)
+  func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void)
 }
 
-public extension YelpRequest {
-  var host: String {
-    return yelpHost
+public extension Request {
+  public func send(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
+    self.internalSend(completionHandler: handler)
   }
+}
 
-  public func send(completionHandler handler: @escaping (_ result: Result<Self.Response, YelpError>) -> Void) {
+internal extension Request {
+  func internalSend(completionHandler handler: @escaping (_ result: Result<Self.ResponseType, APIError>) -> Void) {
     guard let urlRequest = self.generateURLRequest() else {
-      handler(.err(YelpRequestError.failedToGenerateRequest))
+      handler(.err(RequestError.failedToGenerateRequest))
       return
     }
     
-    self.session.send(urlRequest) {(data, response, error) in
-      var result: Result<Self.Response, YelpError>
+    self.session.send(urlRequest) { data, response, error in
+      var result: Result<Self.ResponseType, APIError>
       defer {
         handler(result)
       }
       
       if let err = error {
-        result = Result.err(YelpRequestError.failedToSendRequest(err as NSError))
+        result = .err(RequestError.failedToSendRequest(cause: err))
         return
       }
       
@@ -146,23 +137,34 @@ public extension YelpRequest {
         return
       }
       
-      result = YelpAPIFactory.makeResponse(with: jsonData, from: self)
+      result = APIFactory.makeResponse(for: Self.self, with: jsonData)
     }
   }
 }
 
-fileprivate extension YelpRequest {
+fileprivate extension Request {
   func generateURLRequest() -> URLRequest? {
-    guard
-      let client = oauthClient(for: oauthVersion),
-      let request = client.makeRequest("https://\(self.host)\(self.path)",
-                                        method: self.requestMethod,
-                                        parameters: self.parameters,
-                                        headers: nil,
-                                        body: nil) else {
-      return nil
-    }
     
-    return try? request.makeRequest()
+    if let client = oAuthClient(for: oauthVersion) {
+      guard
+        let request = client.makeRequest("https://\(self.host)\(self.path)",
+                                         method: self.requestMethod,
+                                         parameters: self.parameters,
+                                         headers: nil,
+                                         body: nil) else {
+        return nil
+      }
+    
+      return try? request.makeRequest()
+    }
+    else {
+      var components = URLComponents()
+      components.scheme = "https"
+      components.host = self.host
+      components.path = self.path
+      components.queryItems = self.parameters.map { URLQueryItem(name: $0, value: $1) }
+      
+      return components.url.map { URLRequest(url: $0) }
+    }
   }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public struct YelpV2PhoneSearchParameters {
-  public struct Phone : YelpStringParameter {
+  public struct Phone : StringParameter {
     let internalValue: String
     
     public var key: String {
@@ -17,7 +17,7 @@ public struct YelpV2PhoneSearchParameters {
     }
   }
   
-  public struct Category : YelpStringParameter {
+  public struct Category : StringParameter {
     var internalValue: String
     
     public var key: String {

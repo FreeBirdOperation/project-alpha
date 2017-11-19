@@ -10,14 +10,14 @@ import XCTest
 @testable import YAPI
 
 class YelpV3TokenRequestTests: YAPIXCTestCase {
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   var request: YelpV3TokenRequest!
   let mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
     request = YelpV3TokenRequest(token: YelpV3TokenParameters(grantType: .clientCredentials, clientId: "CLIENTID", clientSecret: "CLIENTSECRET"), session: session)
   }
   

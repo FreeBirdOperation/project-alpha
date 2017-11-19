@@ -10,14 +10,14 @@ import XCTest
 @testable import YAPI
 
 class YelpV2SearchRequestTests: YAPIXCTestCase {
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   var request: YelpV2SearchRequest!
   let mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
     request = YelpV2SearchRequest(search: YelpV2SearchParameters(location: "Portland, OR" as YelpSearchLocation), session: session)
   }
   

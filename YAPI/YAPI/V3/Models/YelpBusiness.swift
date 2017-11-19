@@ -33,7 +33,7 @@ public struct YelpV3Business {
   public let categories: [YelpCategory]
 
   /// The coordinates of this business.
-  public let coordinates: YelpCoordinate
+  public let coordinates: Coordinate
   
   /// Phone number for this business formatted for display
   public let displayPhoneNumber: String?
@@ -80,7 +80,7 @@ public struct YelpV3Business {
     self.categories = try categories.map { try YelpCategory(withDict: $0) }
     
     let coordinates: [String: AnyObject] = try dict.parseParam(key: Params.coordinates)
-    self.coordinates = try YelpCoordinate(withDict: coordinates)
+    self.coordinates = try Coordinate(withDict: coordinates)
     
     self.displayPhoneNumber = try? dict.parseParam(key: Params.display_phone)
     self.distance = try dict.parseParam(key: Params.distance)
@@ -96,7 +96,7 @@ public struct YelpV3Business {
     
     let rawPrice: String = try dict.parseParam(key: Params.price)
     guard let price = YelpPrice(withDollarSigns: rawPrice) else {
-        throw YelpParseError.invalid(field: Params.price, value: rawPrice)
+        throw ParseError.invalid(field: Params.price, value: rawPrice)
     }
     self.price = price
     self.rating = try dict.parseParam(key: Params.rating)
@@ -104,14 +104,14 @@ public struct YelpV3Business {
     
     let rawUrl: String = try dict.parseParam(key: Params.url)
     guard let url = URL(string: rawUrl) else {
-      throw YelpParseError.invalid(field: Params.url, value: rawUrl)
+      throw ParseError.invalid(field: Params.url, value: rawUrl)
     }
     self.url = url
     
     let transactions: [String] = try dict.parseParam(key: Params.transactions)
     self.transactions = try transactions.map { rawTransaction in
       guard let transaction = YelpTransaction(rawValue: rawTransaction) else {
-        throw YelpParseError.invalid(field: Params.transactions, value: rawTransaction)
+        throw ParseError.invalid(field: Params.transactions, value: rawTransaction)
       }
       return transaction
     }

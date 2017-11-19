@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public struct YelpV3LocationParameter {
-  public struct Location : YelpStringParameter {
+  public struct Location : StringParameter {
     let internalValue: String
     
     public var key: String {
@@ -18,7 +18,7 @@ public struct YelpV3LocationParameter {
     }
   }
   
-  public struct Latitude : YelpDoubleParameter {
+  public struct Latitude : DoubleParameter {
     let internalValue: Double
     
     public var key: String {
@@ -30,7 +30,7 @@ public struct YelpV3LocationParameter {
     }
   }
   
-  public struct Longitude : YelpDoubleParameter {
+  public struct Longitude : DoubleParameter {
     let internalValue: Double
     
     public var key: String {

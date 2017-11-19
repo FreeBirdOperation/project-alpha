@@ -38,7 +38,7 @@ class YelpPhoneSearchResponseTests: YAPIXCTestCase {
       XCTAssertNil(response.businesses)
       XCTAssertNotNil(response.error)
       
-      guard case .invalidParameter(field: "location") = response.error! else {
+      guard case YelpResponseError.invalidParameter(field: "location") = response.error! else {
         return XCTFail("Wrong error type given: \(response.error!)")
       }
       XCTAssert(response.wasSuccessful == false)

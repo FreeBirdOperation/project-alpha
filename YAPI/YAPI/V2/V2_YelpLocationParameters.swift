@@ -13,7 +13,7 @@ import CoreLocation
     There are three available methods to specify location in a search. The location is a required 
     parameter, and exactly one of these methods should be used for a request.
  */
-public protocol YelpLocationParameter : YelpParameter {}
+public protocol YelpLocationParameter : Parameter {}
 
 internal protocol InternalLocation : YelpLocationParameter {
   var hint: YelpSearchLocation.Hint? { get }
@@ -22,8 +22,8 @@ internal protocol InternalLocation : YelpLocationParameter {
 /**
     Location is specified by a particular neighborhood, address or city.
  */
-public struct YelpSearchLocation : InternalLocation, YelpStringParameter {
-  public struct Hint : YelpParameter {
+public struct YelpSearchLocation : InternalLocation, StringParameter {
+  public struct Hint : Parameter {
     let cll: String
     
     public var key: String {
@@ -57,7 +57,7 @@ public struct YelpSearchLocation : InternalLocation, YelpStringParameter {
     self.init(location: location, coordinateHint: hint?.coordinate)
   }
   
-  init(location: String, coordinateHint hint: CLLocationCoordinate2D? = nil) {
+  init(location: String, coordinateHint hint: CLLocationCoordinate2D?) {
     self.internalValue = location
     if let hint = hint {
       self.hint = Hint(coordinate: hint)

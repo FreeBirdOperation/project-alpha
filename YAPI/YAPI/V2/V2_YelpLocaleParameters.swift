@@ -17,7 +17,7 @@ public struct YelpV2LocaleParameters {
     case english = "en"
   }
   
-  struct FilterLanguage : YelpBooleanParameter {
+  struct FilterLanguage : BooleanParameter {
     let internalValue: Bool
     
     var key: String {
@@ -40,7 +40,7 @@ public struct YelpV2LocaleParameters {
 }
 
 
-extension YelpV2LocaleParameters.Language : YelpParameter {
+extension YelpV2LocaleParameters.Language : Parameter {
   var key: String {
     return "lang"
   }

@@ -10,14 +10,14 @@ import XCTest
 @testable import YAPI
 
 class YelpV2GenericRequestTestCase : YAPIXCTestCase {
-  var session: YelpHTTPClient!
+  var session: HTTPClient!
   var request: YelpV2BusinessRequest!
   let mockSession = MockURLSession()
   
   override func setUp() {
     super.setUp()
     
-    session = YelpHTTPClient(session: mockSession)
+    session = HTTPClient(session: mockSession)
     request = YelpV2BusinessRequest(businessId: "", session: session)
   }
   
@@ -29,13 +29,16 @@ class YelpV2GenericRequestTestCase : YAPIXCTestCase {
   }
   
   func test_SendRequest_WhereRequestErrors_GivesTheError() {
-    let mockError = NSError(domain: "error", code: 0, userInfo: nil)
+    let mockError = MockError()
     mockSession.nextError = mockError
     request.send() { result in
       XCTAssert(result.isErr())
       
-      guard case YelpRequestError.failedToSendRequest(mockError) = result.unwrapErr() else {
-        return XCTFail("Wrong error type thrown: \(result.unwrapErr())")
+      guard
+        case RequestError.failedToSendRequest(cause: let error) = result.unwrapErr(),
+        error is MockError
+        else {
+          return XCTFail("Wrong error type thrown: \(result.unwrapErr())")
       }
     }
   }
@@ -55,7 +58,7 @@ class YelpV2GenericRequestTestCase : YAPIXCTestCase {
     request.send() { result in
       XCTAssert(result.isErr())
 
-      guard case YelpResponseError.failedToParse(cause: YelpParseError.invalidJson) = result.unwrapErr() else {
+      guard case YelpResponseError.failedToParse(cause: ParseError.invalidJson) = result.unwrapErr() else {
         return XCTFail("Wrong error type given: \(result.unwrapErr())")
       }
     }

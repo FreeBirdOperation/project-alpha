@@ -20,7 +20,7 @@ public final class YelpV3SearchResponse: YelpV3Response {
   public let businesses: [YelpV3Business]
   public let region: YelpRegion
   
-  public var error: YelpResponseError?
+  public var error: APIError?
   
   public init(withJSON data: [String : AnyObject]) throws {
     if let error = data["error"] as? [String: AnyObject] {

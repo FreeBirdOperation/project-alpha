@@ -9,25 +9,25 @@
 import Foundation
 
 /**
-    A protocol describing an error caused by either a YelpRequest or YelpResponse
+    A protocol describing an error caused by either a Request or Response
  */
-public protocol YelpError: Error, CustomStringConvertible {}
+public protocol APIError: Error, CustomStringConvertible {}
 
 /**
     Errors that occur while trying to send the request
  */
-public enum YelpRequestError: YelpError {
+public enum RequestError: APIError {
   /// The request was unable to be generated, possibly a malformed url
   case failedToGenerateRequest
-  /// The request failed to send for some reason, see the wrapped NSError for details
-  case failedToSendRequest(NSError)
+  /// The request failed to send for some reason, see the wrapped Error for details
+  case failedToSendRequest(cause: Error)
   
   public var description: String {
     switch self {
     case .failedToGenerateRequest:
       return "Failed to generate the Network Request for some reason"
-    case let .failedToSendRequest(err):
-      return "Failed to send request (\(err.code))"
+    case .failedToSendRequest(cause: let cause):
+      return "Failed to send request (\(cause))"
     }
   }
 }
@@ -35,7 +35,7 @@ public enum YelpRequestError: YelpError {
 /**
     Errors that can return from a Yelp response and if there are any issues generating the response
  */
-public enum YelpResponseError: YelpError {
+public enum YelpResponseError: APIError {
   /// An unknown error occurred with the Yelp service
   case unknownError(cause: Error?)
   /// An internal service error occurred with the Yelp service
@@ -57,7 +57,7 @@ public enum YelpResponseError: YelpError {
   /// No data was recieved in the response
   case noDataRecieved
   /// Data was recieved, but it couldn't be parsed as JSON
-  case failedToParse(cause: YelpParseError)
+  case failedToParse(cause: ParseError)
   /// Resource could not be found
   case notFound
   /// An access token must be supplied in order to use this endpoint,
@@ -100,14 +100,14 @@ public enum YelpResponseError: YelpError {
     case .notFound:
       return "The resource could not be found."
     case .tokenMissing:
-      return "An access token must be supplied in order to use this endpoint, make sure you have authenticated through the YelpAPIFactory"
+      return "An access token must be supplied in order to use this endpoint, make sure you have authenticated through the APIFactory"
     case .badAuth:
       return "Invalid combination of client_id and client_secret."
     }
   }
 }
 
-public enum YelpParseError: YelpError {
+public enum ParseError: APIError {
   
   // The data is not in JSON format
   case invalidJson(cause: Error)
@@ -117,6 +117,9 @@ public enum YelpParseError: YelpError {
   
   // A piece of data was not recognized
   case invalid(field: String, value: String)
+  
+  // The decoder failed to decode the response object
+  case decoderFailed(cause: Error)
   
   // The cause of the failure is unknown
   case unknown
@@ -129,6 +132,8 @@ public enum YelpParseError: YelpError {
       return "A required field <\(field)> was missing in the response"
     case .invalid(field: let field, value: let value):
       return "A piece of data was not recognized <\(field): \(value)>"
+    case .decoderFailed(cause: let cause):
+      return "The decoder failed to decode the response object: <\(cause)>"
     case .unknown:
       return "The cause of the failure is unknown"
     }

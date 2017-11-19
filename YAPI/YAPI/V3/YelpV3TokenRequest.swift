@@ -12,22 +12,24 @@ import OAuthSwift
 /**
     A YelpRequest that is used in order to retrieve an access token for the Yelp API.
  */
-public final class YelpV3TokenRequest : YelpRequest {
-  public typealias Response = YelpV3TokenResponse
+public final class YelpV3TokenRequest : Request {
   
-  public let oauthVersion: OAuthSwiftCredential.Version = .oauth2
-  public let path: String = YelpEndpoints.V3.token
+  public typealias ResponseType = YelpV3TokenResponse
+  
+  public let host: String = APIEndpoints.Yelp.host
+  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth2
+  public let path: String = APIEndpoints.Yelp.V3.token
   public let parameters: [String: String]
   public var requestMethod: OAuthSwiftHTTPRequest.Method {
     return .POST
   }
-  public let session: YelpHTTPClient
+  public let session: HTTPClient
   
-  init(token: YelpV3TokenParameters, session: YelpHTTPClient = YelpHTTPClient.sharedSession) {
+  init(token: YelpV3TokenParameters, session: HTTPClient = HTTPClient.sharedSession) {
     var parameters = [String: String]()
-    parameters.insertParameter(token.grantType)
-    parameters.insertParameter(token.clientId)
-    parameters.insertParameter(token.clientSecret)
+    parameters.insert(parameter: token.grantType)
+    parameters.insert(parameter: token.clientId)
+    parameters.insert(parameter: token.clientSecret)
     
     self.parameters = parameters
     self.session = session

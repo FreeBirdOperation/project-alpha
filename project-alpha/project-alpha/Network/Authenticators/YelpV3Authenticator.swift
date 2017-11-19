@@ -18,7 +18,7 @@ final class YelpV3Authenticator: Authenticator {
   typealias TokenType = YelpV3AuthenticationToken
   
   class func authenticate(with token: YelpV3AuthenticationToken, completionHandler: @escaping (Result<NetworkAdapter, Error>) -> Void) {
-    YelpAPIFactory.V3.authenticate(appId: token.appId, clientSecret: token.clientSecret) { error in
+    APIFactory.Yelp.V3.authenticate(appId: token.appId, clientSecret: token.clientSecret) { error in
       let result: Result<NetworkAdapter, Error>
       if let error = error {
         result = .err(error)

@@ -1,5 +1,5 @@
 //
-//  YelpHTTPClient.swift
+//  HTTPClient.swift
 //  Chowroulette
 //
 //  Created by Daniel Seitz on 7/29/16.
@@ -30,12 +30,12 @@ protocol URLSessionDataTaskProtocol {
 }
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
-public final class YelpHTTPClient {
-  static let sharedSession = YelpHTTPClient()
+public final class HTTPClient {
+  static let sharedSession = HTTPClient()
   fileprivate let session: URLSessionProtocol
   
   /**
-      Initialize a new YelpHTTPClient with the session to use for network requests
+      Initialize a new HTTPClient with the session to use for network requests
    
       - Parameter session: The session object to use to make network requests
    */
@@ -50,6 +50,7 @@ public final class YelpHTTPClient {
       - Parameter completionHandler: The handler to call with the response information
    */
   func send(_ url: URL, completionHandler handler: @escaping DataTaskResult) {
+    log(.info, for: .network, message: "Sending Request to: \(url)")
     let task = self.session.dataTask(with: url, completionHandler: handler)
     task.resume()
   }
@@ -61,6 +62,7 @@ public final class YelpHTTPClient {
       - Parameter completionHandler: The handler to call with the response information
    */
   func send(_ request: URLRequest, completionHandler handler: @escaping DataTaskResult) {
+    log(.info, for: .network, message: "Sending Request to: \(request)")
     let task = self.session.dataTask(with: request, completionHandler: handler)
     task.resume()
   }
