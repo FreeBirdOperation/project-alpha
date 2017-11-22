@@ -46,14 +46,17 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // action function for select button
     @IBAction func selectButton(_ sender: Any) {
+      /*
         if(distanceLabel.text != ""){
             performSegue(withIdentifier: "segueResult", sender: self)
         }
+      */
+      let resultVC = ResultViewController()
+      self.navigationController?.pushViewController(resultVC, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var result = segue.destination as! ResultViewController
-        result.passedInfo = distanceLabel.text!
     }
     
 }

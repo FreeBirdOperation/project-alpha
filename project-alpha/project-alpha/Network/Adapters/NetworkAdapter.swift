@@ -15,10 +15,6 @@ struct SearchParameters {
   var distance: Int
 }
 
-protocol BusinessModel {
-  var name: String { get }
-}
-
 protocol NetworkAdapter {
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void)
 }
