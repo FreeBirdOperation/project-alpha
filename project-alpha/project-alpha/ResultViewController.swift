@@ -13,8 +13,6 @@ class ResultViewController: UIViewController {
   lazy var actionHandler: ResultViewControllerOperations = {
     return ResultActionHandler(viewController: self)
   }()
-//  @IBOutlet weak var choiceImageView: UIImageView!
-//  @IBOutlet weak var card: UIView!
   let card: ResultCardView
   var resetButton: UIButton!
   
