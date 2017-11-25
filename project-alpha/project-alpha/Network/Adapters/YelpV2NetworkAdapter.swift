@@ -9,7 +9,11 @@
 import Foundation
 import YAPI
 
-extension YelpBusiness: BusinessModel {}
+extension YelpBusiness: BusinessModel {
+  var imageReference: ImageReference? {
+    return nil
+  }
+}
 
 final class YelpV2NetworkAdapter: NetworkAdapter {
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {

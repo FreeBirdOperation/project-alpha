@@ -35,7 +35,7 @@ public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
       imageReference.cachedImage // COULD BE NIL HERE EVEN IF THE IMAGE WILL BE SUCCESSFULLY LOADED
     ```
  */
-public class ImageReference {
+open class ImageReference {
   static let globalCache: Cache<ImageReference> = Cache(identifier: "Image Cache")
 
   fileprivate enum State {
@@ -48,7 +48,7 @@ public class ImageReference {
   
   fileprivate var _cachedImage: UIImage?
   /// A copy of the cached image or nil if no image has been loaded yet
-  fileprivate(set) var cachedImage: UIImage? {
+  fileprivate(set) open var cachedImage: UIImage? {
     get {
       return getCopyOfCachedImage()
     }
@@ -59,6 +59,8 @@ public class ImageReference {
       }
     }
   }
+  
+  private var scale: CGFloat = 1.0
   
   let url: URL
   
@@ -71,18 +73,18 @@ public class ImageReference {
    
       - Returns: An ImageLoader that is ready to load an image from the url
    */
-  init(from url: URL, session: HTTPClient = HTTPClient.sharedSession) {
+  public init(from url: URL, session: HTTPClient = HTTPClient.sharedSession) {
     self.url = url
     self.state = .idle
     self.session = session
   }
   
-  convenience init?(from string: String, session: HTTPClient = HTTPClient.sharedSession) {
+  public convenience init?(from string: String, session: HTTPClient = HTTPClient.sharedSession) {
     guard let url = URL(string: string) else { return nil }
     self.init(from: url, session: session)
   }
   
-  private func getCopyOfCachedImage(withScale scale: CGFloat = 1.0) -> UIImage? {
+  private func getCopyOfCachedImage() -> UIImage? {
     guard
       let cachedImage = self._cachedImage,
       let cgImage = cachedImage.cgImage?.copy()
@@ -106,6 +108,7 @@ public class ImageReference {
    */
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
+    self.scale = scale
     if self.state == .loading {
       // TODO (dseitz): Instead of forcing the user to handle this, we could shove off
       // the request to a background thread that waits for a signal from the loading
@@ -129,7 +132,7 @@ public class ImageReference {
       self.cachedImage == nil {
         self.cachedImage = imageReference._cachedImage
     }
-    if let image = getCopyOfCachedImage(withScale: scale) {
+    if let image = self.cachedImage {
       log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
       handler(.ok(image))
       self.state = .idle

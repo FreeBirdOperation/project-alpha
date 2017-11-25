@@ -31,7 +31,7 @@ protocol URLSessionDataTaskProtocol {
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
 public final class HTTPClient {
-  static let sharedSession = HTTPClient()
+  static public let sharedSession = HTTPClient()
   fileprivate let session: URLSessionProtocol
   
   /**

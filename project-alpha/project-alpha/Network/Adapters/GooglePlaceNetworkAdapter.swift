@@ -9,7 +9,11 @@
 import Foundation
 import YAPI
 
-extension GoogleEstablishment: BusinessModel {}
+extension GoogleEstablishment: BusinessModel {
+  var imageReference: ImageReference? {
+    return nil
+  }
+}
 
 final class GooglePlaceNetworkAdapter: NetworkAdapter {
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {

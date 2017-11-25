@@ -9,84 +9,139 @@
 import UIKit
 import MapKit
 
-struct placeData {
-    var name: String
-    var price: Int
-    var distance: Int
-    var number: Int
+class ResultViewController: UIViewController {
+  lazy var actionHandler: ResultViewControllerOperations = {
+    return ResultActionHandler(viewController: self)
+  }()
+  let card: ResultCardView
+  var resetButton: UIButton!
+  
+  init() {
+    let mockBusiness = MockBusiness(name: "TEST CARD", image: UIImage(named: "fork-and-knife")!)
+    let card = ResultCardView(businessModel: mockBusiness, frame: CGRect())
+    card.backgroundColor = .red
+    self.card = card
     
-    init(name: String, price: Int, distance: Int, number: Int){
-        self.name = name
-        self.price = price
-        self.distance = distance
-        self.number = number
-    }
+    super.init(nibName: nil, bundle: nil)
+    card.frame.size = CGSize(width: view.frame.width - 20, height: view.frame.height - 20)
+    card.center = view.center
+
+    self.view.addSubview(card)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.resetButton = UIButton(forAutoLayout: ())
+    self.resetButton.autoSetDimensions(to: CGSize(width: 160, height: 80))
+    self.resetButton.backgroundColor = .red
+    self.view.addSubview(self.resetButton)
+    self.resetButton.setTitle("RESET", for: .normal)
+    self.resetButton.addTarget(actionHandler,
+                               action: #selector(ResultViewControllerOperations.resetButtonPressed(_:)),
+                               for: .touchUpInside)
+    self.resetButton.autoPinEdge(toSuperviewMargin: .top)
+    self.resetButton.autoAlignAxis(toSuperviewAxis: .vertical)
+    self.resetButton.tintColor = .black
+    
+    let panGestureRecognizer = UIPanGestureRecognizer(target: actionHandler,
+                                                      action: #selector(ResultViewControllerOperations.panCard(_:)))
+    card.addGestureRecognizer(panGestureRecognizer)
+  }
 }
 
-class ResultViewController: UIViewController {
-    @IBOutlet weak var label: UILabel!
-    var passedInfo = String()
+@objc protocol ResultViewControllerOperations {
+  func panCard(_ sender: UIPanGestureRecognizer)
+  func resetButtonPressed(_ sender: UIButton)
+}
+
+class ResultActionHandler: ResultViewControllerOperations {
+  let maxRotationInRadians: CGFloat = 0.61
+  let viewController: ResultViewController
+  
+  var view: UIView {
+    return viewController.view
+  }
+  
+  init(viewController: ResultViewController) {
+    self.viewController = viewController
+  }
+  
+  @objc func resetButtonPressed(_ sender: UIButton) {
+    resetCard()
+  }
+  
+  @objc func panCard(_ sender: UIPanGestureRecognizer) {
+    guard let card = sender.view as? ResultCardView else { return assertionFailure("pan view should not be nil") }
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var numberLabel: UILabel!
+    let xOffset = card.offsetFrom(view: view).x
+    let point = sender.translation(in: view)
+    card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+    rotate(card: card)
     
-    var dummyData = [placeData]()
-    var limit = 0
-    var tracker = 0
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        label.text = passedInfo
-        limit = Int(label.text!)!
-        randomDataGenerator(num: limit)
-        displayInfo(position: tracker)
+    if card.isRight(of: view) {
+      card.choiceImageView.image = #imageLiteral(resourceName: "fork-and-plate")
+    }
+    else {
+      card.choiceImageView.image = #imageLiteral(resourceName: "fork-and-knife")
     }
     
-    private func displayInfo(position: Int){
-        self.nameLabel.text = dummyData[position].name
-        self.priceLabel.text = String(dummyData[position].price)
-        self.distanceLabel.text = String(dummyData[position].distance)
-        self.numberLabel.text = String(dummyData[position].number)
-    }
+    card.choiceImageView.alpha = xOffset / view.center.x
     
-    private func randomDataGenerator(num: Int){
-        for index in 0...num{
-            dummyData.append(placeData(name: "Testing Restaurant", price: 4, distance: index+3, number: index))
-        }
+    switch sender.state {
+    case .ended:
+      gestureDidEnd(sender)
+    default:
+      break
     }
+  }
+  
+  private func rotate(card: UIView) {
+    let xOffset = card.isLeft(of: view) ? -card.offsetFrom(view: view).x : card.offsetFrom(view: view).x
+    let divisor = (view.frame.width / 2) / maxRotationInRadians
     
-    private func openMaps(placeName: String, latitude: Double, longitude: Double){
-        self.view.backgroundColor = .blue
-        let lat:CLLocationDegrees = latitude
-        let long:CLLocationDegrees = longitude
-        
-        let regionDistance: CLLocationDistance = 1000;
-        let cordinates = CLLocationCoordinate2DMake(lat, long)
-        let regionSpan = MKCoordinateRegionMakeWithDistance(cordinates, regionDistance, regionDistance)
-        
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
-        
-        let placemark = MKPlacemark(coordinate: cordinates)
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = placeName
-        mapItem.openInMaps(launchOptions: options)
+    // Assuming width of 100 points:
+    // 100 / 2 = 50 (half width of screen is range we want to rotate over)
+    // 50 / maxRotationInRadians = divisor (divisor is some value we can use to
+    //                                      backwards compute the desired rotation
+    //                                      based on distance from center)
+    // finalRotation = xOffset / divisor
+    card.transform = CGAffineTransform(rotationAngle: xOffset / divisor)
+  }
+  
+  private func gestureDidEnd(_ sender: UIPanGestureRecognizer) {
+    guard let card = sender.view else { return assertionFailure("pan view should not be nil") }
+
+    let quarterWidth = view.frame.width / 4
+    
+    // Center point is within the leftmost quadrant of the screen
+    if card.center.x < quarterWidth {
+      UIView.animate(withDuration: 0.3) {
+        card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
+        card.alpha = 0.0
+      }
     }
-    
-    
-    // SWIPE FUNCTIONS
-    @IBAction func rightSwipe(_ sender: UISwipeGestureRecognizer) {
-        openMaps(placeName: "Krispy Kreme Doughnuts", latitude: 45.533211, longitude: -122.847043)
+    // Center point is within the rightmost quadrant of the screen
+    else if card.center.x > (view.frame.width - quarterWidth) {
+      UIView.animate(withDuration: 0.3) {
+        card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
+        card.alpha = 0.0
+      }
     }
-    
-    @IBAction func leftSwipe(_ sender: UISwipeGestureRecognizer) {
-        self.view.backgroundColor = .yellow
-        tracker += 1
-        if(tracker < limit){
-            displayInfo(position: tracker)
-        }else{
-            self.view.backgroundColor = .red
-        }
+    else {
+      resetCard()
     }
+  }
+  
+  private func resetCard() {
+    UIView.animate(withDuration: 0.2) {
+      self.viewController.card.choiceImageView.alpha = 0.0
+      self.viewController.card.center = self.view.center
+      self.viewController.card.alpha = 1.0
+      self.viewController.card.transform = .identity
+    }
+  }
 }
