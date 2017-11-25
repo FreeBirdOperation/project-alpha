@@ -32,6 +32,7 @@
 		083C5E711D772AC200132923 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C5E5D1D772AC200132923 /* HTTPClient.swift */; };
 		083C5E721D772AC200132923 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C5E5E1D772AC200132923 /* Request.swift */; };
 		083C5E751D772AC200132923 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C5E611D772AC200132923 /* Errors.swift */; };
+		085870501FC969C9000F973A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089CC6A71D9ADAEA0018F1D1 /* Foundation.framework */; };
 		087490321FB7C3CD0072E539 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490311FB7C3CD0072E539 /* Result.swift */; };
 		087490341FB811F90072E539 /* YelpV3SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490331FB811F90072E539 /* YelpV3SearchResponse.swift */; };
 		087490361FB813A50072E539 /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490351FB813A50072E539 /* YelpBusiness.swift */; };
@@ -235,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085870501FC969C9000F973A /* Foundation.framework in Frameworks */,
 				089008D41D98F2E600D8DF7E /* OAuthSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,25 +8,49 @@
 
 import UIKit
 import MapKit
+import YAPI
 
 class ResultViewController: UIViewController {
   lazy var actionHandler: ResultViewControllerOperations = {
     return ResultActionHandler(viewController: self)
   }()
-  let card: ResultCardView
+  var card: ResultCardView
   var resetButton: UIButton!
+  fileprivate var businesses: [BusinessModel] = []
+  fileprivate let networkAdapter: NetworkAdapter
+  fileprivate let searchParameters: SearchParameters
   
-  init() {
-    let mockBusiness = MockBusiness(name: "TEST CARD", image: UIImage(named: "fork-and-knife")!)
-    let card = ResultCardView(businessModel: mockBusiness, frame: CGRect())
-    card.backgroundColor = .red
-    self.card = card
+  init(networkAdapter: NetworkAdapter, searchParameters: SearchParameters) {
+    self.networkAdapter = networkAdapter
+    self.searchParameters = searchParameters
+    self.card = ResultCardView(frame: CGRect())
     
     super.init(nibName: nil, bundle: nil)
     card.frame.size = CGSize(width: view.frame.width - 20, height: view.frame.height - 20)
     card.center = view.center
-
+    card.backgroundColor = .red
     self.view.addSubview(card)
+    card.isHidden = true
+
+    
+    networkAdapter.makeSearchRequest(with: searchParameters) { result in
+      guard case .ok(let businesses) = result else {
+        log(.error, for: .network, message: "Error retrieving business results: \(result.unwrapErr())")
+        return
+      }
+      
+      self.businesses = businesses.shuffled()
+      
+      guard let business = self.businesses.first else {
+        log(.error, for: .general, message: "No business found in response")
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self.card.isHidden = false
+        self.card.businessModel = business
+      }
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -71,7 +95,30 @@ class ResultActionHandler: ResultViewControllerOperations {
   }
   
   @objc func resetButtonPressed(_ sender: UIButton) {
-    resetCard()
+    if !self.viewController.businesses.isEmpty {
+      self.viewController.businesses.removeFirst()
+      self.viewController.card.businessModel = self.viewController.businesses.first
+      
+      resetCard()
+    }
+    // TESTING: Get the next chunk of restauraunts, offset is handled in YelpV3NetworkAdapter as a hardcoded value, we will need to go back and make it more generic for it to work
+    else {
+      self.viewController.networkAdapter.makeSearchRequest(with: self.viewController.searchParameters) { result in
+        guard case .ok(let businesses) = result else {
+          print("\(result.unwrapErr())")
+          return
+        }
+        
+        self.viewController.businesses = businesses.shuffled()
+        
+        DispatchQueue.main.async {
+          self.viewController.card.businessModel = self.viewController.businesses.first
+          
+          self.resetCard()
+        }
+      }
+    }
+
   }
   
   @objc func panCard(_ sender: UIPanGestureRecognizer) {

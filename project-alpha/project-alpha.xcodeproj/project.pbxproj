@@ -17,6 +17,12 @@
 		0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0858703A1FC3F19B000F973A /* NSArray+PureLayout.m */; };
 		085870461FC57146000F973A /* ResultCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870451FC57146000F973A /* ResultCardView.swift */; };
 		085870491FC5791F000F973A /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870481FC5791F000F973A /* BusinessModel.swift */; };
+		0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858704A1FC96651000F973A /* Collections+project-alpha.swift */; };
+		0858704D1FC96990000F973A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0858704C1FC96986000F973A /* Foundation.framework */; };
+		085870511FC96A17000F973A /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
+		085870521FC96A17000F973A /* YAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; };
+		085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -52,6 +58,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		085870531FC96A17000F973A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */,
+				085870521FC96A17000F973A /* YAPI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
@@ -70,6 +91,9 @@
 		085870431FC3F33C000F973A /* project_alpha-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "project_alpha-Bridging-Header.h"; sourceTree = "<group>"; };
 		085870451FC57146000F973A /* ResultCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCardView.swift; sourceTree = "<group>"; };
 		085870481FC5791F000F973A /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
+		0858704A1FC96651000F973A /* Collections+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+project-alpha.swift"; sourceTree = "<group>"; };
+		0858704C1FC96986000F973A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		085870541FC96A43000F973A /* OAuthSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OAuthSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0858704D1FC96990000F973A /* Foundation.framework in Frameworks */,
+				085870511FC96A17000F973A /* YAPI.framework in Frameworks */,
+				085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */,
 				08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */,
+				0858704A1FC96651000F973A /* Collections+project-alpha.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -195,6 +223,7 @@
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
+				085870541FC96A43000F973A /* OAuthSwift.framework */,
 				085870431FC3F33C000F973A /* project_alpha-Bridging-Header.h */,
 				085870311FC3F19B000F973A /* PureLayout */,
 				08CCBE921FB96D57007EC96E /* Configuration */,
@@ -256,6 +285,7 @@
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0858704C1FC96986000F973A /* Foundation.framework */,
 				08CCBE901FB8FF9D007EC96E /* YAPI.framework */,
 			);
 			name = Frameworks;
@@ -281,6 +311,7 @@
 				087648A71FB8FF190058E110 /* Sources */,
 				087648A81FB8FF190058E110 /* Frameworks */,
 				087648A91FB8FF190058E110 /* Resources */,
+				085870531FC96A17000F973A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -430,6 +461,7 @@
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
+				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
@@ -610,6 +642,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP6LAQGWJ4;
 				INFOPLIST_FILE = "project-alpha/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "freebird.project-alpha";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -626,6 +659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP6LAQGWJ4;
 				INFOPLIST_FILE = "project-alpha/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "freebird.project-alpha";
 				PRODUCT_NAME = "$(TARGET_NAME)";

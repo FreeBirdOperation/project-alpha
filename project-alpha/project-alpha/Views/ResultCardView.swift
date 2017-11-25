@@ -10,30 +10,56 @@ import UIKit
 import YAPI
 
 class ResultCardView: UIView {
-  let titleLabel: UILabel
-  let imageView: UIImageView
-  let choiceImageView: UIImageView
+  var titleLabel: UILabel
+  var imageView: UIImageView
+  var choiceImageView: UIImageView
   
-  init(businessModel: BusinessModel, frame: CGRect) {
+  private var _businessModel: BusinessModel?
+  var businessModel: BusinessModel? {
+    get {
+      return _businessModel
+    }
+    set {
+      guard let businessModel = newValue else {
+        DispatchQueue.main.async {
+          self.titleLabel.text = ""
+          self.imageView.image = nil
+          self._businessModel = nil
+        }
+        return
+      }
+      _businessModel = businessModel
+      self.titleLabel.text = businessModel.name
+      businessModel.imageReference?.load { [weak self] result in
+        guard case .ok(let image) = result else {
+          log(.error, for: .imageLoading, message: "Failed to load image: \(result.unwrapErr())")
+          return
+        }
+        
+        DispatchQueue.main.async {
+          self?.imageView.image = image
+        }
+      }
+    }
+  }
+  
+  override init(frame: CGRect) {
     self.titleLabel = UILabel()
-    self.titleLabel.text = businessModel.name
     self.imageView = UIImageView()
     self.choiceImageView = UIImageView()
 
     super.init(frame: frame)
+
     self.addSubview(titleLabel)
     self.addSubview(imageView)
     self.addSubview(choiceImageView)
     self.setupConstraints()
+  }
+  
+  convenience init(businessModel: BusinessModel, frame: CGRect) {
+    self.init(frame: frame)
     
-    businessModel.imageReference?.load { [weak self] result in
-      guard case .ok(let image) = result else {
-        log(.error, for: .imageLoading, message: "Failed to load image: \(result.unwrapErr())")
-        return
-      }
-      
-      self?.imageView.image = image
-    }
+    self.businessModel = businessModel
   }
   
   required init?(coder aDecoder: NSCoder) {
