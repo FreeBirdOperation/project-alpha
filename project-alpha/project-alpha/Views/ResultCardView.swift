@@ -31,24 +31,30 @@ protocol ResultDisplayable {
   func display(businessModel: BusinessModel?)
   func startChoosing(direction: SwipeDirection)
   func fadeChoiceImage(to alpha: CGFloat)
+  func blurImage()
+  func unblurImage()
 }
 
 class ResultCardView: UIView {
   var titleLabel: UILabel
   var imageView: UIImageView
   var choiceImageView: UIImageView
+  let blurFilterView: UIVisualEffectView
   
   override init(frame: CGRect = CGRect.zero) {
     self.titleLabel = UILabel()
     self.imageView = UIImageView()
     self.choiceImageView = UIImageView()
+    self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
     super.init(frame: frame)
 
     self.addSubview(titleLabel)
     self.addSubview(imageView)
     self.addSubview(choiceImageView)
+    self.addSubview(blurFilterView)
     self.setupConstraints()
+    self.setupBlur()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -66,6 +72,15 @@ class ResultCardView: UIView {
     choiceImageView.autoCenterInSuperview()
     choiceImageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.25)
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
+  }
+  
+  func setupBlur() {
+    blurFilterView.autoPinEdgesToSuperviewEdges()
+    
+    blurFilterView.alpha = 0.9
+    
+    // Remove this to default to blurred, just using for testing for now
+    blurFilterView.isHidden = true
   }
 }
 
@@ -111,5 +126,13 @@ extension ResultCardView: ResultDisplayable {
   
   func fadeChoiceImage(to alpha: CGFloat) {
     choiceImageView.alpha = alpha
+  }
+  
+  func blurImage() {
+    blurFilterView.isHidden = false
+  }
+  
+  func unblurImage() {
+    blurFilterView.isHidden = true
   }
 }
