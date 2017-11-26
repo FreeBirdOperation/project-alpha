@@ -23,6 +23,7 @@
 		085870521FC96A17000F973A /* YAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; };
 		085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870591FCB5B41000F973A /* ResultActionHandler.swift */; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -94,6 +95,7 @@
 		0858704A1FC96651000F973A /* Collections+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections+project-alpha.swift"; sourceTree = "<group>"; };
 		0858704C1FC96986000F973A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		085870541FC96A43000F973A /* OAuthSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OAuthSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		085870591FCB5B41000F973A /* ResultActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandler.swift; sourceTree = "<group>"; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		085870571FCB5B16000F973A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				085870581FCB5B1D000F973A /* ResultScreen */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		085870581FCB5B1D000F973A /* ResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */,
+				085870591FCB5B41000F973A /* ResultActionHandler.swift */,
+			);
+			path = ResultScreen;
+			sourceTree = "<group>";
+		};
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
@@ -248,12 +267,12 @@
 		087648AD1FB8FF190058E110 /* project-alpha */ = {
 			isa = PBXGroup;
 			children = (
+				085870571FCB5B16000F973A /* Controllers */,
 				085870471FC57912000F973A /* Models */,
 				085870441FC5712C000F973A /* Views */,
 				0858702C1FC3E9A9000F973A /* Extensions */,
 				0846EBA21FBC1544001B0F69 /* Network */,
 				087648AE1FB8FF190058E110 /* AppDelegate.swift */,
-				A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */,
 				087648B01FB8FF190058E110 /* ViewController.swift */,
 				087648B21FB8FF190058E110 /* Main.storyboard */,
 				A34B34561FBD675E005A8C24 /* FilterViewController.swift */,
@@ -462,6 +481,7 @@
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
 				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
+				0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,

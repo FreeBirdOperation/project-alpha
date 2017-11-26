@@ -24,9 +24,19 @@ extension MutableCollection {
 
 extension Collection {
   /// Return a copy of `self` with its elements shuffled
-  func shuffled() -> [Iterator.Element] {
+  func shuffled() -> [Element] {
     var list = Array(self)
     list.shuffle()
     return list
+  }
+  
+  var second: Element? {
+    return self.count > 1 ? self[index(startIndex, offsetBy: 1)] : nil
+  }
+}
+
+extension Array {
+  mutating func popFirst() -> Element? {
+    return self.count > 1 ? self.removeFirst() : nil
   }
 }

@@ -9,41 +9,36 @@
 import UIKit
 import YAPI
 
+class ResultCardViewModel {
+  private let updateBlock: (BusinessModel?) -> Void
+  var businessModel: BusinessModel? {
+    didSet {
+      updateBlock(businessModel)
+    }
+  }
+  
+  init(updateBlock: @escaping (BusinessModel?) -> Void) {
+    self.updateBlock = updateBlock
+  }
+}
+
+enum SwipeDirection {
+  case left
+  case right
+}
+
+protocol ResultDisplayable {
+  func display(businessModel: BusinessModel?)
+  func startChoosing(direction: SwipeDirection)
+  func fadeChoiceImage(to alpha: CGFloat)
+}
+
 class ResultCardView: UIView {
   var titleLabel: UILabel
   var imageView: UIImageView
   var choiceImageView: UIImageView
   
-  private var _businessModel: BusinessModel?
-  var businessModel: BusinessModel? {
-    get {
-      return _businessModel
-    }
-    set {
-      guard let businessModel = newValue else {
-        DispatchQueue.main.async {
-          self.titleLabel.text = ""
-          self.imageView.image = nil
-          self._businessModel = nil
-        }
-        return
-      }
-      _businessModel = businessModel
-      self.titleLabel.text = businessModel.name
-      businessModel.imageReference?.load { [weak self] result in
-        guard case .ok(let image) = result else {
-          log(.error, for: .imageLoading, message: "Failed to load image: \(result.unwrapErr())")
-          return
-        }
-        
-        DispatchQueue.main.async {
-          self?.imageView.image = image
-        }
-      }
-    }
-  }
-  
-  override init(frame: CGRect) {
+  override init(frame: CGRect = CGRect.zero) {
     self.titleLabel = UILabel()
     self.imageView = UIImageView()
     self.choiceImageView = UIImageView()
@@ -54,12 +49,6 @@ class ResultCardView: UIView {
     self.addSubview(imageView)
     self.addSubview(choiceImageView)
     self.setupConstraints()
-  }
-  
-  convenience init(businessModel: BusinessModel, frame: CGRect) {
-    self.init(frame: frame)
-    
-    self.businessModel = businessModel
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -77,5 +66,50 @@ class ResultCardView: UIView {
     choiceImageView.autoCenterInSuperview()
     choiceImageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.25)
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
+  }
+}
+
+extension ResultCardView: ResultDisplayable {
+  private static let leftChoiceImage = #imageLiteral(resourceName: "fork-and-knife")
+  private static let rightChoiceImage = #imageLiteral(resourceName: "fork-and-plate")
+  
+  func display(businessModel: BusinessModel?) {
+    guard let businessModel = businessModel else {
+      isHidden = true
+      titleLabel.text = ""
+      imageView.image = nil
+      return
+    }
+    
+    isHidden = false
+    titleLabel.text = businessModel.name
+    if let cachedImage = businessModel.imageReference?.cachedImage {
+      imageView.image = cachedImage
+    }
+    else {
+      businessModel.imageReference?.load { [weak self] result in
+        guard case .ok(let image) = result else {
+          log(.error, for: .imageLoading, message: "Failed to load image: \(result.unwrapErr())")
+          return
+        }
+        
+        DispatchQueue.main.async {
+          self?.imageView.image = image
+        }
+      }
+    }
+  }
+  
+  func startChoosing(direction: SwipeDirection) {
+    switch direction {
+    case .left:
+      choiceImageView.image = ResultCardView.leftChoiceImage
+    case .right:
+      choiceImageView.image = ResultCardView.rightChoiceImage
+    }
+  }
+  
+  func fadeChoiceImage(to alpha: CGFloat) {
+    choiceImageView.alpha = alpha
   }
 }
