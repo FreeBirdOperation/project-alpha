@@ -95,8 +95,9 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
   }
   
+    /*
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     var result = segue.destination as! ResultViewController
-  }
+  }*/
   
 }

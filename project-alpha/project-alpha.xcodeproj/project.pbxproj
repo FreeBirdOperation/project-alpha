@@ -41,6 +41,7 @@
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
 		A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */; };
+		A3DFFC591FCCD25E006A3555 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFFC581FCCD25E006A3555 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A3DFFC581FCCD25E006A3555 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 				087648B51FB8FF190058E110 /* Assets.xcassets */,
 				087648B71FB8FF190058E110 /* LaunchScreen.storyboard */,
 				087648BA1FB8FF190058E110 /* Info.plist */,
+				A3DFFC581FCCD25E006A3555 /* MapViewController.swift */,
 			);
 			path = "project-alpha";
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
+				A3DFFC591FCCD25E006A3555 /* MapViewController.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
 				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
