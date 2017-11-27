@@ -61,7 +61,7 @@ public struct YelpV3Business {
   public let phoneNumber: String?
   
   /// Price level of the business. Value is one of $, $$, $$$ and $$$$.
-  public let price: YelpPrice
+  public let price: YelpPrice?
   
   /// Rating for this business (value ranges from 1, 1.5, ... 4.5, 5).
   public let rating: Double
@@ -94,11 +94,17 @@ public struct YelpV3Business {
     self.name = try dict.parseParam(key: Params.name)
     self.phoneNumber = try dict.parseParam(key: Params.phone)
     
-    let rawPrice: String = try dict.parseParam(key: Params.price)
-    guard let price = YelpPrice(withDollarSigns: rawPrice) else {
+    let rawPrice: String? = try? dict.parseParam(key: Params.price)
+    if let rawPrice = rawPrice {
+      guard let price = YelpPrice(withDollarSigns: rawPrice) else {
         throw ParseError.invalid(field: Params.price, value: rawPrice)
+      }
+      self.price = price
     }
-    self.price = price
+    else {
+      self.price = nil
+    }
+
     self.rating = try dict.parseParam(key: Params.rating)
     self.reviewCount = try dict.parseParam(key: Params.review_count)
     
