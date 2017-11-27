@@ -40,6 +40,7 @@
 		A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */; };
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
+		A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */,
 				0858704D1FC96990000F973A /* Foundation.framework in Frameworks */,
 				085870511FC96A17000F973A /* YAPI.framework in Frameworks */,
 				085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */,
@@ -304,6 +307,7 @@
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */,
 				0858704C1FC96986000F973A /* Foundation.framework */,
 				08CCBE901FB8FF9D007EC96E /* YAPI.framework */,
 			);
