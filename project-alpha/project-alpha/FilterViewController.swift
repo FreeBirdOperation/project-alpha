@@ -13,6 +13,10 @@ import UIKit
 var inProgress: Bool = false
 
 class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+  
+  // Testing purposes only.
+  var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
   // Properties
   @IBOutlet weak var distanceLabel: UITextField!
   let distanceFilter = ["5", "10", "15", "20", "50", "100"]
@@ -99,5 +103,21 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     var result = segue.destination as! ResultViewController
   }*/
+    
+    func startIndicator(){
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorView.gray
+        view.subviews(self.activityIndicator)
+        self.activityIndicator.startAnimating()
+        // when indicator begins the user can't interact with the app
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopIndicator(){
+        self.activityIndicator.stopAnimating()
+        // continue interaction
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
   
 }

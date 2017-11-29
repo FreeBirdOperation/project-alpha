@@ -12,10 +12,9 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
+    let locationManager = CLLocationManager()
     //Map
     @IBOutlet weak var mapView: MKMapView!
-    
-    let locationManager = CLLocationManager()
     
     // the function called everytime the user moves 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -36,7 +35,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        // this allows the user use their location only when using the app.
+        // this allows the user use their location only when using the app. can change to always
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
