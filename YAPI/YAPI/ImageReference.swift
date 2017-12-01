@@ -37,17 +37,21 @@ public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
  */
 open class ImageReference {
   static let globalCache: Cache<ImageReference> = Cache(identifier: "Image Cache")
-  
-  private let loadCondVar = Condition<ImageLoadResult>()
-  private let backgroundQueue: DispatchQueue
 
-  fileprivate enum State {
+  // The networking state of the image reference, used to defer
+  // load requests if one is already in progress
+  private enum State {
     case idle
     case loading
   }
   private var state: ImageReference.State
   
+  // Dependency injected network session
   private let session: HTTPClient
+  // Condition variable to signal threads that are waiting on a load to finish
+  private let loadCondVar = Condition<ImageLoadResult>()
+  // Background thread to enqueue deferred loads
+  private let backgroundQueue: DispatchQueue
   
   private var _cachedImage: UIImage?
   /// A copy of the cached image or nil if no image has been loaded yet
@@ -63,6 +67,7 @@ open class ImageReference {
     }
   }
 
+  /// The URL that this image reference points to
   public let url: URL
   
   /**
@@ -109,6 +114,14 @@ open class ImageReference {
    */
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
+    
+    // First check if our endpoint is in the cache already, then load our cached image
+    // if we have one
+    // NOTE: if we have two separate image references pointing to the same endpoint and we
+    // fire off load requests for each simultaneously, we will likely send both before one
+    // can be cached, and so we would have an extra network request involved. This isn't much
+    // of a problem since there should really only ever be one image reference for a given
+    // endpoint, and even if the situation does arise it should be a minimal performance hit.
     if
       let imageReference = ImageReference.globalCache[self.cacheKey],
       self.cachedImage == nil {

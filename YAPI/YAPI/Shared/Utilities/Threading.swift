@@ -12,6 +12,7 @@ class Condition<Signaled> {
   private let condition: NSCondition = NSCondition()
   private var value: Signaled?
   
+  @discardableResult
   func wait() -> Signaled {
     condition.lock()
     defer {
