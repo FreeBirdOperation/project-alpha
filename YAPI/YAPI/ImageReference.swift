@@ -37,20 +37,23 @@ public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
  */
 open class ImageReference {
   static let globalCache: Cache<ImageReference> = Cache(identifier: "Image Cache")
+  
+  private let loadCondVar = Condition<ImageLoadResult>()
+  private let backgroundQueue: DispatchQueue
 
   fileprivate enum State {
     case idle
     case loading
   }
-  fileprivate var state: ImageReference.State
+  private var state: ImageReference.State
   
-  fileprivate let session: HTTPClient
+  private let session: HTTPClient
   
-  fileprivate var _cachedImage: UIImage?
+  private var _cachedImage: UIImage?
   /// A copy of the cached image or nil if no image has been loaded yet
-  fileprivate(set) open var cachedImage: UIImage? {
+  private(set) open var cachedImage: UIImage? {
     get {
-      return getCopyOfCachedImage()
+      return getCopyOfCachedImage(withScale: 1.0)
     }
     set {
       assert(_cachedImage == nil, "Attempted to update a cached image that has already been cached")
@@ -59,10 +62,8 @@ open class ImageReference {
       }
     }
   }
-  
-  private var scale: CGFloat = 1.0
-  
-  let url: URL
+
+  public let url: URL
   
   /**
       Initialize a new ImageReference with the specified url. Two ImageReferences initialized with the same
@@ -77,6 +78,9 @@ open class ImageReference {
     self.url = url
     self.state = .idle
     self.session = session
+    self.backgroundQueue = DispatchQueue(label: "com.yapi.image-load.\(url)",
+                                         qos: DispatchQoS.background,
+                                         attributes: .concurrent)
   }
   
   public convenience init?(from string: String, session: HTTPClient = HTTPClient.sharedSession) {
@@ -84,15 +88,12 @@ open class ImageReference {
     self.init(from: url, session: session)
   }
   
-  private func getCopyOfCachedImage() -> UIImage? {
-    guard
-      let cachedImage = self._cachedImage,
-      let cgImage = cachedImage.cgImage?.copy()
-      else {
-        return nil
+  private func getCopyOfCachedImage(withScale scale: CGFloat) -> UIImage? {
+    guard let cachedImage = self._cachedImage else {
+      return nil
     }
     
-    return UIImage(cgImage: cgImage, scale: scale, orientation: cachedImage.imageOrientation)
+    return cachedImage.copy(withScale: scale)
   }
   
   /**
@@ -108,41 +109,42 @@ open class ImageReference {
    */
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
-    self.scale = scale
-    if self.state == .loading {
-      // TODO (dseitz): Instead of forcing the user to handle this, we could shove off
-      // the request to a background thread that waits for a signal from the loading
-      // reference so the fact that there is already a load going on is opaque to the user.
-      // I'm not quite sure how to signal between threads, maybe there is some condvar
-      // primitive in the standard library? It should be a solvable problem, though it is
-      // not high priority right now.
-      //
-      // Essentially it would work by handing off a block that calls the handler with the
-      // cached image (or some error, not sure how we would get the error context if the
-      // loading thread failed...). Once the loading thread finishes, it signals all waiting
-      // threads that an image is cached and ready. Those threads then run, grab the image,
-      // and call their handler with the result.
-      log(.warning, for: .imageLoading, message: "Attempting to load an image from \(self.url) when a request is already in flight, wait for the previous request to finish before attempting to load again")
-      handler(.err(.loadInProgress))
-      return
-    }
-    self.state = .loading
     if
       let imageReference = ImageReference.globalCache[self.cacheKey],
       self.cachedImage == nil {
         self.cachedImage = imageReference._cachedImage
     }
-    if let image = self.cachedImage {
+    if let image = getCopyOfCachedImage(withScale: scale) {
       log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
       handler(.ok(image))
-      self.state = .idle
       return
     }
+
+    if self.state == .loading {
+      // We're already loading the image, defer this handler until after the
+      // load finishes so we don't duplicate network work.
+      backgroundQueue.async {
+        let result = self.loadCondVar.wait()
+        let copyResult = result.map { image -> UIImage in
+          guard let copyImage = image.copy(withScale: scale) else {
+            assertionFailure("Failed to copy image with scale \(scale)")
+            return image
+          }
+          
+          return copyImage
+        }
+        handler(copyResult)
+      }
+      return
+    }
+    self.state = .loading
     
     self.session.send(self.url) { data, response, error in
       var result: Result<UIImage, ImageLoadError>
       defer {
         self.state = .idle
+        // Make sure we signal any waiting threads
+        self.loadCondVar.broadcast(value: result)
         handler(result)
       }
       if let err = error {
@@ -150,7 +152,7 @@ open class ImageReference {
         result = .err(.requestError(err as NSError))
         return
       }
-
+      
       guard let imageData = data else {
         log(.error, for: .network, message: "Error loading image from \(self.url): No data was received")
         result = .err(.noDataReceived)
@@ -189,8 +191,4 @@ public enum ImageLoadError: Error {
   case noDataReceived
   /// Data was received, but it was not an image
   case invalidData
-  /// A load is currently in progress, wait for that to finish
-  case loadInProgress
-  /// Failed to create a valid copy of the cached image
-  case copyError
 }

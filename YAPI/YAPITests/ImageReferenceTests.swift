@@ -36,12 +36,13 @@ class ImageReferenceTests: YAPIXCTestCase {
     XCTAssertNil(imageReference)
   }
   
-  // This test may be deprecated/modified soon
-  func test_LoadImage_WhileLoadIsInFlight_ReturnsError() {
+  func test_LoadImage_WhileLoadIsInFlight_DefersLoadForImage() {
     mockSession.asyncAfter = .milliseconds(100)
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     var image: UIImage? = nil
+    var image2: UIImage? = nil
     let expect = expectation(description: "The image load finished")
+    let expect2 = expectation(description: "The second image load finished")
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
     
     imageReference.load { result in
@@ -52,16 +53,69 @@ class ImageReferenceTests: YAPIXCTestCase {
     }
     
     imageReference.load { result in
-      XCTAssert(result.isErr())
+      XCTAssert(result.isOk())
       
-      guard case .loadInProgress = result.unwrapErr() else {
-        return XCTFail("Error was wrong type")
-      }
+      image2 = result.unwrap()
+      expect2.fulfill()
     }
     
     waitForExpectations(timeout: 1.0) { error in
       XCTAssertNil(error)
       XCTAssertNotNil(image)
+      XCTAssertNotNil(image2)
+    }
+  }
+  
+  func test_LoadImage_WhileLoadIsInFlight_MultipleLoads_DefersLoadsForImage() {
+    mockSession.asyncAfter = .milliseconds(100)
+    mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
+
+    var image: UIImage? = nil
+    var image2: UIImage? = nil
+    var image3: UIImage? = nil
+    var image4: UIImage? = nil
+
+    let expect = expectation(description: "The image load finished")
+    let expect2 = expectation(description: "The second image load finished")
+    let expect3 = expectation(description: "The third image load finished")
+    let expect4 = expectation(description: "The fourth image load finished")
+    
+    let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image = result.unwrap()
+      expect.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image2 = result.unwrap()
+      expect2.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image3 = result.unwrap()
+      expect3.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      image4 = result.unwrap()
+      expect4.fulfill()
+    }
+    
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
+      XCTAssertNotNil(image)
+      XCTAssertNotNil(image2)
+      XCTAssertNotNil(image3)
+      XCTAssertNotNil(image4)
     }
   }
   
@@ -210,5 +264,7 @@ class ImageReferenceTests: YAPIXCTestCase {
       
       XCTAssert(image.scale == 1.5)
     }
+    
+    XCTAssert(imageReference.cachedImage?.scale == 1.0)
   }
 }
