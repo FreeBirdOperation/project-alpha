@@ -119,6 +119,33 @@ class ImageReferenceTests: YAPIXCTestCase {
     }
   }
   
+  func test_LoadImage_WhileLoadIsInFlight_ErrorInLoad_ReturnsError() {
+    mockSession.asyncAfter = .milliseconds(100)
+    var resultError: ImageLoadError? = nil
+    
+    let expect = expectation(description: "The image load finished")
+    let expect2 = expectation(description: "The second image load finished")
+    
+    let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
+    
+    imageReference.load { result in
+      XCTAssert(result.isErr())
+      expect.fulfill()
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isErr())
+      
+      resultError = result.unwrapErr()
+      expect2.fulfill()
+    }
+  
+    waitForExpectations(timeout: 1.0) { error in
+      XCTAssertNil(error)
+      XCTAssertNotNil(resultError)
+    }
+  }
+  
   func test_LoadImage_LoadsAnImageFromValidData() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage, options: .ignoreUnknownCharacters)
     let imageReference = ImageReference(from: URL(string: "http://s3-media3.fl.yelpcdn.com/bphoto/nQK-6_vZMt5n88zsAS94ew/ms.jpg")!, session: session)
@@ -266,5 +293,37 @@ class ImageReferenceTests: YAPIXCTestCase {
     }
     
     XCTAssert(imageReference.cachedImage?.scale == 1.0)
+  }
+  
+  func test_Subclass_OverridesCachedImage_LoadsFromOverriddenProperty() {
+    class MockImageReference: ImageReference {
+      let expectedImage: UIImage
+
+      override var cachedImage: UIImage? {
+        return expectedImage
+      }
+      
+      init(expectedImage: UIImage, session: HTTPClient) {
+        self.expectedImage = expectedImage
+        super.init(from: Mock.url, session: session)
+      }
+    }
+    
+    let expectedImage = UIImage(data: Data(base64Encoded: ResponseInjections.yelpValidImage)!)!
+    let mockImageReference = MockImageReference(expectedImage: expectedImage, session: session)
+    
+    let expectedImageData = UIImagePNGRepresentation(expectedImage)!
+    let cachedImageData = UIImagePNGRepresentation(mockImageReference.cachedImage!)!
+    
+    XCTAssertEqual(expectedImageData, cachedImageData)
+    
+    mockImageReference.load { result in
+      XCTAssert(result.isOk())
+      
+      let loadedImageData = UIImagePNGRepresentation(result.unwrap())!
+      
+      XCTAssertEqual(expectedImageData, loadedImageData)
+    }
+    
   }
 }

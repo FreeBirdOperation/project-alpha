@@ -36,6 +36,7 @@
 		0858705C1FD0EC5A000F973A /* UIImage+YAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858705B1FD0EC5A000F973A /* UIImage+YAPI.swift */; };
 		0858705E1FD0FD42000F973A /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858705D1FD0FD42000F973A /* Threading.swift */; };
 		085870601FD0FD84000F973A /* ConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858705F1FD0FD84000F973A /* ConditionTests.swift */; };
+		085870621FD325FF000F973A /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870611FD325FF000F973A /* MockObjects.swift */; };
 		087490321FB7C3CD0072E539 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490311FB7C3CD0072E539 /* Result.swift */; };
 		087490341FB811F90072E539 /* YelpV3SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490331FB811F90072E539 /* YelpV3SearchResponse.swift */; };
 		087490361FB813A50072E539 /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490351FB813A50072E539 /* YelpBusiness.swift */; };
@@ -160,6 +161,7 @@
 		0858705B1FD0EC5A000F973A /* UIImage+YAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+YAPI.swift"; path = "Shared/Extensions/UIImage+YAPI.swift"; sourceTree = "<group>"; };
 		0858705D1FD0FD42000F973A /* Threading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Threading.swift; path = Shared/Utilities/Threading.swift; sourceTree = "<group>"; };
 		0858705F1FD0FD84000F973A /* ConditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConditionTests.swift; path = Misc/ConditionTests.swift; sourceTree = "<group>"; };
+		085870611FD325FF000F973A /* MockObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockObjects.swift; path = Mocks/MockObjects.swift; sourceTree = "<group>"; };
 		087490311FB7C3CD0072E539 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		087490331FB811F90072E539 /* YelpV3SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YelpV3SearchResponse.swift; path = V3/YelpV3SearchResponse.swift; sourceTree = "<group>"; };
 		087490351FB813A50072E539 /* YelpBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YelpBusiness.swift; path = V3/Models/YelpBusiness.swift; sourceTree = "<group>"; };
@@ -383,7 +385,7 @@
 				089CC6AC1D9AE3590018F1D1 /* V2 */,
 				089CC6AD1D9AE35D0018F1D1 /* V3 */,
 				08CD2CF51D7811F800DBFA24 /* TestHelpers */,
-				08CD2CE91D78074A00DBFA24 /* NetworkMocks */,
+				08CD2CE91D78074A00DBFA24 /* Mocks */,
 				083C5E421D77280A00132923 /* Info.plist */,
 				08CD2D021D7B4E1600DBFA24 /* YelpAuthenticationTests.swift */,
 			);
@@ -673,13 +675,14 @@
 			name = Factory;
 			sourceTree = "<group>";
 		};
-		08CD2CE91D78074A00DBFA24 /* NetworkMocks */ = {
+		08CD2CE91D78074A00DBFA24 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
 				08CD2CDE1D78073100DBFA24 /* ResponseInjections.swift */,
 				08CD2CD81D78073100DBFA24 /* NetworkMockObjects.swift */,
+				085870611FD325FF000F973A /* MockObjects.swift */,
 			);
-			name = NetworkMocks;
+			name = Mocks;
 			sourceTree = "<group>";
 		};
 		08CD2CF51D7811F800DBFA24 /* TestHelpers */ = {
@@ -986,6 +989,7 @@
 				08A0FA971D85FA8900FEB43C /* YelpActionlinkParametersTests.swift in Sources */,
 				08A0FAA71D86303C00FEB43C /* YelpRequestTestCase.swift in Sources */,
 				08CD2CE11D78073100DBFA24 /* NetworkMockObjects.swift in Sources */,
+				085870621FD325FF000F973A /* MockObjects.swift in Sources */,
 				08CD2CE51D78073100DBFA24 /* YelpV2SearchResponseTests.swift in Sources */,
 				08025B321DA31140001636DB /* YelpV3TokenRequestTests.swift in Sources */,
 				08CD2CFF1D7B436700DBFA24 /* YAPIXCTestCase.swift in Sources */,

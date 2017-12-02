@@ -28,15 +28,15 @@ public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
  
       // This is an asynchronous operation, don't expect to have the cached image 
       // available after calling this
-      imageReference.load() { (image, error) in 
-        // Do something with the image here
+      imageReference.load() { result in
+        // Do something with the result here
       }
  
       imageReference.cachedImage // COULD BE NIL HERE EVEN IF THE IMAGE WILL BE SUCCESSFULLY LOADED
     ```
  */
 open class ImageReference {
-  static let globalCache: Cache<ImageReference> = Cache(identifier: "Image Cache")
+  public static let globalCache: Cache<ImageReference> = Cache(identifier: "ImageCache")
 
   // The networking state of the image reference, used to defer
   // load requests if one is already in progress
@@ -57,7 +57,7 @@ open class ImageReference {
   /// A copy of the cached image or nil if no image has been loaded yet
   private(set) open var cachedImage: UIImage? {
     get {
-      return getCopyOfCachedImage(withScale: 1.0)
+      return _cachedImage?.copy()
     }
     set {
       assert(_cachedImage == nil, "Attempted to update a cached image that has already been cached")
@@ -79,7 +79,9 @@ open class ImageReference {
    
       - Returns: An ImageLoader that is ready to load an image from the url
    */
-  public init(from url: URL, session: HTTPClient = HTTPClient.sharedSession) {
+  public init(from url: URL,
+              using cache: Cache<ImageReference> = ImageReference.globalCache,
+              session: HTTPClient = HTTPClient.sharedSession) {
     self.url = url
     self.state = .idle
     self.session = session
@@ -88,29 +90,27 @@ open class ImageReference {
                                          attributes: .concurrent)
   }
   
-  public convenience init?(from string: String, session: HTTPClient = HTTPClient.sharedSession) {
+  /**
+      Initialize a new ImageReference with the specified URL string.
+   
+      - Parameter string: The string representation of a URL to load the image from
+      - Parameter session: The session to use to make network requests, generally keep this as default
+   
+      - Returns: An ImageLoader that is ready to load an image from the URL or nil if the URL was malformed
+   */
+  public convenience init?(from string: String,
+                           using cache: Cache<ImageReference> = ImageReference.globalCache,
+                           session: HTTPClient = HTTPClient.sharedSession) {
     guard let url = URL(string: string) else { return nil }
-    self.init(from: url, session: session)
-  }
-  
-  private func getCopyOfCachedImage(withScale scale: CGFloat) -> UIImage? {
-    guard let cachedImage = self._cachedImage else {
-      return nil
-    }
-    
-    return cachedImage.copy(withScale: scale)
+    self.init(from: url, using: cache, session: session)
   }
   
   /**
       Load an image in the background and pass it to the completion handler once finished. This can be 
-      called multiple times to retrieve the same image at different scales. Only one load is allowed to be 
-      in progress at a time. Each call will return a new instance of a UIImage
+      called multiple times to retrieve the same image at different scales. Each call will return a new instance of a UIImage
    
       - Parameter scale: The scale factor to apply to the image
-      - Parameter completionHandler: The handler to call once the image load has completed. This handler 
-          takes a UIImage? and a ImageLoaderError? as arguments. If the load was a success, the handler 
-          will be called with the UIImage created and the error will be nil. If there is an error, the 
-          image will be nil and an error object will be returned
+      - Parameter completionHandler: The handler to call once the image load has completed.
    */
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
@@ -127,12 +127,15 @@ open class ImageReference {
       self.cachedImage == nil {
         self.cachedImage = imageReference._cachedImage
     }
-    if let image = getCopyOfCachedImage(withScale: scale) {
+    if let image = cachedImage?.copy(withScale: scale) {
       log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
       handler(.ok(image))
       return
     }
 
+    // FIXME: There is a race condition here, but the atomics API is pretty ugly, come back
+    // later and figure out a clean way to do a CAS on the state. Worst case we do an unnecessary
+    // network call, so it's not that important.
     if self.state == .loading {
       // We're already loading the image, defer this handler until after the
       // load finishes so we don't duplicate network work.
@@ -188,11 +191,11 @@ open class ImageReference {
 }
 
 extension ImageReference: Cacheable {
-  var isCacheable: Bool {
+  public var isCacheable: Bool {
     return _cachedImage != nil
   }
   
-  var cacheKey: CacheKey {
+  public var cacheKey: CacheKey {
     return CacheKey(url.absoluteString)
   }
 }
