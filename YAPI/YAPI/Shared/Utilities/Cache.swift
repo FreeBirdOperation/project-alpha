@@ -11,25 +11,25 @@ import Foundation
 // Used to uniquely identify cacheAccessQueues
 private var id: Int = 0
 
-internal protocol Cacheable: class {
+public protocol Cacheable: class {
   var isCacheable: Bool { get }
   var cacheKey: CacheKey { get }
 }
 
-internal struct CacheKey {
+public struct CacheKey {
   fileprivate let key: String
   
-  init(_ key: String) {
+  public init(_ key: String) {
     self.key = key
   }
 }
 
-final class Cache<Stored: Cacheable> {
+final public class Cache<Stored: Cacheable> {
   private var internalCache = [String: Stored]()
   private let cacheAccessQueue: DispatchQueue
   let identifier: String
   
-  init(identifier: String) {
+  public init(identifier: String) {
     self.identifier = identifier
     self.cacheAccessQueue = DispatchQueue(label: "com.yapi.cache-access.\(identifier)-\(id)", attributes: .concurrent)
     id += 1
@@ -38,7 +38,7 @@ final class Cache<Stored: Cacheable> {
   // TODO (dseitz): Uh... I think statics in Swift are automatically synchronized across
   // threads... So I don't think we need any of these synchronization operations... Let's
   // do some research
-  subscript(key: CacheKey) -> Stored? {
+  public subscript(key: CacheKey) -> Stored? {
     get {
       var imageReference: Stored? = nil
       self.readLock() {
@@ -51,7 +51,7 @@ final class Cache<Stored: Cacheable> {
   /**
    Flush all items from the cache
    */
-  func flush() {
+  public func flush() {
     log(.info, for: .caching, message: "Cache (\(identifier)) was flushed")
     self.writeLock() {
       self.internalCache.removeAll()
@@ -65,7 +65,7 @@ final class Cache<Stored: Cacheable> {
    
    - Returns: true if the object is in the cache, false if it is not
    */
-  func contains(_ object: Stored) -> Bool {
+  public func contains(_ object: Stored) -> Bool {
     return self[object.cacheKey] != nil
   }
   
@@ -77,7 +77,7 @@ final class Cache<Stored: Cacheable> {
    - Returns: true if the object was successfully inserted, false otherwise
    */
   @discardableResult
-  func insert(_ object: Stored) -> Bool {
+  public func insert(_ object: Stored) -> Bool {
     guard object.isCacheable else { return false }
     
     let alreadyCached = internalCache[object.cacheKey.key]

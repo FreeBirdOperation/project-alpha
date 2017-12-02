@@ -21,6 +21,7 @@ class YAPIXCTestCase : XCTestCase {
   override class func tearDown() {
     AuthKeys.clearAuthentication()
     
+    Asserts.shouldAssert = true
     super.tearDown()
   }
   

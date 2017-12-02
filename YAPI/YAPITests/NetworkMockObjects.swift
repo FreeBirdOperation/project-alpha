@@ -9,12 +9,6 @@
 import Foundation
 @testable import YAPI
 
-struct MockError: APIError {
-  var description: String {
-    return "A Mock Error"
-  }
-}
-
 class MockURLSession: URLSessionProtocol {
   var nextData: Data?
   var nextError: Error?
