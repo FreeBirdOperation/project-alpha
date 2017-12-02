@@ -46,6 +46,9 @@ open class ImageReference {
   }
   private var state: ImageReference.State
   
+  // The cache that this image reference is using
+  private let cache: Cache<ImageReference>
+  
   // Dependency injected network session
   private let session: HTTPClient
   // Condition variable to signal threads that are waiting on a load to finish
@@ -84,6 +87,7 @@ open class ImageReference {
               session: HTTPClient = HTTPClient.sharedSession) {
     self.url = url
     self.state = .idle
+    self.cache = cache
     self.session = session
     self.backgroundQueue = DispatchQueue(label: "com.yapi.image-load.\(url)",
                                          qos: DispatchQoS.background,
@@ -123,7 +127,7 @@ open class ImageReference {
     // of a problem since there should really only ever be one image reference for a given
     // endpoint, and even if the situation does arise it should be a minimal performance hit.
     if
-      let imageReference = ImageReference.globalCache[self.cacheKey],
+      let imageReference = cache[self.cacheKey],
       self.cachedImage == nil {
         self.cachedImage = imageReference._cachedImage
     }
@@ -182,7 +186,7 @@ open class ImageReference {
       }
       
       self.cachedImage = image
-      ImageReference.globalCache.insert(self)
+      self.cache.insert(self)
       
       log(.success, for: .network, message: "Image loaded from \(self.url)")
       result = .ok(image)

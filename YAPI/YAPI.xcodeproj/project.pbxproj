@@ -37,6 +37,7 @@
 		0858705E1FD0FD42000F973A /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858705D1FD0FD42000F973A /* Threading.swift */; };
 		085870601FD0FD84000F973A /* ConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858705F1FD0FD84000F973A /* ConditionTests.swift */; };
 		085870621FD325FF000F973A /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870611FD325FF000F973A /* MockObjects.swift */; };
+		085870641FD3344B000F973A /* YAPIXCNetworkTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870631FD3344B000F973A /* YAPIXCNetworkTestCase.swift */; };
 		087490321FB7C3CD0072E539 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490311FB7C3CD0072E539 /* Result.swift */; };
 		087490341FB811F90072E539 /* YelpV3SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490331FB811F90072E539 /* YelpV3SearchResponse.swift */; };
 		087490361FB813A50072E539 /* YelpBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087490351FB813A50072E539 /* YelpBusiness.swift */; };
@@ -162,6 +163,7 @@
 		0858705D1FD0FD42000F973A /* Threading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Threading.swift; path = Shared/Utilities/Threading.swift; sourceTree = "<group>"; };
 		0858705F1FD0FD84000F973A /* ConditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConditionTests.swift; path = Misc/ConditionTests.swift; sourceTree = "<group>"; };
 		085870611FD325FF000F973A /* MockObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockObjects.swift; path = Mocks/MockObjects.swift; sourceTree = "<group>"; };
+		085870631FD3344B000F973A /* YAPIXCNetworkTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YAPIXCNetworkTestCase.swift; path = TestHelpers/YAPIXCNetworkTestCase.swift; sourceTree = "<group>"; };
 		087490311FB7C3CD0072E539 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		087490331FB811F90072E539 /* YelpV3SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YelpV3SearchResponse.swift; path = V3/YelpV3SearchResponse.swift; sourceTree = "<group>"; };
 		087490351FB813A50072E539 /* YelpBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = YelpBusiness.swift; path = V3/Models/YelpBusiness.swift; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 				08CD2CF61D78120D00DBFA24 /* AssertOverride.swift */,
 				08CD2CFE1D7B436700DBFA24 /* YAPIXCTestCase.swift */,
 				0874903E1FB828B80072E539 /* Utilities.swift */,
+				085870631FD3344B000F973A /* YAPIXCNetworkTestCase.swift */,
 			);
 			name = TestHelpers;
 			sourceTree = "<group>";
@@ -993,6 +996,7 @@
 				08CD2CE51D78073100DBFA24 /* YelpV2SearchResponseTests.swift in Sources */,
 				08025B321DA31140001636DB /* YelpV3TokenRequestTests.swift in Sources */,
 				08CD2CFF1D7B436700DBFA24 /* YAPIXCTestCase.swift in Sources */,
+				085870641FD3344B000F973A /* YAPIXCNetworkTestCase.swift in Sources */,
 				08CD2CE81D78073100DBFA24 /* HTTPClientTests.swift in Sources */,
 				08219C821FC11B5700EA034F /* GoogleEstablishmentTests.swift in Sources */,
 				08CD2CE61D78073100DBFA24 /* YelpDataModelTests.swift in Sources */,

@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import YAPI
+
+// TODO: Make this private and fix any unit tests it breaks
+struct MockError: APIError {
+  var description: String {
+    return "A Mock Error"
+  }
+}
 
 enum Mock {
-  static let url = URL(string: "https://google.com")!
+  static let url: URL = URL(string: "https://google.com")!
+  static let error: APIError = MockError()
 }
