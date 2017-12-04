@@ -12,14 +12,15 @@ import CoreLocation
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
-  let locationmanagement: CLLocationManager = CLLocationManager.sharedInstance
+class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+  // TODO: Inject this
+  let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   
   // Testing purposes only.
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
   @IBAction func MapButton(_ sender: Any) {
-    let mapViewController = MapViewController(locationManger: locationmanagement)
+    let mapViewController = MapViewController()
     self.navigationController?.pushViewController(mapViewController, animated: true)
   }
   
@@ -42,7 +43,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    locationmanagement.requestWhenInUseAuthorization()
+    locationManager.requestWhenInUseAuthorization()
     
     distancePicker.delegate = self
     distancePicker.dataSource = self
