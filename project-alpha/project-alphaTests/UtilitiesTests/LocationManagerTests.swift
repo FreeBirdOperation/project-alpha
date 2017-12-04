@@ -139,6 +139,26 @@ class LocationManagerTests: PAXCTestCase {
     XCTAssertFalse(locationManager.contains(observer: mockObserver))
   }
   
+  func test_LocationManager_RemoveObserver_WhenNotObserving_DoesNothing() {
+    let mockObserver = MockCLLocationManagerDelegate()
+    
+    XCTAssertFalse(locationManager.contains(observer: mockObserver))
+
+    locationManager.removeObserver(mockObserver)
+
+    XCTAssertFalse(locationManager.contains(observer: mockObserver))
+  }
+  
+  func test_LocationManager_DesiredAccuracy_PassesThroughToInternalLocationManager() {
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    
+    XCTAssertEqual(mockLocationManager.desiredAccuracy, kCLLocationAccuracyBest)
+    
+    locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+    
+    XCTAssertEqual(mockLocationManager.desiredAccuracy, kCLLocationAccuracyKilometer)
+  }
+  
   func test_LocationManager_ShouldDisplayHeadingCalibration_PassesThroughDelegate() {
     locationManager.shouldDisplayHeadingCalibration = false
 
