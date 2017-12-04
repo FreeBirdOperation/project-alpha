@@ -38,7 +38,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Map"/>
                                 <connections>
-                                    <segue destination="vix-wj-Ynz" kind="presentation" id="Wlg-fp-1EY"/>
+                                    <action selector="MapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sYa-Pf-6OU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -53,30 +53,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="89.505247376311857"/>
-        </scene>
-        <!--Map View Controller-->
-        <scene sceneID="YhW-PL-HcY">
-            <objects>
-                <viewController id="vix-wj-Ynz" customClass="MapViewController" customModule="project_alpha" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aj1-Xg-hs9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-gs-4bA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="ZQ8-T9-gVs"/>
-                    </view>
-                    <connections>
-                        <outlet property="mapView" destination="sfF-gs-4bA" id="LJS-8U-tbv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3ZZ-nf-Kb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="476" y="814.54272863568224"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RFM-tX-grQ">

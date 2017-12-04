@@ -40,6 +40,7 @@
 		A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */; };
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
+		A3AC85CC1FD4B4AA0078838A /* CLLocationManager+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC85CB1FD4B4AA0078838A /* CLLocationManager+project-alpha.swift */; };
 		A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */; };
 		A3DFFC591FCCD25E006A3555 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DFFC581FCCD25E006A3555 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		A3AC85CB1FD4B4AA0078838A /* CLLocationManager+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationManager+project-alpha.swift"; sourceTree = "<group>"; };
 		A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A3DFFC581FCCD25E006A3555 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +192,7 @@
 			children = (
 				0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */,
 				0858704A1FC96651000F973A /* Collections+project-alpha.swift */,
+				A3AC85CB1FD4B4AA0078838A /* CLLocationManager+project-alpha.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
 				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
+				A3AC85CC1FD4B4AA0078838A /* CLLocationManager+project-alpha.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,

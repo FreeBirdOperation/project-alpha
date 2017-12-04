@@ -10,6 +10,7 @@ import Foundation
 import YAPI
 
 protocol BusinessModel {
+  var id: String { get }
   var name: String { get }
   var imageReference: ImageReference? { get }
 }
@@ -30,6 +31,7 @@ struct MockBusiness: BusinessModel {
   
   let name: String
   let imageReference: ImageReference?
+  let id: String = "id"
   
   init(name: String, image: UIImage) {
     self.name = name

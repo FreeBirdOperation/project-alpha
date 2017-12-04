@@ -39,12 +39,14 @@ class ResultCardView: UIView {
   var titleLabel: UILabel
   var imageView: UIImageView
   var choiceImageView: UIImageView
+  let idLabel: UILabel
   let blurFilterView: UIVisualEffectView
   
   override init(frame: CGRect = CGRect.zero) {
     self.titleLabel = UILabel()
     self.imageView = UIImageView()
     self.choiceImageView = UIImageView()
+    self.idLabel = UILabel()
     self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
     super.init(frame: frame)
@@ -52,6 +54,7 @@ class ResultCardView: UIView {
     self.addSubview(titleLabel)
     self.addSubview(imageView)
     self.addSubview(choiceImageView)
+    self.addSubview(idLabel)
     self.addSubview(blurFilterView)
     self.setupConstraints()
     self.setupBlur()
@@ -72,6 +75,9 @@ class ResultCardView: UIView {
     choiceImageView.autoCenterInSuperview()
     choiceImageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.25)
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
+    
+    idLabel.autoPinEdge(toSuperviewMargin: .bottom)
+    idLabel.autoAlignAxis(toSuperviewAxis: .vertical)
   }
   
   func setupBlur() {
@@ -98,6 +104,7 @@ extension ResultCardView: ResultDisplayable {
     
     isHidden = false
     titleLabel.text = businessModel.name
+    idLabel.text = businessModel.id
     if let cachedImage = businessModel.imageReference?.cachedImage {
       imageView.image = cachedImage
     }
