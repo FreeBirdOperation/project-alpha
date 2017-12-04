@@ -8,11 +8,21 @@
 
 //import Cocoa
 import UIKit
-
+import CoreLocation
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
+  let locationmanagement: CLLocationManager = CLLocationManager.sharedInstance
+  
+  // Testing purposes only.
+  var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+  @IBAction func MapButton(_ sender: Any) {
+    let mapViewController = MapViewController(locationManger: locationmanagement)
+    self.navigationController?.pushViewController(mapViewController, animated: true)
+  }
+  
   // Properties
   @IBOutlet weak var distanceLabel: UITextField!
   let distanceFilter = ["5", "10", "15", "20", "50", "100"]
@@ -32,11 +42,19 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    locationmanagement.requestWhenInUseAuthorization()
+    
     distancePicker.delegate = self
     distancePicker.dataSource = self
     
     //Binding textfield to picker
     distanceLabel.inputView = distancePicker
+    
+    // Acitivity Indicator settings
+    self.activityIndicator.center = self.view.center
+    self.activityIndicator.hidesWhenStopped = true
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+    view.addSubview(self.activityIndicator)
   }
   
   
@@ -66,7 +84,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
      }
      */
     if !inProgress {
-      inProgress = true
+      startIndicator()
       let keys = getKeys()
       guard
         let appId = keys["APP_ID"],
@@ -89,14 +107,27 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
           let resultVC = ResultViewController(networkAdapter: networkAdapter, searchParameters: params)
           self.navigationController?.pushViewController(resultVC, animated: true)
-          inProgress = false
+          self.stopIndicator()
         }
       }
     }
   }
   
+    /*
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     var result = segue.destination as! ResultViewController
-  }
+  }*/
+    
+    func startIndicator(){
+        inProgress = true
+        self.activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+    
+    func stopIndicator(){
+        inProgress = false
+        self.activityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
   
 }

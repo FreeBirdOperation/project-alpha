@@ -13,6 +13,10 @@ extension GoogleEstablishment: BusinessModel {
   var imageReference: ImageReference? {
     return nil
   }
+  
+  var id: String {
+    return ""
+  }
 }
 
 final class GooglePlaceNetworkAdapter: NetworkAdapter {
