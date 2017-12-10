@@ -12,26 +12,26 @@ import CoreLocation
 @testable import project_alpha
 
 extension Mock {
-  static var locationManager: MockLocationManager { return MockLocationManager() }
-}
+  static var locationManager: LocationManager { return LocationManager() }
 
-class MockLocationManager {
-  private(set) var didRequestAuthorization: Bool = false
-  private(set) var didStartUpdatingLocation: Bool = false
-  private(set) var observers: [CLLocationManagerDelegate] = []
-  
-  // LocationManagerProtocol conformance
-  var desiredAccuracy: CLLocationAccuracy = Double.nan // An invalid value for testing purposes
-  var shouldDisplayHeadingCalibration: Bool = false
-  
-  fileprivate init() {}
-
-  func contains(observer: NSObject) -> Bool {
-    return observers.contains { $0.isEqual(observer) }
+  class LocationManager {
+    private(set) var didRequestAuthorization: Bool = false
+    private(set) var didStartUpdatingLocation: Bool = false
+    private(set) var observers: [CLLocationManagerDelegate] = []
+    
+    // LocationManagerProtocol conformance
+    var desiredAccuracy: CLLocationAccuracy = Double.nan // An invalid value for testing purposes
+    var shouldDisplayHeadingCalibration: Bool = false
+    
+    fileprivate init() {}
+    
+    func contains(observer: NSObject) -> Bool {
+      return observers.contains { $0.isEqual(observer) }
+    }
   }
 }
 
-extension MockLocationManager: LocationManagerProtocol {
+extension Mock.LocationManager: LocationManagerProtocol {
   func requestWhenInUseAuthorization() {
     didRequestAuthorization = true
   }

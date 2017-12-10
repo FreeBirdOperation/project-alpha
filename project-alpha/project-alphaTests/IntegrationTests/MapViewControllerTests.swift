@@ -13,7 +13,7 @@ import CoreLocation
 @testable import project_alpha
 
 class MapViewControllerTests: ViewControllerIntegrationTestCase {
-  private var mockLocationManager: MockLocationManager = Mock.locationManager
+  private var mockLocationManager: Mock.LocationManager = Mock.locationManager
 
   override func setUp() {
     mockLocationManager = Mock.locationManager

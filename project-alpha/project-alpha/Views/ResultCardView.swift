@@ -22,11 +22,6 @@ class ResultCardViewModel {
   }
 }
 
-enum SwipeDirection {
-  case left
-  case right
-}
-
 protocol ResultDisplayable {
   func display(businessModel: BusinessModel?)
   func startChoosing(direction: SwipeDirection)
