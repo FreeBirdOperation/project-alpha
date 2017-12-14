@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		084128641FE2550C009D2639 /* OSRMTextInstructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128581FE25508009D2639 /* OSRMTextInstructions.framework */; };
+		084128651FE2550C009D2639 /* OSRMTextInstructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128581FE25508009D2639 /* OSRMTextInstructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128661FE2550C009D2639 /* AWSPolly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128591FE25508009D2639 /* AWSPolly.framework */; };
+		084128671FE2550C009D2639 /* AWSPolly.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128591FE25508009D2639 /* AWSPolly.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128681FE2550C009D2639 /* Polyline.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285A1FE25509009D2639 /* Polyline.framework */; };
+		084128691FE2550C009D2639 /* Polyline.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285A1FE25509009D2639 /* Polyline.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0841286A1FE2550C009D2639 /* Solar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285B1FE25509009D2639 /* Solar.framework */; };
+		0841286B1FE2550C009D2639 /* Solar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285B1FE25509009D2639 /* Solar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0841286C1FE2550C009D2639 /* MapboxNavigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285C1FE25509009D2639 /* MapboxNavigation.framework */; };
+		0841286D1FE2550C009D2639 /* MapboxNavigation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285C1FE25509009D2639 /* MapboxNavigation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0841286E1FE2550C009D2639 /* MapboxDirections.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285D1FE2550A009D2639 /* MapboxDirections.framework */; };
+		0841286F1FE2550C009D2639 /* MapboxDirections.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285D1FE2550A009D2639 /* MapboxDirections.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128701FE2550C009D2639 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285E1FE2550A009D2639 /* SDWebImage.framework */; };
+		084128711FE2550C009D2639 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285E1FE2550A009D2639 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128721FE2550C009D2639 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285F1FE2550A009D2639 /* AWSCore.framework */; };
+		084128731FE2550C009D2639 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0841285F1FE2550A009D2639 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128741FE2550C009D2639 /* MapboxCoreNavigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128601FE2550B009D2639 /* MapboxCoreNavigation.framework */; };
+		084128751FE2550C009D2639 /* MapboxCoreNavigation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128601FE2550B009D2639 /* MapboxCoreNavigation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128761FE2550C009D2639 /* Turf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128611FE2550B009D2639 /* Turf.framework */; };
+		084128771FE2550C009D2639 /* Turf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128611FE2550B009D2639 /* Turf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		084128781FE2550C009D2639 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128621FE2550B009D2639 /* Mapbox.framework */; };
+		084128791FE2550C009D2639 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128621FE2550B009D2639 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0841287A1FE2550C009D2639 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084128631FE2550B009D2639 /* MapboxMobileEvents.framework */; };
+		0841287B1FE2550C009D2639 /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 084128631FE2550B009D2639 /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */; };
 		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
 		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
@@ -19,11 +43,11 @@
 		085870491FC5791F000F973A /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870481FC5791F000F973A /* BusinessModel.swift */; };
 		0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858704A1FC96651000F973A /* Collections+project-alpha.swift */; };
 		0858704D1FC96990000F973A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0858704C1FC96986000F973A /* Foundation.framework */; };
-		085870511FC96A17000F973A /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		085870521FC96A17000F973A /* YAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; };
 		085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870591FCB5B41000F973A /* ResultActionHandler.swift */; };
+		0858D7621FDE78D20057AD3B /* MGLMapView+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D7611FDE78D20057AD3B /* MGLMapView+project-alpha.swift */; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -76,8 +100,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				084128751FE2550C009D2639 /* MapboxCoreNavigation.framework in Embed Frameworks */,
 				085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */,
+				084128731FE2550C009D2639 /* AWSCore.framework in Embed Frameworks */,
+				084128771FE2550C009D2639 /* Turf.framework in Embed Frameworks */,
+				0841286F1FE2550C009D2639 /* MapboxDirections.framework in Embed Frameworks */,
+				084128691FE2550C009D2639 /* Polyline.framework in Embed Frameworks */,
+				084128671FE2550C009D2639 /* AWSPolly.framework in Embed Frameworks */,
+				0841286D1FE2550C009D2639 /* MapboxNavigation.framework in Embed Frameworks */,
 				085870521FC96A17000F973A /* YAPI.framework in Embed Frameworks */,
+				0841286B1FE2550C009D2639 /* Solar.framework in Embed Frameworks */,
+				084128711FE2550C009D2639 /* SDWebImage.framework in Embed Frameworks */,
+				084128791FE2550C009D2639 /* Mapbox.framework in Embed Frameworks */,
+				0841287B1FE2550C009D2639 /* MapboxMobileEvents.framework in Embed Frameworks */,
+				084128651FE2550C009D2639 /* OSRMTextInstructions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +121,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		084128581FE25508009D2639 /* OSRMTextInstructions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSRMTextInstructions.framework; path = Carthage/Build/iOS/OSRMTextInstructions.framework; sourceTree = "<group>"; };
+		084128591FE25508009D2639 /* AWSPolly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSPolly.framework; path = Carthage/Build/iOS/AWSPolly.framework; sourceTree = "<group>"; };
+		0841285A1FE25509009D2639 /* Polyline.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Polyline.framework; path = Carthage/Build/iOS/Polyline.framework; sourceTree = "<group>"; };
+		0841285B1FE25509009D2639 /* Solar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Solar.framework; path = Carthage/Build/iOS/Solar.framework; sourceTree = "<group>"; };
+		0841285C1FE25509009D2639 /* MapboxNavigation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxNavigation.framework; path = Carthage/Build/iOS/MapboxNavigation.framework; sourceTree = "<group>"; };
+		0841285D1FE2550A009D2639 /* MapboxDirections.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxDirections.framework; path = Carthage/Build/iOS/MapboxDirections.framework; sourceTree = "<group>"; };
+		0841285E1FE2550A009D2639 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
+		0841285F1FE2550A009D2639 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = Carthage/Build/iOS/AWSCore.framework; sourceTree = "<group>"; };
+		084128601FE2550B009D2639 /* MapboxCoreNavigation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxCoreNavigation.framework; path = Carthage/Build/iOS/MapboxCoreNavigation.framework; sourceTree = "<group>"; };
+		084128611FE2550B009D2639 /* Turf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Turf.framework; path = Carthage/Build/iOS/Turf.framework; sourceTree = "<group>"; };
+		084128621FE2550B009D2639 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = Carthage/Build/iOS/Mapbox.framework; sourceTree = "<group>"; };
+		084128631FE2550B009D2639 /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapboxMobileEvents.framework; path = Carthage/Build/iOS/MapboxMobileEvents.framework; sourceTree = "<group>"; };
 		0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
@@ -106,6 +154,8 @@
 		0858704C1FC96986000F973A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		085870541FC96A43000F973A /* OAuthSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OAuthSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		085870591FCB5B41000F973A /* ResultActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandler.swift; sourceTree = "<group>"; };
+		0858D7611FDE78D20057AD3B /* MGLMapView+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MGLMapView+project-alpha.swift"; sourceTree = "<group>"; };
+		0858D76D1FDE8FEB0057AD3B /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuthSwift.framework; sourceTree = "<group>"; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -146,10 +196,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */,
+				0841286E1FE2550C009D2639 /* MapboxDirections.framework in Frameworks */,
 				0858704D1FC96990000F973A /* Foundation.framework in Frameworks */,
-				085870511FC96A17000F973A /* YAPI.framework in Frameworks */,
+				084128641FE2550C009D2639 /* OSRMTextInstructions.framework in Frameworks */,
+				0841286C1FE2550C009D2639 /* MapboxNavigation.framework in Frameworks */,
+				084128721FE2550C009D2639 /* AWSCore.framework in Frameworks */,
+				084128681FE2550C009D2639 /* Polyline.framework in Frameworks */,
+				084128761FE2550C009D2639 /* Turf.framework in Frameworks */,
+				0841286A1FE2550C009D2639 /* Solar.framework in Frameworks */,
 				085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */,
+				084128701FE2550C009D2639 /* SDWebImage.framework in Frameworks */,
+				084128741FE2550C009D2639 /* MapboxCoreNavigation.framework in Frameworks */,
+				0841287A1FE2550C009D2639 /* MapboxMobileEvents.framework in Frameworks */,
 				08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */,
+				084128661FE2550C009D2639 /* AWSPolly.framework in Frameworks */,
+				084128781FE2550C009D2639 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +267,7 @@
 			children = (
 				0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */,
 				0858704A1FC96651000F973A /* Collections+project-alpha.swift */,
+				0858D7611FDE78D20057AD3B /* MGLMapView+project-alpha.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -246,6 +308,7 @@
 		085870571FCB5B16000F973A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0858D75C1FDDEC700057AD3B /* MapScreen */,
 				085870581FCB5B1D000F973A /* ResultScreen */,
 			);
 			path = Controllers;
@@ -260,9 +323,29 @@
 			path = ResultScreen;
 			sourceTree = "<group>";
 		};
+		0858D75C1FDDEC700057AD3B /* MapScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A3DFFC581FCCD25E006A3555 /* MapViewController.swift */,
+			);
+			path = MapScreen;
+			sourceTree = "<group>";
+		};
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
+				0841285F1FE2550A009D2639 /* AWSCore.framework */,
+				084128591FE25508009D2639 /* AWSPolly.framework */,
+				084128621FE2550B009D2639 /* Mapbox.framework */,
+				084128601FE2550B009D2639 /* MapboxCoreNavigation.framework */,
+				0841285D1FE2550A009D2639 /* MapboxDirections.framework */,
+				084128631FE2550B009D2639 /* MapboxMobileEvents.framework */,
+				0841285C1FE25509009D2639 /* MapboxNavigation.framework */,
+				084128581FE25508009D2639 /* OSRMTextInstructions.framework */,
+				0841285A1FE25509009D2639 /* Polyline.framework */,
+				0841285E1FE2550A009D2639 /* SDWebImage.framework */,
+				0841285B1FE25509009D2639 /* Solar.framework */,
+				084128611FE2550B009D2639 /* Turf.framework */,
 				085870541FC96A43000F973A /* OAuthSwift.framework */,
 				085870431FC3F33C000F973A /* project_alpha-Bridging-Header.h */,
 				085870311FC3F19B000F973A /* PureLayout */,
@@ -301,7 +384,6 @@
 				087648B51FB8FF190058E110 /* Assets.xcassets */,
 				087648B71FB8FF190058E110 /* LaunchScreen.storyboard */,
 				087648BA1FB8FF190058E110 /* Info.plist */,
-				A3DFFC581FCCD25E006A3555 /* MapViewController.swift */,
 			);
 			path = "project-alpha";
 			sourceTree = "<group>";
@@ -331,6 +413,7 @@
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0858D76D1FDE8FEB0057AD3B /* OAuthSwift.framework */,
 				A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */,
 				0858704C1FC96986000F973A /* Foundation.framework */,
 				08CCBE901FB8FF9D007EC96E /* YAPI.framework */,
@@ -410,6 +493,8 @@
 				087648A81FB8FF190058E110 /* Frameworks */,
 				087648A91FB8FF190058E110 /* Resources */,
 				085870531FC96A17000F973A /* Embed Frameworks */,
+				0858D7601FDE77DF0057AD3B /* ShellScript */,
+				080DEDB81FDE90D100CEABD1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -532,6 +617,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		080DEDB81FDE90D100CEABD1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/MapboxNavigation.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MapboxCoreNavigation.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MapboxNavigation.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MapboxCoreNavigation.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		0858D7601FDE77DF0057AD3B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework/strip-frameworks.sh\"";
+		};
 		08CCBE911FB967E6007EC96E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -543,7 +658,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#check if env-vars.sh exists\nif [ -f ./env-vars.sh ]\nthen\nsource ./env-vars.sh\necho \"env found\"\necho $APP_ID\necho $CLIENT_SECRET\nfi\n\necho \"done\"";
+			shellScript = "if [ ! -d Carthage/Build/iOS ] ; then\n    carthage version >/dev/null 2>&1 || { echo \"Please install carthage to build this project\"; exit 1; }\n#carthage update --platform iOS\n    echo \"Please run `carthage update --platform iOS`\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -568,6 +683,7 @@
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
+				0858D7621FDE78D20057AD3B /* MGLMapView+project-alpha.swift in Sources */,
 				A3DFFC591FCCD25E006A3555 /* MapViewController.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
@@ -749,6 +865,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP6LAQGWJ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "project-alpha/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -766,6 +888,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP6LAQGWJ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "project-alpha/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -71,6 +71,7 @@ class ResultViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.view.backgroundColor = UIColor.black
   }
   
   private func setup(card: UIView, withGestureRecognizer: Bool) {

@@ -30,7 +30,7 @@ xcuserdata
 .build/
 
 # Carthage
-Carthage/
+**/Carthage/
 
 ## Secrets
 **/secrets.plist

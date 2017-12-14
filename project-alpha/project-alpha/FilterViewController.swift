@@ -9,6 +9,8 @@
 //import Cocoa
 import UIKit
 import CoreLocation
+import MapboxDirections
+import MapboxNavigation
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
@@ -20,8 +22,25 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
   @IBAction func MapButton(_ sender: Any) {
-    let mapViewController = MapViewController()
+    /*
+    let mapViewController = MapViewController(source: CLLocationCoordinate2D(latitude: 45.509931, longitude: -122.679582),
+                                              destination: CLLocationCoordinate2D(latitude: 45.509930, longitude: -122.683706))
     self.navigationController?.pushViewController(mapViewController, animated: true)
+    */
+    let origin = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 38.9131752, longitude: -77.0324047), name: "Mapbox")
+    let destination = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 38.8977, longitude: -77.0365), name: "White House")
+    
+    let options = RouteOptions(waypoints: [origin, destination])
+    options.routeShapeResolution = .full
+    options.includesSteps = true
+    
+    Directions.shared.calculate(options) { (waypoints, routes, error) in
+      guard let route = routes?.first else { return }
+      
+      let viewController = NavigationViewController(for: route)
+//      viewController.
+      self.present(viewController, animated: true, completion: nil)
+    }
   }
   
   // Properties
