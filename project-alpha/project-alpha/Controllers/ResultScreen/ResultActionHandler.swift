@@ -9,7 +9,9 @@
 import UIKit
 import YAPI
 
-protocol ResultViewControllerDelegate {
+protocol ResultViewControllerDelegate: class {
+  var viewController: ResultViewController? { get set }
+  
   func retrieveBusinesses(with params: SearchParameters,
                           completionHandler: @escaping (Result<[BusinessModel], APIError>) -> Void)
   func selectOption(_ businessModel: BusinessModel?)
@@ -18,6 +20,20 @@ protocol ResultViewControllerDelegate {
 
 class ResultActionHandler: ResultViewControllerDelegate {
   let networkAdapter: NetworkAdapter
+  private weak var _viewController: ResultViewController?
+  
+  var viewController: ResultViewController? {
+    get {
+      return _viewController
+    }
+    set {
+      guard _viewController == nil else {
+        assertionFailure("Attempted to bind action handler to more than one view controller")
+        return
+      }
+      _viewController = newValue
+    }
+  }
   
   private var searchInProgress: Bool
   
@@ -43,12 +59,18 @@ class ResultActionHandler: ResultViewControllerDelegate {
   }
   
   func selectOption(_ businessModel: BusinessModel?) {
+    defer {
+      viewController?.showNextOption()
+    }
     guard let businessModel = businessModel else { return }
 
     print("Selected \(businessModel.name)")
   }
   
   func discardOption(_ businessModel: BusinessModel?) {
+    defer {
+      viewController?.showNextOption()
+    }
     guard let businessModel = businessModel else { return }
 
     print("Discarded \(businessModel.name)")

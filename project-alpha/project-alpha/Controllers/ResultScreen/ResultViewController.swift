@@ -56,6 +56,8 @@ class ResultViewController: UIViewController {
     
     super.init(nibName: nil, bundle: nil)
     
+    self.delegate.viewController = self
+    
     self.setup(card: backupCard, withGestureRecognizer: false)
     self.setup(card: card, withGestureRecognizer: true)
 
@@ -193,7 +195,6 @@ extension ResultViewController {
       case .right:
         self.delegate.selectOption(self.cardViewModel.businessModel)
       }
-      self.showNextOption()
     }
     
     if animated {

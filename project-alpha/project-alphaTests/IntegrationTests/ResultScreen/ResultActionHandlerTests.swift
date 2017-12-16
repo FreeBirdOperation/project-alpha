@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import YAPI
 @testable import project_alpha
 
 class ResultActionHandlerTests: PAXCTestCase {
@@ -19,6 +20,21 @@ class ResultActionHandlerTests: PAXCTestCase {
 
     mockNetworkAdapter = Mock.networkAdapter
     actionHandler = ResultActionHandler(networkAdapter: mockNetworkAdapter)
+  }
+  
+  func test_ResultActionHandler_OnlySetsViewControllerOnce() {
+    let vc1 = Mock.ResultScreen.viewController
+    let vc2 = Mock.ResultScreen.viewController
+    
+    XCTAssertNil(actionHandler.viewController)
+    
+    actionHandler.viewController = vc1
+    
+    XCTAssertEqual(actionHandler.viewController, vc1)
+    
+    actionHandler.viewController = vc2
+    
+    XCTAssertEqual(actionHandler.viewController, vc1)
   }
   
   func test_ResultActionHandler_RetrieveBusinessesMakesNetworkRequest() {

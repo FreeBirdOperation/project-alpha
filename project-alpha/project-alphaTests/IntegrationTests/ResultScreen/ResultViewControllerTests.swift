@@ -11,43 +11,25 @@ import YAPI
 import XCTest
 @testable import project_alpha
 
-private class MockDelegate: ResultViewControllerDelegate {
-  private(set) var selected: Bool = false
-  private(set) var discarded: Bool = false
-  private(set) var retrieved: Bool = false
-    
-  var nextResult: Result<[BusinessModel], APIError> = .ok(Array(repeating: Mock.businessModel, count: 10))
-
-  func retrieveBusinesses(with params: SearchParameters,
-                          completionHandler: @escaping (Result<[BusinessModel], APIError>) -> Void) {
-    retrieved = true
-    completionHandler(nextResult)
-  }
-  
-  func selectOption(_ businessModel: BusinessModel?) {
-    selected = true
-  }
-  
-  func discardOption(_ businessModel: BusinessModel?) {
-    discarded = true
-  }
-}
-
 class ResultViewControllerTests: ViewControllerIntegrationTestCase {
   let mockSearchParameters = SearchParameters(distance: 100)
-  private var mockDelegate: MockDelegate = MockDelegate()
+  private var mockDelegate: Mock.ResultScreen.Delegate = Mock.ResultScreen.delegate
   
   var resultViewController: ResultViewController {
     return viewController as! ResultViewController
   }
   
   override func setUp() {
-    mockDelegate = MockDelegate()
+    mockDelegate = Mock.ResultScreen.delegate
     let pageModel = ResultViewControllerPageModel(delegate: mockDelegate,
                                                   searchParameters: mockSearchParameters)
     viewController = ResultViewController(pageModel: pageModel)
     
     super.setUp()
+  }
+  
+  func test_ResultViewController_SetsDelegateViewControllerAsSelf() {
+    XCTAssertTrue(mockDelegate.viewController === viewController)
   }
   
   func test_ResultViewController_RetrievesBusinessesOnInitialization() {
