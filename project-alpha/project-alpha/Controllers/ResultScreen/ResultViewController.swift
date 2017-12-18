@@ -10,11 +10,23 @@ import UIKit
 import MapKit
 import YAPI
 
-class ResultViewController: UIViewController {
-  lazy private var actionHandler: ResultViewControllerOperations = {
-    return ResultActionHandler(viewController: self, networkAdapter: self.networkAdapter)
-  }()
+struct ResultViewControllerPageModel {
+  let delegate: ResultViewControllerDelegate
+  let searchParameters: SearchParameters
 
+  /// Minimum number of businesses loaded before preloading another batch of businesses
+  let refreshThreshold: UInt
+  
+  init(delegate: ResultViewControllerDelegate,
+       searchParameters: SearchParameters,
+       refreshThreshold: UInt = 5) {
+    self.delegate = delegate
+    self.searchParameters = searchParameters
+    self.refreshThreshold = refreshThreshold
+  }
+}
+
+class ResultViewController: UIViewController {
   lazy private var cardViewModel: ResultCardViewModel = {
     return ResultCardViewModel(updateBlock: { [weak self] businessModel in
       self?.card.display(businessModel: businessModel)
@@ -27,24 +39,29 @@ class ResultViewController: UIViewController {
     })
   }()
 
-  private var card: UIView & ResultDisplayable
-  private var backupCard: UIView & ResultDisplayable
-  private var businesses: [BusinessModel] = []
-  private let networkAdapter: NetworkAdapter
+  private(set) var businesses: [BusinessModel] = []
+
+  private let card: UIView & ResultDisplayable
+  private let backupCard: UIView & ResultDisplayable
+  private let delegate: ResultViewControllerDelegate
   private let searchParameters: SearchParameters
+  private let refreshThreshold: UInt
   
-  init(networkAdapter: NetworkAdapter, searchParameters: SearchParameters) {
-    self.networkAdapter = networkAdapter
-    self.searchParameters = searchParameters
+  init(pageModel: ResultViewControllerPageModel) {
+    self.delegate = pageModel.delegate
+    self.searchParameters = pageModel.searchParameters
+    self.refreshThreshold = pageModel.refreshThreshold
     self.card = ResultCardView()
     self.backupCard = ResultCardView()
     
     super.init(nibName: nil, bundle: nil)
     
+    self.delegate.viewController = self
+    
     self.setup(card: backupCard, withGestureRecognizer: false)
     self.setup(card: card, withGestureRecognizer: true)
 
-    actionHandler.retrieveBusinesses(with: searchParameters) { result in
+    delegate.retrieveBusinesses(with: searchParameters) { result in
       guard case .ok(let businesses) = result else {
         log(.error, for: .network, message: "Error retrieving business results: \(result.unwrapErr())")
         return
@@ -67,10 +84,6 @@ class ResultViewController: UIViewController {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
   }
   
   private func setup(card: UIView, withGestureRecognizer: Bool) {
@@ -163,53 +176,64 @@ extension ResultViewController {
     
     // Center point is within the leftmost quadrant of the screen
     if card.center.x < quarterWidth {
-      UIView.animate(withDuration: 0.3, animations: {
-        card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
-        card.alpha = 0.0
-      }, completion: { (success) in
-        self.showNextOption()
-        self.actionHandler.discardOption()
-      })
+      swipe(.left, animated: true)
     }
-      // Center point is within the rightmost quadrant of the screen
+    // Center point is within the rightmost quadrant of the screen
     else if card.center.x > (view.frame.width - quarterWidth) {
-      UIView.animate(withDuration: 0.3, animations: {
-        card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
-        card.alpha = 0.0
-      }, completion: { (success) in
-        self.showNextOption()
-        self.actionHandler.selectOption()
-      })
+      swipe(.right, animated: true)
     }
     else {
       resetCard(animated: true)
     }
   }
   
-  private func showNextOption() {
-    if businesses.count > 1 {
-      cardViewModel.businessModel = businesses.popFirst()
-      backupCardViewModel.businessModel = businesses.first
-      
-      resetCard(animated: false)
+  func swipe(_ direction: SwipeDirection, animated: Bool) {
+    let completionBlock: (Bool) -> Void = { success in
+      switch direction {
+      case .left:
+        self.delegate.discardOption(self.cardViewModel.businessModel)
+      case .right:
+        self.delegate.selectOption(self.cardViewModel.businessModel)
+      }
     }
-      // TESTING: Get the next chunk of restauraunts, offset is handled in YelpV3NetworkAdapter as a hardcoded value, we will need to go back and make it more generic for it to work
+    
+    if animated {
+      let offset: CGFloat = direction.isLeft ? -200 : 200
+      UIView.animate(withDuration: 0.3, animations: {
+        self.card.center = CGPoint(x: self.card.center.x + offset, y: self.card.center.y + 75)
+        self.card.alpha = 0.0
+      }, completion: completionBlock)
+    }
     else {
-      actionHandler.retrieveBusinesses(with: searchParameters) { [weak self] result in
-        
+      completionBlock(true)
+    }
+  }
+  
+  func showNextOption() {
+    let displayOption = { [weak self] in
+      self?.cardViewModel.businessModel = self?.businesses.popFirst()
+      self?.backupCardViewModel.businessModel = self?.businesses.first
+      
+      self?.resetCard(animated: false)
+    }
+
+    if businesses.count < refreshThreshold {
+      // Get the next block of restauraunts
+      delegate.retrieveBusinesses(with: searchParameters) { [weak self] result in
         guard case .ok(let businesses) = result else {
           print("Error: \(result.unwrapErr())")
           return
         }
         
-        self?.businesses.append(contentsOf: businesses)
+        self?.businesses.append(contentsOf: businesses.shuffled())
         
-        DispatchQueue.main.async {
-          self?.cardViewModel.businessModel = self?.businesses.popFirst()
-          self?.backupCardViewModel.businessModel = self?.businesses.first
-          self?.resetCard(animated: false)
+        if self?.cardViewModel.businessModel == nil {
+          DispatchQueue.main.async {
+            displayOption()
+          }
         }
       }
     }
+    displayOption()
   }
 }

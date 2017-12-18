@@ -105,8 +105,10 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
         DispatchQueue.main.async {
           let params = SearchParameters(distance: (Int(self.distanceLabel.text ?? "") ?? 10) * 100)
+          let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
+                                                        searchParameters: params)
 
-          let resultVC = ResultViewController(networkAdapter: networkAdapter, searchParameters: params)
+          let resultVC = ResultViewController(pageModel: pageModel)
           self.navigationController?.pushViewController(resultVC, animated: true)
           self.stopIndicator()
         }

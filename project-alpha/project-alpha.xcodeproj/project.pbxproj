@@ -24,6 +24,8 @@
 		085870551FC96A43000F973A /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; };
 		085870561FC96A43000F973A /* OAuthSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 085870541FC96A43000F973A /* OAuthSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870591FCB5B41000F973A /* ResultActionHandler.swift */; };
+		0858D7591FDDE3610057AD3B /* ResultActionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */; };
+		0858D75B1FDDE4090057AD3B /* MockNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -45,6 +47,12 @@
 		08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6901FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift */; };
 		08EAD6851FD531710082DAA6 /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD6841FD531710082DAA6 /* LocationManagerTests.swift */; };
 		08EAD6881FD533A10082DAA6 /* PAXCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD6871FD533A10082DAA6 /* PAXCTestCase.swift */; };
+		08EAD68F1FDD1F100082DAA6 /* ResultViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD68E1FDD1F0F0082DAA6 /* ResultViewControllerTests.swift */; };
+		08EAD6911FDD20D80082DAA6 /* MockBusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD6901FDD20D80082DAA6 /* MockBusinessModel.swift */; };
+		08EAD6951FDDDDE80082DAA6 /* SwipeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EAD6941FDDDDE80082DAA6 /* SwipeDirection.swift */; };
+		08FEB65C1FE437CB00E43632 /* MockResultViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEB65B1FE437CB00E43632 /* MockResultViewControllerDelegate.swift */; };
+		08FEB65E1FE43A0800E43632 /* MockResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEB65D1FE43A0800E43632 /* MockResultViewController.swift */; };
+		08FEB6601FE5010600E43632 /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEB65F1FE5010600E43632 /* Assertion.swift */; };
 		A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */; };
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
@@ -106,6 +114,8 @@
 		0858704C1FC96986000F973A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		085870541FC96A43000F973A /* OAuthSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = OAuthSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		085870591FCB5B41000F973A /* ResultActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandler.swift; sourceTree = "<group>"; };
+		0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandlerTests.swift; sourceTree = "<group>"; };
+		0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkAdapter.swift; sourceTree = "<group>"; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +143,12 @@
 		08E0F6901FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlaceAuthenticator.swift; sourceTree = "<group>"; };
 		08EAD6841FD531710082DAA6 /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
 		08EAD6871FD533A10082DAA6 /* PAXCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAXCTestCase.swift; sourceTree = "<group>"; };
+		08EAD68E1FDD1F0F0082DAA6 /* ResultViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewControllerTests.swift; sourceTree = "<group>"; };
+		08EAD6901FDD20D80082DAA6 /* MockBusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBusinessModel.swift; sourceTree = "<group>"; };
+		08EAD6941FDDDDE80082DAA6 /* SwipeDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeDirection.swift; sourceTree = "<group>"; };
+		08FEB65B1FE437CB00E43632 /* MockResultViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResultViewControllerDelegate.swift; sourceTree = "<group>"; };
+		08FEB65D1FE43A0800E43632 /* MockResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResultViewController.swift; sourceTree = "<group>"; };
+		08FEB65F1FE5010600E43632 /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
 		A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +276,15 @@
 			path = ResultScreen;
 			sourceTree = "<group>";
 		};
+		0858D7571FDDE3350057AD3B /* ResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				08EAD68E1FDD1F0F0082DAA6 /* ResultViewControllerTests.swift */,
+				0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */,
+			);
+			path = ResultScreen;
+			sourceTree = "<group>";
+		};
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +313,7 @@
 		087648AD1FB8FF190058E110 /* project-alpha */ = {
 			isa = PBXGroup;
 			children = (
+				08EAD6931FDDDDD90082DAA6 /* Enums */,
 				08D74CDE1FD4FE1E00306586 /* Utilities */,
 				085870571FCB5B16000F973A /* Controllers */,
 				085870471FC57912000F973A /* Models */,
@@ -352,6 +378,7 @@
 			children = (
 				08D74CDF1FD4FE2F00306586 /* LocationManager.swift */,
 				08D74CE11FD5005D00306586 /* Weak.swift */,
+				08FEB65F1FE5010600E43632 /* Assertion.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -359,6 +386,7 @@
 		08D74CE31FD51ADC00306586 /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
+				0858D7571FDDE3350057AD3B /* ResultScreen */,
 				08D74CE61FD51B4100306586 /* Utilities */,
 				08D74CE41FD51AEE00306586 /* MapViewControllerTests.swift */,
 			);
@@ -376,8 +404,11 @@
 		08D74CED1FD528F000306586 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				08FEB65A1FE437A900E43632 /* ResultScreen */,
 				08D74CEE1FD528FF00306586 /* Mock.swift */,
 				08D74CF01FD5295800306586 /* MockLocationManager.swift */,
+				08EAD6901FDD20D80082DAA6 /* MockBusinessModel.swift */,
+				0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -396,6 +427,23 @@
 				08EAD6871FD533A10082DAA6 /* PAXCTestCase.swift */,
 			);
 			path = TestHelpers;
+			sourceTree = "<group>";
+		};
+		08EAD6931FDDDDD90082DAA6 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				08EAD6941FDDDDE80082DAA6 /* SwipeDirection.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		08FEB65A1FE437A900E43632 /* ResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				08FEB65B1FE437CB00E43632 /* MockResultViewControllerDelegate.swift */,
+				08FEB65D1FE43A0800E43632 /* MockResultViewController.swift */,
+			);
+			path = ResultScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -553,6 +601,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08EAD6951FDDDDE80082DAA6 /* SwipeDirection.swift in Sources */,
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
 				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
@@ -565,6 +614,7 @@
 				0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
+				08FEB6601FE5010600E43632 /* Assertion.swift in Sources */,
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
@@ -583,12 +633,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FEB65C1FE437CB00E43632 /* MockResultViewControllerDelegate.swift in Sources */,
+				08EAD6911FDD20D80082DAA6 /* MockBusinessModel.swift in Sources */,
 				08EAD6851FD531710082DAA6 /* LocationManagerTests.swift in Sources */,
 				08D74CF11FD5295800306586 /* MockLocationManager.swift in Sources */,
+				0858D7591FDDE3610057AD3B /* ResultActionHandlerTests.swift in Sources */,
 				087648C41FB8FF190058E110 /* project_alphaTests.swift in Sources */,
+				08EAD68F1FDD1F100082DAA6 /* ResultViewControllerTests.swift in Sources */,
 				08D74CE51FD51AEE00306586 /* MapViewControllerTests.swift in Sources */,
 				08EAD6881FD533A10082DAA6 /* PAXCTestCase.swift in Sources */,
+				08FEB65E1FE43A0800E43632 /* MockResultViewController.swift in Sources */,
 				08D74CE81FD51B5A00306586 /* ViewControllerIntegrationTestCase.swift in Sources */,
+				0858D75B1FDDE4090057AD3B /* MockNetworkAdapter.swift in Sources */,
 				08D74CEF1FD528FF00306586 /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

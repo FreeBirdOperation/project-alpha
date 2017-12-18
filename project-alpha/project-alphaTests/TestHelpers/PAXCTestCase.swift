@@ -7,7 +7,20 @@
 //
 
 import Foundation
+import YAPI
 import XCTest
 
 // project-alpha test case override point
-class PAXCTestCase: XCTestCase {}
+class PAXCTestCase: XCTestCase {
+  override func setUp() {
+    super.setUp()
+
+    YAPI.Asserts.shouldAssert = false
+  }
+  
+  override func tearDown() {
+    YAPI.Asserts.shouldAssert = true
+    
+    super.tearDown()
+  }
+}

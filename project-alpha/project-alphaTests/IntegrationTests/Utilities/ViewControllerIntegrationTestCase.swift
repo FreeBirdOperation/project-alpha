@@ -10,24 +10,38 @@ import Foundation
 import XCTest
 
 class ViewControllerIntegrationTestCase: PAXCTestCase {
-  var viewController: UIViewController!
+  private var _viewController: UIViewController!
+  
+  var viewController: UIViewController {
+    get {
+      return _viewController
+    }
+    set {
+      _viewController = newValue
+      _viewController.viewDidLoad()
+    }
+  }
   
   override func setUp() {
     super.setUp()
-
-    guard let viewController = viewController else {
+    
+    guard _viewController != nil else {
       preconditionFailure("Subclassing test cases must set viewController value before calling setUp")
     }
-
-    viewController.viewDidLoad()
   }
   
-  func makeViewAppear(_ animated: Bool) {
+  override func tearDown() {
+    _viewController = nil
+
+    super.tearDown()
+  }
+  
+  final func makeViewAppear(_ animated: Bool) {
     viewController.viewWillAppear(animated)
     viewController.viewDidAppear(animated)
   }
   
-  func makeViewDisappear(_ animated: Bool) {
+  final func makeViewDisappear(_ animated: Bool) {
     viewController.viewWillDisappear(animated)
     viewController.viewDidDisappear(animated)
   }

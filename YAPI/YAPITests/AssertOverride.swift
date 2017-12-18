@@ -8,12 +8,12 @@
 
 import Foundation
 
-enum Asserts {
-  static var shouldAssert: Bool = true
+public enum Asserts {
+  public static var shouldAssert: Bool = true
 }
 
 // Disable asserts for testing
-func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+public func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
   if Asserts.shouldAssert {
     Swift.assert(condition, message, file: file, line: line)
   }
@@ -22,7 +22,7 @@ func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> 
   }
 }
 
-func assertionFailure(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+public func assertionFailure(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
   if Asserts.shouldAssert {
     Swift.assertionFailure(message, file: file, line: line)
   }

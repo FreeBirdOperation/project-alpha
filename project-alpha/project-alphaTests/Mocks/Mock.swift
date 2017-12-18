@@ -15,4 +15,7 @@ private struct MockError: Error {}
 
 enum Mock {
   static var error: Error { return MockError() }
+  
+  // MARK: Subnamespaces
+  enum ResultScreen {}
 }
