@@ -10,13 +10,19 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
   let mapView: MKMapView
   let locationManager: LocationManagerProtocol
+  let latitude: Double
+  let longitude: Double
+  let locationName: String
   
   init(locationManger: LocationManagerProtocol = LocationManager.sharedManager) {
     self.mapView = MKMapView(forAutoLayout: ())
     self.locationManager = locationManger
+    self.latitude = 45.496536
+    self.longitude = -122.886072
+    self.locationName = "Popeyes"
     super.init(nibName: nil, bundle: nil)
     view.addSubview(mapView)
     mapView.autoPinEdgesToSuperviewEdges()
@@ -31,6 +37,18 @@ class MapViewController: UIViewController {
     locationManager.addObserver(self)
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.startUpdatingLocation()
+    
+    //test direction
+    getDirection()
+  }
+  
+  private func getDirection(){
+    mapView.delegate = self
+    mapView.showsScale = true
+    mapView.showsPointsOfInterest = true
+    mapView.showsUserLocation = true
+    
+    
   }
 }
 
