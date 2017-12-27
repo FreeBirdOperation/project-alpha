@@ -20,8 +20,8 @@ class Condition<Signaled> {
     }
     
     while true {
+      condition.wait()
       guard let value = value else {
-        condition.wait()
         continue
       }
       

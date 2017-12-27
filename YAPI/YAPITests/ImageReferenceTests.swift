@@ -141,9 +141,13 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
   func test_LoadImage_LoadsAnImageFromValidData() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handlerCalled = false
     imageReference.load() { result in
+      handlerCalled = true
       XCTAssert(result.isOk())
     }
+    
+    XCTAssertTrue(handlerCalled)
   }
   
   func test_LoadImage_LoadsAnImageFromValidData_CachesTheImage() {
@@ -161,52 +165,63 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
   
   func test_LoadImage_LoadsAnImageFromInvalidData_GivesAnError() {
     mockSession.nextData = Data()
-
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handlerCalled = false
 
     imageReference.load() { result in
+      handlerCalled = true
       XCTAssert(result.isErr())
       
       guard case .invalidData = result.unwrapErr() else {
         return XCTFail("Error was wrong type")
       }
     }
+    
+    XCTAssertTrue(handlerCalled)
   }
   
   func test_LoadImage_WhereRequestErrors_GivesTheError() {
     mockSession.nextError = Mock.error
-
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handlerCalled = false
 
     imageReference.load() { result in
+      handlerCalled = true
       XCTAssert(result.isErr())
       
       guard case .requestError = result.unwrapErr() else {
         return XCTFail("Error was wrong type")
       }
     }
+    
+    XCTAssertTrue(handlerCalled)
   }
   
   func test_LoadImage_RecievesNoData_GivesAnError() {
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
-
+    var handlerCalled = false
+    
     imageReference.load() { result in
+      handlerCalled = true
       XCTAssert(result.isErr())
       
       guard case .noDataReceived = result.unwrapErr() else {
         return XCTFail("Error was wrong type")
       }
     }
+    
+    XCTAssertTrue(handlerCalled)
   }
   
   func test_LoadImage_WithDifferentImageReferencesToSameURL_GivesCachedImage() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
-
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
     let imageReference2 = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handlersCalled = false
     
-    imageReference.load() { (result) -> Void in
-      imageReference2.load() { (result2) -> Void in
+    imageReference.load() { result in
+      imageReference2.load() { result2 in
+        handlersCalled = true
         XCTAssert(result.isOk())
         XCTAssert(result2.isOk())
         
@@ -225,6 +240,8 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
         XCTAssert(imageData == imageData2)
       }
     }
+    
+    XCTAssertTrue(handlersCalled)
   }
   
   func test_LoadImage_StoresImagesInCache() {
@@ -233,12 +250,14 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
     let url2 = URL(string: "http://s3-media3.fl.yelpcdn.com/qwer.jpg")!
     let imageReference = ImageReference(from: url, using: mockCache, session: session)
     let imageReference2 = ImageReference(from: url2, using: mockCache, session: session)
+    var handlersCalled = false
     
     XCTAssertFalse(mockCache.contains(imageReference))
     XCTAssertFalse(mockCache.contains(imageReference2))
 
     imageReference.load() { result in
       imageReference2.load() { result2 in
+        handlersCalled = true
         XCTAssert(result.isOk())
         XCTAssert(result2.isOk())
         
@@ -246,13 +265,17 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
         XCTAssertTrue(self.mockCache.contains(imageReference2))
       }
     }
+    
+    XCTAssertTrue(handlersCalled)
   }
   
   func test_CachedImageProperty_ReturnsCopy() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handlerCalled = false
     
     imageReference.load() { result in
+      handlerCalled = true
       let cachedImage = imageReference.cachedImage
       
       XCTAssertNotNil(cachedImage)
@@ -266,13 +289,18 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
       XCTAssert(cachedImage !== imageReference.cachedImage)
       XCTAssert(imageReference.cachedImage !== imageReference.cachedImage)
     }
+    
+    XCTAssertTrue(handlerCalled)
   }
   
   func test_LoadImageWithScale_ScalesTheImage() {
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
     let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var handler1Called = false
+    var handler2Called = false
     
     imageReference.load(withScale: 0.5) { result in
+      handler1Called = true
       XCTAssert(result.isOk())
       
       let image = result.unwrap()
@@ -281,6 +309,7 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
     }
     
     imageReference.load(withScale: 1.5) { result in
+      handler2Called = true
       XCTAssert(result.isOk())
       
       let image = result.unwrap()
@@ -289,6 +318,8 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
     }
     
     XCTAssert(imageReference.cachedImage?.scale == 1.0)
+    XCTAssertTrue(handler1Called)
+    XCTAssertTrue(handler2Called)
   }
  
   func test_Subclass_OverridesCachedImage_LoadsFromOverriddenProperty() {
@@ -312,15 +343,42 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
     
     let expectedImageData = UIImagePNGRepresentation(expectedImage)!
     let cachedImageData = UIImagePNGRepresentation(mockImageReference.cachedImage!)!
+    var handlerCalled = false
     
     XCTAssertEqual(expectedImageData, cachedImageData)
     
     mockImageReference.load { result in
+      handlerCalled = true
       XCTAssert(result.isOk())
       
       let loadedImageData = UIImagePNGRepresentation(result.unwrap())!
       
       XCTAssertEqual(expectedImageData, loadedImageData)
-    }    
+    }
+
+    XCTAssertTrue(handlerCalled)
+  }
+  
+  func test_ImageReference_CanLoadImageMultipleTimes() {
+    mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
+    let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    var loadedCount = 0
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      loadedCount += 1
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      loadedCount += 1
+    }
+    
+    imageReference.load { result in
+      XCTAssert(result.isOk())
+      loadedCount += 1
+    }
+    
+    XCTAssertEqual(loadedCount, 3)
   }
 }
