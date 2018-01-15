@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MapKit
+import AddressBook
+import Contacts
 import YAPI
 
 protocol ResultViewControllerDelegate: class {
@@ -66,6 +69,24 @@ class ResultActionHandler: ResultViewControllerDelegate {
 
     print("Selected \(businessModel.name)")
     print("Coordinate: \(businessModel.coordinate)")
+    
+    // Fill in information like this to get address info without geocoding
+    let addressDictionary = [
+      // NOTE: If we have to we can force apple maps to display the name of
+      // the location like this, this isn't ideal since it seems like a misuse
+      // of the key
+      CNPostalAddressStreetKey: businessModel.name
+//      CNPostalAddressPostalCodeKey: "97201",
+//      CNPostalAddressCityKey: "Portland",
+//      CNPostalAddressStateKey: "OR",
+//      CNPostalAddressCountryKey: "United States",
+//      CNPostalAddressISOCountryCodeKey: "US"
+    ]
+    
+    let placemark = MKPlacemark(coordinate: businessModel.coordinate, addressDictionary: addressDictionary)
+    let mapItem = MKMapItem(placemark: placemark)
+    
+    mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
   }
   
   func discardOption(_ businessModel: BusinessModel?) {
