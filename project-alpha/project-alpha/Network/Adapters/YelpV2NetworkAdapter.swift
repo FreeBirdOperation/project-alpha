@@ -7,11 +7,20 @@
 //
 
 import Foundation
+import CoreLocation
 import YAPI
 
 extension YelpBusiness: BusinessModel {
   var imageReference: ImageReference? {
     return nil
+  }
+  
+  var coordinate: CLLocationCoordinate2D {
+    // FIXME: Come back and find a safe way to get these coordinates
+    let latitude = location.coordinate!.latitude
+    let longitude = location.coordinate!.longitude
+    
+    return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
 }
 

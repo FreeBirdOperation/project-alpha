@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 import YAPI
 
 extension GoogleEstablishment: BusinessModel {
@@ -16,6 +17,13 @@ extension GoogleEstablishment: BusinessModel {
   
   var id: String {
     return ""
+  }
+  
+  var coordinate: CLLocationCoordinate2D {
+    let latitude = geometry.location.lat
+    let longitude = geometry.location.lng
+    
+    return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
 }
 

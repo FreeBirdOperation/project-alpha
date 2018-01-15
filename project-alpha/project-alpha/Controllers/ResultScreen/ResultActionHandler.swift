@@ -65,6 +65,7 @@ class ResultActionHandler: ResultViewControllerDelegate {
     guard let businessModel = businessModel else { return }
 
     print("Selected \(businessModel.name)")
+    print("Coordinate: \(businessModel.coordinate)")
   }
   
   func discardOption(_ businessModel: BusinessModel?) {

@@ -18,11 +18,6 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   
   // Testing purposes only.
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
-  @IBAction func MapButton(_ sender: Any) {
-    let mapViewController = MapViewController()
-    self.navigationController?.pushViewController(mapViewController, animated: true)
-  }
   
   // Properties
   @IBOutlet weak var distanceLabel: UITextField!

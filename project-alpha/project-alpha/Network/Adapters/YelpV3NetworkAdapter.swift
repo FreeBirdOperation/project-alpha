@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import CoreLocation
 import YAPI
 
 extension YelpV3Business: BusinessModel {
   var imageReference: ImageReference? {
     return self.image
+  }
+  
+  var coordinate: CLLocationCoordinate2D {
+    return self.coordinates.coordinate
   }
 }
 
