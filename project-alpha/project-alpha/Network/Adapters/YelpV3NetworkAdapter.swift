@@ -18,6 +18,25 @@ extension YelpV3Business: BusinessModel {
   var coordinate: CLLocationCoordinate2D {
     return self.coordinates.coordinate
   }
+  
+  var address: AddressModel? {
+    return location
+  }
+}
+
+extension YelpV3Location: AddressModel {
+  var street: String {
+    return address1
+  }
+  
+  var countryModel: CountryModel {
+    return YelpV3CountryModel(name: country, isoCode: nil)
+  }
+}
+
+private struct YelpV3CountryModel: CountryModel {
+  var name: String
+  var isoCode: String? = nil
 }
 
 final class YelpV3NetworkAdapter: NetworkAdapter {
