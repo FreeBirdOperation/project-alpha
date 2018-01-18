@@ -25,6 +25,10 @@ extension GoogleEstablishment: BusinessModel {
     
     return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
+  
+  var address: AddressModel? {
+    return nil
+  }
 }
 
 final class GooglePlaceNetworkAdapter: NetworkAdapter {

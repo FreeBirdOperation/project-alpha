@@ -22,6 +22,12 @@ extension YelpBusiness: BusinessModel {
     
     return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
   }
+  
+  
+  var address: AddressModel? {
+    // TODO: Implement this, we should have the required information
+    return nil
+  }
 }
 
 final class YelpV2NetworkAdapter: NetworkAdapter {

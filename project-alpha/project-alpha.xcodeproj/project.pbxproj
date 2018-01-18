@@ -33,6 +33,8 @@
 		087648B91FB8FF190058E110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B71FB8FF190058E110 /* LaunchScreen.storyboard */; };
 		087648C41FB8FF190058E110 /* project_alphaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648C31FB8FF190058E110 /* project_alphaTests.swift */; };
 		087648CF1FB8FF190058E110 /* project_alphaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648CE1FB8FF190058E110 /* project_alphaUITests.swift */; };
+		08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE3200DAAF4003AA7DF /* AddressModel.swift */; };
+		08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */; };
 		08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CCBE931FB96D8D007EC96E /* secrets.plist */; };
 		08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CDF1FD4FE2F00306586 /* LocationManager.swift */; };
@@ -128,6 +130,8 @@
 		087648CA1FB8FF190058E110 /* project-alphaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "project-alphaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648CE1FB8FF190058E110 /* project_alphaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = project_alphaUITests.swift; sourceTree = "<group>"; };
 		087648D01FB8FF190058E110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08914EE3200DAAF4003AA7DF /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapItem+project-alpha.swift"; sourceTree = "<group>"; };
 		08CCBE901FB8FF9D007EC96E /* YAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CCBE931FB96D8D007EC96E /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		08D74CDF1FD4FE2F00306586 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			children = (
 				0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */,
 				0858704A1FC96651000F973A /* Collections+project-alpha.swift */,
+				08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				085870481FC5791F000F973A /* BusinessModel.swift */,
+				08914EE3200DAAF4003AA7DF /* AddressModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -602,6 +608,7 @@
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
 				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
+				08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */,
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
@@ -621,6 +628,7 @@
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
+				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
