@@ -24,6 +24,16 @@ class ImageReferenceTests: YAPIXCNetworkTestCase {
     XCTAssertNil(imageReference)
   }
   
+  func test_Prefetch_LoadsImage() {
+    mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)
+
+    let imageReference = ImageReference(from: Mock.url, using: mockCache, session: session)
+    
+    imageReference.prefetch()
+    
+    XCTAssertNotNil(imageReference.cachedImage)
+  }
+  
   func test_LoadImage_WhileLoadIsInFlight_DefersLoadForImage() {
     mockSession.asyncAfter = .milliseconds(100)
     mockSession.nextData = Data(base64Encoded: ResponseInjections.yelpValidImage)

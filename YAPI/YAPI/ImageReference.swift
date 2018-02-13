@@ -112,12 +112,10 @@ open class ImageReference {
   /**
       Prefetch an image in the background without doing anything with the image once it's loaded
       This is useful for when you want to start loading an image before you need it
-   
-      - Parameter scale: The scale factor to apply to the image
    */
-  public func prefetch(withScale scale: CGFloat = 1.0) {
+  public func prefetch() {
     // Start a load
-    load(withScale: scale) { _ in /* Do nothing with result */ }
+    load() { _ in /* Do nothing with result */ }
   }
   
   /**

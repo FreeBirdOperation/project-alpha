@@ -41,11 +41,11 @@
 		08914F0E203295E7003AA7DF /* PAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F0D203295E7003AA7DF /* PAViewController.swift */; };
 		08914F1120329668003AA7DF /* PAImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1020329668003AA7DF /* PAImageView.swift */; };
 		08914F142032B0D7003AA7DF /* PAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F132032B0D7003AA7DF /* PAView.swift */; };
+		08914F1620334311003AA7DF /* MockAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1520334311003AA7DF /* MockAddressModel.swift */; };
 		08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CCBE931FB96D8D007EC96E /* secrets.plist */; };
 		08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CDF1FD4FE2F00306586 /* LocationManager.swift */; };
 		08D74CE21FD5005D00306586 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CE11FD5005D00306586 /* Weak.swift */; };
-		08D74CE51FD51AEE00306586 /* MapViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CE41FD51AEE00306586 /* MapViewControllerTests.swift */; };
 		08D74CE81FD51B5A00306586 /* ViewControllerIntegrationTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CE71FD51B5A00306586 /* ViewControllerIntegrationTestCase.swift */; };
 		08D74CEF1FD528FF00306586 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CEE1FD528FF00306586 /* Mock.swift */; };
 		08D74CF11FD5295800306586 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CF01FD5295800306586 /* MockLocationManager.swift */; };
@@ -144,11 +144,11 @@
 		08914F0D203295E7003AA7DF /* PAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAViewController.swift; sourceTree = "<group>"; };
 		08914F1020329668003AA7DF /* PAImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAImageView.swift; sourceTree = "<group>"; };
 		08914F132032B0D7003AA7DF /* PAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAView.swift; sourceTree = "<group>"; };
+		08914F1520334311003AA7DF /* MockAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAddressModel.swift; sourceTree = "<group>"; };
 		08CCBE901FB8FF9D007EC96E /* YAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CCBE931FB96D8D007EC96E /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		08D74CDF1FD4FE2F00306586 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		08D74CE11FD5005D00306586 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
-		08D74CE41FD51AEE00306586 /* MapViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerTests.swift; sourceTree = "<group>"; };
 		08D74CE71FD51B5A00306586 /* ViewControllerIntegrationTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerIntegrationTestCase.swift; sourceTree = "<group>"; };
 		08D74CEE1FD528FF00306586 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		08D74CF01FD5295800306586 /* MockLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
@@ -433,7 +433,6 @@
 			children = (
 				0858D7571FDDE3350057AD3B /* ResultScreen */,
 				08D74CE61FD51B4100306586 /* Utilities */,
-				08D74CE41FD51AEE00306586 /* MapViewControllerTests.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -454,6 +453,7 @@
 				08D74CF01FD5295800306586 /* MockLocationManager.swift */,
 				08EAD6901FDD20D80082DAA6 /* MockBusinessModel.swift */,
 				0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */,
+				08914F1520334311003AA7DF /* MockAddressModel.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -692,7 +692,7 @@
 				0858D7591FDDE3610057AD3B /* ResultActionHandlerTests.swift in Sources */,
 				087648C41FB8FF190058E110 /* project_alphaTests.swift in Sources */,
 				08EAD68F1FDD1F100082DAA6 /* ResultViewControllerTests.swift in Sources */,
-				08D74CE51FD51AEE00306586 /* MapViewControllerTests.swift in Sources */,
+				08914F1620334311003AA7DF /* MockAddressModel.swift in Sources */,
 				08EAD6881FD533A10082DAA6 /* PAXCTestCase.swift in Sources */,
 				08FEB65E1FE43A0800E43632 /* MockResultViewController.swift in Sources */,
 				08D74CE81FD51B5A00306586 /* ViewControllerIntegrationTestCase.swift in Sources */,
