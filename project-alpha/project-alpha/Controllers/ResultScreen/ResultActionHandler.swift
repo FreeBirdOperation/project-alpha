@@ -70,23 +70,42 @@ class ResultActionHandler: ResultViewControllerDelegate {
     print("Selected \(businessModel.name)")
     print("Coordinate: \(businessModel.coordinate)")
     
-    // Fill in information like this to get address info without geocoding
-    let addressDictionary = [
-      // NOTE: If we have to we can force apple maps to display the name of
-      // the location like this, this isn't ideal since it seems like a misuse
-      // of the key
-      CNPostalAddressStreetKey: businessModel.name
-//      CNPostalAddressPostalCodeKey: "97201",
-//      CNPostalAddressCityKey: "Portland",
-//      CNPostalAddressStateKey: "OR",
-//      CNPostalAddressCountryKey: "United States",
-//      CNPostalAddressISOCountryCodeKey: "US"
-    ]
+    let mapLaunchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     
-    let placemark = MKPlacemark(coordinate: businessModel.coordinate, addressDictionary: addressDictionary)
-    let mapItem = MKMapItem(placemark: placemark)
+    if let address = businessModel.address {
+      // We have address info from the response, don't bother reverse geocoding the coordinates
+      let placemark = MKPlacemark(coordinate: businessModel.coordinate, postalAddress: address.postalAddress)
+      let mapItem = MKMapItem(businessModel: businessModel, placemark: placemark)
+      
+      mapItem.openInMaps(launchOptions: mapLaunchOptions)
+    }
+    else {
+      // We don't have address info so lets get the information
+      // TODO: Cache this value? Maybe not? Look into geocoding api
+      let geocoder = CLGeocoder()
+      let location = CLLocation(latitude: businessModel.coordinate.latitude,
+                                longitude: businessModel.coordinate.longitude)
+
+      // TODO: This is a network request, so we need a loading spinner here to
+      // prevent user interaction while the request is in flight
+      geocoder.reverseGeocodeLocation(location) { placemarks, error in
+        let mkPlacemark: MKPlacemark
+        if let placemark = placemarks?.first {
+          mkPlacemark = MKPlacemark(placemark: placemark)
+        }
+        else {
+          log(.error, for: LoggingDomain.general, message: "Error reverse geocoding: \(String(describing: error))")
+          
+          // If this fails we still have the coordinates, so lets just open the map without
+          // address info
+          mkPlacemark = MKPlacemark(coordinate: businessModel.coordinate)
+        }
+        let mapItem = MKMapItem(businessModel: businessModel, placemark: mkPlacemark)
+        
+        mapItem.openInMaps(launchOptions: mapLaunchOptions)
+      }
+    }
     
-    mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
   }
   
   func discardOption(_ businessModel: BusinessModel?) {

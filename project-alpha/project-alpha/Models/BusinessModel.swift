@@ -15,6 +15,5 @@ protocol BusinessModel {
   var name: String { get }
   var imageReference: ImageReference? { get }
   var coordinate: CLLocationCoordinate2D { get }
-  
-  // var address: AddressModel { get }
+  var address: AddressModel? { get }
 }

@@ -236,6 +236,7 @@
 			children = (
 				0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */,
 				0858704A1FC96651000F973A /* Collections+project-alpha.swift */,
+				08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				085870481FC5791F000F973A /* BusinessModel.swift */,
+				08914EE3200DAAF4003AA7DF /* AddressModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -649,6 +651,7 @@
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
 				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
+				08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */,
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
@@ -673,6 +676,7 @@
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
+				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
