@@ -32,14 +32,14 @@ protocol ResultDisplayable {
 
 class ResultCardView: UIView {
   var titleLabel: UILabel
-  var imageView: UIImageView
+  var imageView: ImageGalleryView
   var choiceImageView: UIImageView
   let idLabel: UILabel
   let blurFilterView: UIVisualEffectView
   
   override init(frame: CGRect = CGRect.zero) {
     self.titleLabel = UILabel()
-    self.imageView = UIImageView()
+    self.imageView = ImageGalleryView()
     self.choiceImageView = UIImageView()
     self.idLabel = UILabel()
     self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
@@ -93,27 +93,15 @@ extension ResultCardView: ResultDisplayable {
     guard let businessModel = businessModel else {
       isHidden = true
       titleLabel.text = ""
-      imageView.image = nil
+      imageView.displayModel = nil
       return
     }
     
     isHidden = false
     titleLabel.text = businessModel.name
     idLabel.text = businessModel.id
-    if let cachedImage = businessModel.imageReference?.cachedImage {
-      imageView.image = cachedImage
-    }
-    else {
-      businessModel.imageReference?.load { [weak self] result in
-        guard case .ok(let image) = result else {
-          log(.error, for: .imageLoading, message: "Failed to load image: \(result.unwrapErr())")
-          return
-        }
-        
-        DispatchQueue.main.async {
-          self?.imageView.image = image
-        }
-      }
+    if let imageReference = businessModel.imageReference {
+      imageView.displayModel = ImageGalleryViewDisplayModel(imageModels: [PAImageViewDisplayModel(imageReference: imageReference)])
     }
   }
   

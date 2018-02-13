@@ -51,6 +51,24 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     self.activityIndicator.hidesWhenStopped = true
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
     view.addSubview(self.activityIndicator)
+    
+    let button = UIButton(forAutoLayout: ())
+    button.backgroundColor = UIColor.red
+    button.setTitle("Photo Viewer", for: .normal)
+    button.addTarget(self, action: #selector(photoButtonPressed), for: .touchUpInside)
+    
+    view.addSubview(button)
+    button.autoPinEdge(toSuperviewMargin: .bottom)
+    button.autoAlignAxis(toSuperviewAxis: .vertical)
+    button.autoPinEdge(toSuperviewMargin: .left)
+  }
+  
+  @objc func photoButtonPressed() {
+    let dataSource = PhotoViewerDataSourceModel(transitionStyle: .scroll,
+                                                images: [PAImageViewDisplayModel(image: #imageLiteral(resourceName: "fork-and-knife")),
+                                                         PAImageViewDisplayModel(image: #imageLiteral(resourceName: "fork-and-plate"))])
+    let photoViewer = PhotoViewerViewController(dataSource: dataSource)
+    navigationController?.pushViewController(photoViewer, animated: true)
   }
   
   
