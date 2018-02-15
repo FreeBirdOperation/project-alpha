@@ -26,7 +26,7 @@ struct ResultViewControllerPageModel {
   }
 }
 
-class ResultViewController: UIViewController {
+class ResultViewController: PAViewController {
   lazy private var cardViewModel: ResultCardViewModel = {
     return ResultCardViewModel(updateBlock: { [weak self] businessModel in
       self?.card.display(businessModel: businessModel)
@@ -54,7 +54,7 @@ class ResultViewController: UIViewController {
     self.card = ResultCardView()
     self.backupCard = ResultCardView()
     
-    super.init(nibName: nil, bundle: nil)
+    super.init()
     
     self.delegate.viewController = self
     

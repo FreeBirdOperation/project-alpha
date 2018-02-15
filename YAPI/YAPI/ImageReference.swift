@@ -110,6 +110,15 @@ open class ImageReference {
   }
   
   /**
+      Prefetch an image in the background without doing anything with the image once it's loaded
+      This is useful for when you want to start loading an image before you need it
+   */
+  public func prefetch() {
+    // Start a load
+    load() { _ in /* Do nothing with result */ }
+  }
+  
+  /**
       Load an image in the background and pass it to the completion handler once finished. This can be 
       called multiple times to retrieve the same image at different scales. Each call will return a new instance of a UIImage
    
