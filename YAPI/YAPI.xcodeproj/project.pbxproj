@@ -108,6 +108,7 @@
 		08E0F6961FBEB592004C3D24 /* GoogleEstablishment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6951FBEB592004C3D24 /* GoogleEstablishment.swift */; };
 		08E0F6991FC01B4F004C3D24 /* GoogleResponseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0F6981FC01B4F004C3D24 /* GoogleResponseErrors.swift */; };
 		08FB75CF1FC0F86200F986D9 /* APIFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB75CE1FC0F86200F986D9 /* APIFactoryTests.swift */; };
+		08FEB6671FEA26A400E43632 /* Atomics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEB6661FEA26A400E43632 /* Atomics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,7 @@
 		08E0F6951FBEB592004C3D24 /* GoogleEstablishment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleEstablishment.swift; path = Google/Models/GoogleEstablishment.swift; sourceTree = "<group>"; };
 		08E0F6981FC01B4F004C3D24 /* GoogleResponseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleResponseErrors.swift; path = Google/Errors/GoogleResponseErrors.swift; sourceTree = "<group>"; };
 		08FB75CE1FC0F86200F986D9 /* APIFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIFactoryTests.swift; path = Shared/APIFactoryTests.swift; sourceTree = "<group>"; };
+		08FEB6661FEA26A400E43632 /* Atomics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Atomics.swift; path = Shared/Utilities/Atomics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +426,7 @@
 				08E0F6921FBDB706004C3D24 /* JSONPrettyPrint.swift */,
 				0881940A1FC0E7D10090E67C /* Cache.swift */,
 				0858705D1FD0FD42000F973A /* Threading.swift */,
+				08FEB6661FEA26A400E43632 /* Atomics.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -974,6 +977,7 @@
 				089CC6C31D9AE81B0018F1D1 /* V2_YelpBusinessRequest.swift in Sources */,
 				08E0F6961FBEB592004C3D24 /* GoogleEstablishment.swift in Sources */,
 				08914F1E2038A6BD003AA7DF /* YelpV3LookupParameters.swift in Sources */,
+				08FEB6671FEA26A400E43632 /* Atomics.swift in Sources */,
 				08025B2B1DA30C0B001636DB /* YelpV3TokenResponse.swift in Sources */,
 				08914F1C2038A5D0003AA7DF /* YelpV3Request.swift in Sources */,
 				087490361FB813A50072E539 /* YelpBusiness.swift in Sources */,

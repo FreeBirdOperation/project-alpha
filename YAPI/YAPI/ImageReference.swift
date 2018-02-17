@@ -44,7 +44,7 @@ open class ImageReference {
     case idle
     case loading
   }
-  private var state: ImageReference.State
+  private var state: Atomic<State>
   
   // The cache that this image reference is using
   private let cache: Cache<ImageReference>
@@ -86,7 +86,7 @@ open class ImageReference {
               using cache: Cache<ImageReference> = ImageReference.globalCache,
               session: HTTPClient = HTTPClient.sharedSession) {
     self.url = url
-    self.state = .idle
+    self.state = Atomic(.idle)
     self.cache = cache
     self.session = session
     self.backgroundQueue = DispatchQueue(label: "com.yapi.image-load.\(url)",
@@ -128,28 +128,7 @@ open class ImageReference {
   public func load(withScale scale: CGFloat = 1.0,
                    completionHandler handler: @escaping (ImageLoadResult) -> Void) {
     
-    // First check if our endpoint is in the cache already, then load our cached image
-    // if we have one
-    // NOTE: if we have two separate image references pointing to the same endpoint and we
-    // fire off load requests for each simultaneously, we will likely send both before one
-    // can be cached, and so we would have an extra network request involved. This isn't much
-    // of a problem since there should really only ever be one image reference for a given
-    // endpoint, and even if the situation does arise it should be a minimal performance hit.
-    if
-      let imageReference = cache[self.cacheKey],
-      self.cachedImage == nil {
-        self.cachedImage = imageReference._cachedImage
-    }
-    if let image = cachedImage?.copy(withScale: scale) {
-      log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
-      handler(.ok(image))
-      return
-    }
-
-    // FIXME: There is a race condition here, but the atomics API is pretty ugly, come back
-    // later and figure out a clean way to do a CAS on the state. Worst case we do an unnecessary
-    // network call, so it's not that important.
-    if self.state == .loading {
+    if self.state.compareAndSwap(old: .idle, new: .loading) == false {
       // We're already loading the image, defer this handler until after the
       // load finishes so we don't duplicate network work.
       backgroundQueue.async {
@@ -166,12 +145,30 @@ open class ImageReference {
       }
       return
     }
-    self.state = .loading
+    
+    // First check if our endpoint is in the cache already, then load our cached image
+    // if we have one
+    // NOTE: if we have two separate image references pointing to the same endpoint and we
+    // fire off load requests for each simultaneously, we will likely send both before one
+    // can be cached, and so we would have an extra network request involved. This isn't much
+    // of a problem since there should really only ever be one image reference for a given
+    // endpoint, and even if the situation does arise it should be a minimal performance hit.
+    if
+      let imageReference = cache[self.cacheKey],
+      self.cachedImage == nil {
+        self.cachedImage = imageReference._cachedImage
+    }
+    if let image = cachedImage?.copy(withScale: scale) {
+      log(.info, for: .imageLoading, message: "Image at \(self.url) was loaded from cache")
+      state.set(.idle)
+      handler(.ok(image))
+      return
+    }
     
     self.session.send(self.url) { data, response, error in
       var result: Result<UIImage, ImageLoadError>
       defer {
-        self.state = .idle
+        self.state.set(.idle)
         // Make sure we signal any waiting threads
         self.loadCondVar.broadcast(value: result)
         handler(result)
@@ -183,14 +180,14 @@ open class ImageReference {
       }
       
       guard let imageData = data else {
-        log(.error, for: .network, message: "Error loading image from \(self.url): No data was received")
         result = .err(.noDataReceived)
+        log(.error, for: .network, message: "Error loading image from \(self.url): \(result.unwrapErr())")
         return
       }
       
       guard let image = UIImage(data: imageData, scale: scale) else {
-        log(.error, for: .network, message: "Error loading image from \(self.url): Invalid data format")
         result = .err(.invalidData)
+        log(.error, for: .network, message: "Error loading image from \(self.url): \(result.unwrapErr())")
         return
       }
       
