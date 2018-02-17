@@ -65,6 +65,12 @@
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
 		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
 		A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */; };
+		A3F306A92037F0BF005E9DEC /* BebasNeue Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3F306A42037F0BE005E9DEC /* BebasNeue Bold.otf */; };
+		A3F306AA2037F0BF005E9DEC /* BebasNeue Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3F306A52037F0BE005E9DEC /* BebasNeue Book.otf */; };
+		A3F306AB2037F0BF005E9DEC /* BebasNeue Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3F306A62037F0BE005E9DEC /* BebasNeue Regular.otf */; };
+		A3F306AC2037F0BF005E9DEC /* BebasNeue Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3F306A72037F0BE005E9DEC /* BebasNeue Light.otf */; };
+		A3F306AD2037F0BF005E9DEC /* BebasNeue Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3F306A82037F0BF005E9DEC /* BebasNeue Thin.otf */; };
+		A3F306AE2037F287005E9DEC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087648BA1FB8FF190058E110 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +174,11 @@
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A3F306A42037F0BE005E9DEC /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Bold.otf"; path = "../../../../../Downloads/bebas_neue/BebasNeue Bold.otf"; sourceTree = "<group>"; };
+		A3F306A52037F0BE005E9DEC /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Book.otf"; path = "../../../../../Downloads/bebas_neue/BebasNeue Book.otf"; sourceTree = "<group>"; };
+		A3F306A62037F0BE005E9DEC /* BebasNeue Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Regular.otf"; path = "../../../../../Downloads/bebas_neue/BebasNeue Regular.otf"; sourceTree = "<group>"; };
+		A3F306A72037F0BE005E9DEC /* BebasNeue Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Light.otf"; path = "../../../../../Downloads/bebas_neue/BebasNeue Light.otf"; sourceTree = "<group>"; };
+		A3F306A82037F0BF005E9DEC /* BebasNeue Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Thin.otf"; path = "../../../../../Downloads/bebas_neue/BebasNeue Thin.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +355,7 @@
 				087648B01FB8FF190058E110 /* ViewController.swift */,
 				087648B21FB8FF190058E110 /* Main.storyboard */,
 				A34B34561FBD675E005A8C24 /* FilterViewController.swift */,
+				A3F306A32037F095005E9DEC /* Fonts */,
 				087648B51FB8FF190058E110 /* Assets.xcassets */,
 				087648B71FB8FF190058E110 /* LaunchScreen.storyboard */,
 				087648BA1FB8FF190058E110 /* Info.plist */,
@@ -491,6 +503,18 @@
 			path = ResultScreen;
 			sourceTree = "<group>";
 		};
+		A3F306A32037F095005E9DEC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A3F306A42037F0BE005E9DEC /* BebasNeue Bold.otf */,
+				A3F306A52037F0BE005E9DEC /* BebasNeue Book.otf */,
+				A3F306A72037F0BE005E9DEC /* BebasNeue Light.otf */,
+				A3F306A62037F0BE005E9DEC /* BebasNeue Regular.otf */,
+				A3F306A82037F0BF005E9DEC /* BebasNeue Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -600,10 +624,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3F306AB2037F0BF005E9DEC /* BebasNeue Regular.otf in Resources */,
 				08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */,
+				A3F306AD2037F0BF005E9DEC /* BebasNeue Thin.otf in Resources */,
+				A3F306AC2037F0BF005E9DEC /* BebasNeue Light.otf in Resources */,
 				087648B91FB8FF190058E110 /* LaunchScreen.storyboard in Resources */,
+				A3F306AA2037F0BF005E9DEC /* BebasNeue Book.otf in Resources */,
 				A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */,
 				087648B61FB8FF190058E110 /* Assets.xcassets in Resources */,
+				A3F306AE2037F287005E9DEC /* Info.plist in Resources */,
+				A3F306A92037F0BF005E9DEC /* BebasNeue Bold.otf in Resources */,
 				087648B41FB8FF190058E110 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
