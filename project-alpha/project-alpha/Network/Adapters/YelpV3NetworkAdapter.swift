@@ -11,8 +11,17 @@ import CoreLocation
 import YAPI
 
 extension YelpV3Business: BusinessModel {
-  var imageReference: ImageReference? {
-    return self.image
+  var imageReferences: [ImageReference] {
+    guard !self.photos.isEmpty else {
+      if let imageReference = self.image {
+        return [imageReference]
+      }
+      else {
+        return []
+      }
+    }
+    
+    return self.photos
   }
   
   var coordinate: CLLocationCoordinate2D {
@@ -57,6 +66,16 @@ final class YelpV3NetworkAdapter: NetworkAdapter {
     
     request.send { result in
       completionHandler(result.map { $0.businesses })
+    }
+  }
+  
+  func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void) {
+    let yelpLookupParams = YelpV3LookupParameters(id: params.id)
+    
+    let request = APIFactory.Yelp.V3.makeLookupRequest(with: yelpLookupParams)
+    
+    request.send { result in
+      completionHandler(result.map { $0.business })
     }
   }
 }

@@ -22,6 +22,7 @@ public struct YelpV3Business {
     static let location = "location"
     static let name = "name"
     static let phone = "phone"
+    static let photos = "photos"
     static let price = "price"
     static let rating = "rating"
     static let review_count = "review_count"
@@ -60,6 +61,9 @@ public struct YelpV3Business {
   /// Phone number for this business
   public let phoneNumber: String?
   
+  /// URLs of up to three photos of the business.
+  public let photos: [ImageReference]
+  
   /// Price level of the business. Value is one of $, $$, $$$ and $$$$.
   public let price: YelpPrice?
   
@@ -93,6 +97,9 @@ public struct YelpV3Business {
     
     self.name = try dict.parseParam(key: Params.name)
     self.phoneNumber = try dict.parseParam(key: Params.phone)
+    
+    let photoUrls: [String]? = try? dict.parseParam(key: Params.photos)
+    self.photos = photoUrls?.flatMap { ImageReference(from: $0) } ?? []
     
     let rawPrice: String? = try? dict.parseParam(key: Params.price)
     if let rawPrice = rawPrice {

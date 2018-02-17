@@ -13,7 +13,8 @@ import YAPI
 protocol BusinessModel {
   var id: String { get }
   var name: String { get }
-  var imageReference: ImageReference? { get }
+  var imageReferences: [ImageReference] { get }
+//  var imageReference: ImageReference? { get }
   var coordinate: CLLocationCoordinate2D { get }
   var address: AddressModel? { get }
 }

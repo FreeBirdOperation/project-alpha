@@ -8,6 +8,20 @@
 
 import Foundation
 
+public struct LocaleParameter: Parameter {
+  let internalValue: Language
+  
+  public var key: String = "locale"
+  
+  public var value: String {
+    return internalValue.rawValue
+  }
+  
+  public init(language value: Language) {
+    self.internalValue = value
+  }
+}
+
 public protocol Language {
   var rawValue: String { get }
 }

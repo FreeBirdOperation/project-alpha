@@ -11,8 +11,8 @@ import CoreLocation
 import YAPI
 
 extension GoogleEstablishment: BusinessModel {
-  var imageReference: ImageReference? {
-    return nil
+  var imageReferences: [ImageReference] {
+    return []
   }
   
   var id: String {
@@ -52,5 +52,10 @@ final class GooglePlaceNetworkAdapter: NetworkAdapter {
         completionHandler(result.map { $0.results })
       }
     }
+  }
+  
+  func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void) {
+    // TODO: Implement
+    return
   }
 }

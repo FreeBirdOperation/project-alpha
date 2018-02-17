@@ -21,6 +21,7 @@ internal enum APIEndpoints {
     internal enum V3 {
       internal static let token: String = "/oauth2/token"
       internal static let search: String = "/v3/businesses/search"
+      internal static let lookup: String = "/v3/businesses"
     }
   }
   
@@ -189,6 +190,10 @@ extension APIFactory.Yelp.V3 {
   
   public static func makeSearchRequest(with parameters: YelpV3SearchParameters) -> YelpV3SearchRequest {
     return YelpV3SearchRequest(searchParameters: parameters, session: APIFactory.currentSession)
+  }
+  
+  public static func makeLookupRequest(with parameters: YelpV3LookupParameters) -> YelpV3LookupRequest {
+    return YelpV3LookupRequest(parameters: parameters, session: APIFactory.currentSession)
   }
 }
 

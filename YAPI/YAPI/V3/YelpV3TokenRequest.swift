@@ -12,12 +12,10 @@ import OAuthSwift
 /**
     A YelpRequest that is used in order to retrieve an access token for the Yelp API.
  */
-public final class YelpV3TokenRequest : Request {
+public final class YelpV3TokenRequest : YelpV3Request {
   
   public typealias ResponseType = YelpV3TokenResponse
   
-  public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth2
   public let path: String = APIEndpoints.Yelp.V3.token
   public let parameters: [String: String]
   public var requestMethod: OAuthSwiftHTTPRequest.Method {

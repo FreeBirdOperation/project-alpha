@@ -38,22 +38,6 @@ public struct YelpV3SearchParameters {
     }
   }
   
-  public struct Locale : Parameter {
-    let internalValue: Language
-    
-    public var key: String {
-      return "locale"
-    }
-    
-    public var value: String {
-      return internalValue.rawValue
-    }
-    
-    public init(language value: Language) {
-      self.internalValue = value
-    }
-  }
-  
   public struct Limit: IntParameter {
     let internalValue: Int
     public let key: String = "limit"
@@ -172,7 +156,7 @@ public struct YelpV3SearchParameters {
   public let categories: Categories?
   
   /// Specify the locale to return the business information in.
-  public let locale: Locale?
+  public let locale: LocaleParameter?
   
   /// Number of business results to return. By default, it will return 20. Maximum is 50.
   public let limit: Limit?
@@ -211,7 +195,7 @@ public struct YelpV3SearchParameters {
                term: Term? = nil,
                radius: Radius? = nil,
                categories: Categories? = nil,
-               locale: Locale? = nil,
+               locale: LocaleParameter? = nil,
                limit: Limit? = nil,
                offset: Offset? = nil,
                sortBy: SortMode? = nil,

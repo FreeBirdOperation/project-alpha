@@ -9,16 +9,12 @@
 import Foundation
 import OAuthSwift
 
-public final class YelpV3SearchRequest : Request {
+public final class YelpV3SearchRequest : YelpV3Request {
   public typealias ResponseType = YelpV3SearchResponse
  
-  public let host: String = APIEndpoints.Yelp.host
-  public let oauthVersion: OAuthSwiftCredential.Version? = .oauth2
   public let path: String = APIEndpoints.Yelp.V3.search
   public let parameters: [String : String]
-  public var requestMethod: OAuthSwiftHTTPRequest.Method {
-    return .GET
-  }
+  public let requestMethod: OAuthSwiftHTTPRequest.Method = .GET
   public let session: HTTPClient
   
   init(searchParameters: YelpV3SearchParameters, session: HTTPClient = HTTPClient.sharedSession) {

@@ -11,8 +11,8 @@ import CoreLocation
 import YAPI
 
 extension YelpBusiness: BusinessModel {
-  var imageReference: ImageReference? {
-    return nil
+  var imageReferences: [ImageReference] {
+    return []
   }
   
   var coordinate: CLLocationCoordinate2D {
@@ -39,5 +39,8 @@ final class YelpV2NetworkAdapter: NetworkAdapter {
     }
   }
   
-  
+  func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void) {
+    // TODO: Implement
+    return
+  }
 }

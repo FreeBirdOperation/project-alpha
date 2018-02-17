@@ -56,6 +56,7 @@ class ResultActionHandler: ResultViewControllerDelegate {
 
     searchInProgress = true
     networkAdapter.makeSearchRequest(with: params) { [weak self] result in
+      // FIXME - HACK: Find a better way to dynamically load specific business information
       self?.searchInProgress = false
       completionHandler(result)
     }

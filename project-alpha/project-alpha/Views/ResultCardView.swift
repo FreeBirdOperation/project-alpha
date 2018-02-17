@@ -100,9 +100,7 @@ extension ResultCardView: ResultDisplayable {
     isHidden = false
     titleLabel.text = businessModel.name
     idLabel.text = businessModel.id
-    if let imageReference = businessModel.imageReference {
-      imageView.displayModel = ImageGalleryViewDisplayModel(imageModels: [PAImageViewDisplayModel(imageReference: imageReference)])
-    }
+    imageView.displayModel = ImageGalleryViewDisplayModel(imageModels: businessModel.imageReferences.map { PAImageViewDisplayModel(imageReference: $0) })
   }
   
   func startChoosing(direction: SwipeDirection) {
