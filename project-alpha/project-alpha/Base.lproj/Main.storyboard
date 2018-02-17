@@ -75,6 +75,7 @@
                     <navigationItem key="navigationItem" id="dT3-lu-1Dn"/>
                     <connections>
                         <outlet property="distanceLabel" destination="KQv-Je-iyH" id="T4H-E0-zMm"/>
+                        <outlet property="distanceTextField" destination="2oR-9A-flf" id="CMh-n2-CAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

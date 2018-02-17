@@ -24,6 +24,9 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   let distanceFilter = ["5", "10", "15", "20", "50", "100"]
   let distancePicker = UIPickerView()
   
+  //NEW
+  @IBOutlet weak var distanceTextField: UITextField!
+  
   private func getKeys() -> [String: String] {
     guard
       let path = Bundle.main.path(forResource: "secrets", ofType: "plist"),
@@ -37,6 +40,9 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    //NEW
+    distanceTextField.keyboardType = UIKeyboardType.numberPad
     
     locationManager.requestWhenInUseAuthorization()
     
