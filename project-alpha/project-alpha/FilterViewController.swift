@@ -12,7 +12,7 @@ import CoreLocation
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   
@@ -43,6 +43,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     //NEW
     distanceTextField.keyboardType = UIKeyboardType.numberPad
+    distanceTextField.delegate = self
     
     locationManager.requestWhenInUseAuthorization()
     
@@ -77,6 +78,14 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     navigationController?.pushViewController(photoViewer, animated: true)
   }
   
+  //NEW
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    distanceTextField.resignFirstResponder()
+    return true
+  }
   
   // These next four functions are for UIPickerViewDelegate and UIPickerViewDataSource
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
