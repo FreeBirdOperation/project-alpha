@@ -12,7 +12,8 @@ import CoreLocation
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class FilterViewController: UIViewController, UITextFieldDelegate {
+  
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   
@@ -20,12 +21,17 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
   
   // Properties
+  /*
   @IBOutlet weak var distanceLabel: UITextField!
   let distanceFilter = ["5", "10", "15", "20", "50", "100"]
   let distancePicker = UIPickerView()
+  */
+  
   
   //NEW
   @IBOutlet weak var distanceTextField: UITextField!
+  @IBOutlet weak var outOfOptionsLabel: UILabel!
+  @IBOutlet weak var subTextLabel: UILabel!
   
   private func getKeys() -> [String: String] {
     guard
@@ -44,14 +50,15 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     //NEW
     distanceTextField.keyboardType = UIKeyboardType.numberPad
     distanceTextField.delegate = self
-    
+    outOfOptionsLabel.isHidden = true
+    subTextLabel.text = "I WANT TO TRAVEL"
+    //
     locationManager.requestWhenInUseAuthorization()
-    
     distancePicker.delegate = self
     distancePicker.dataSource = self
-    
+    */
     //Binding textfield to picker
-    distanceLabel.inputView = distancePicker
+    //distanceLabel.inputView = distancePicker
     
     // Acitivity Indicator settings
     self.activityIndicator.center = self.view.center
@@ -87,6 +94,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     return true
   }
   
+  /*
   // These next four functions are for UIPickerViewDelegate and UIPickerViewDataSource
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
@@ -104,7 +112,46 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     distanceLabel.text = distanceFilter[row]
     self.view.endEditing(false)
   }
+  */
   
+  
+  //NEW SELECT BUTTON
+  //NEED alert if user does not enter anything into textfield
+  @IBAction func distanceSearchButton(_ sender: Any) {
+    if !inProgress {
+      startIndicator()
+      let keys = getKeys()
+      guard
+        let appId = keys["APP_ID"],
+        let clientSecret = keys["CLIENT_SECRET"]
+        else {
+          assertionFailure("Unable to retrieve appId or clientSecret from file")
+          return
+      }
+      let authToken = YelpV3AuthenticationToken(appId: appId, clientSecret: clientSecret)
+      
+      // TODO: Authenticate on app launch, not button press
+      YelpV3Authenticator.authenticate(with: authToken) { result in
+        guard case .ok(let networkAdapter) = result else {
+          print("Error authenticating: \(result.unwrapErr())")
+          return
+        }
+        
+        DispatchQueue.main.async {
+          let params = SearchParameters(distance: (Int(self.distanceTextField.text ?? "") ?? 10) * 100)
+          let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
+                                                        searchParameters: params)
+          
+          let resultVC = ResultViewController(pageModel: pageModel)
+          self.navigationController?.pushViewController(resultVC, animated: true)
+          self.stopIndicator()
+        }
+      }
+    }
+  }
+  
+  
+  /*
   // action function for select button
   @IBAction func selectButton(_ sender: Any) {
     /*
@@ -143,7 +190,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
       }
     }
   }
-  
+  */
     /*
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     var result = segue.destination as! ResultViewController
