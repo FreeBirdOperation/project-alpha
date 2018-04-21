@@ -41,7 +41,7 @@ public struct YelpV3Business {
   
   /// The distance in meters from the search location. This returns meters
   /// regardless of the locale.
-  public let distance: Double
+  public let distance: Double?
   
   /// Yelp ID for business
   public let id: String
@@ -87,7 +87,7 @@ public struct YelpV3Business {
     self.coordinates = try Coordinate(withDict: coordinates)
     
     self.displayPhoneNumber = try? dict.parseParam(key: Params.display_phone)
-    self.distance = try dict.parseParam(key: Params.distance)
+    self.distance = try? dict.parseParam(key: Params.distance)
     self.id = try dict.parseParam(key: Params.id)
     self.image = ImageReference(from: try dict.parseParam(key: Params.image_url))
     self.closed = try dict.parseParam(key: Params.is_closed)

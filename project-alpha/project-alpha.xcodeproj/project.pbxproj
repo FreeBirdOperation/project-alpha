@@ -26,6 +26,7 @@
 		0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085870591FCB5B41000F973A /* ResultActionHandler.swift */; };
 		0858D7591FDDE3610057AD3B /* ResultActionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */; };
 		0858D75B1FDDE4090057AD3B /* MockNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */; };
+		08691D88203BD556003D3205 /* InfoActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08691D87203BD556003D3205 /* InfoActionHandler.swift */; };
 		087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648AE1FB8FF190058E110 /* AppDelegate.swift */; };
 		087648B11FB8FF190058E110 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648B01FB8FF190058E110 /* ViewController.swift */; };
 		087648B41FB8FF190058E110 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B21FB8FF190058E110 /* Main.storyboard */; };
@@ -42,6 +43,9 @@
 		08914F1120329668003AA7DF /* PAImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1020329668003AA7DF /* PAImageView.swift */; };
 		08914F142032B0D7003AA7DF /* PAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F132032B0D7003AA7DF /* PAView.swift */; };
 		08914F1620334311003AA7DF /* MockAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1520334311003AA7DF /* MockAddressModel.swift */; };
+		08914F202038B8F2003AA7DF /* DependencyContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1F2038B8F2003AA7DF /* DependencyContext.swift */; };
+		08914F23203BA08B003AA7DF /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F22203BA08B003AA7DF /* PopAnimator.swift */; };
+		08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F25203BA300003AA7DF /* InfoViewController.swift */; };
 		08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CCBE931FB96D8D007EC96E /* secrets.plist */; };
 		08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CDF1FD4FE2F00306586 /* LocationManager.swift */; };
@@ -123,6 +127,7 @@
 		085870591FCB5B41000F973A /* ResultActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandler.swift; sourceTree = "<group>"; };
 		0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultActionHandlerTests.swift; sourceTree = "<group>"; };
 		0858D75A1FDDE4090057AD3B /* MockNetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkAdapter.swift; sourceTree = "<group>"; };
+		08691D87203BD556003D3205 /* InfoActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoActionHandler.swift; sourceTree = "<group>"; };
 		087648AB1FB8FF190058E110 /* project-alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "project-alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648AE1FB8FF190058E110 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		087648B01FB8FF190058E110 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +150,9 @@
 		08914F1020329668003AA7DF /* PAImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAImageView.swift; sourceTree = "<group>"; };
 		08914F132032B0D7003AA7DF /* PAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAView.swift; sourceTree = "<group>"; };
 		08914F1520334311003AA7DF /* MockAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAddressModel.swift; sourceTree = "<group>"; };
+		08914F1F2038B8F2003AA7DF /* DependencyContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContext.swift; sourceTree = "<group>"; };
+		08914F22203BA08B003AA7DF /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
+		08914F25203BA300003AA7DF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		08CCBE901FB8FF9D007EC96E /* YAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CCBE931FB96D8D007EC96E /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		08D74CDF1FD4FE2F00306586 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -262,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				08914F0F20329657003AA7DF /* Common */,
-				085870451FC57146000F973A /* ResultCardView.swift */,
 				08914F062032875D003AA7DF /* ImageGalleryView.swift */,
 			);
 			path = Views;
@@ -277,21 +284,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		085870571FCB5B16000F973A /* Controllers */ = {
+		085870571FCB5B16000F973A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				08914F122032968D003AA7DF /* Common */,
+				08914F24203BA2EF003AA7DF /* InfoScreen */,
 				08914F08203294DC003AA7DF /* PhotoViewerScreen */,
 				085870581FCB5B1D000F973A /* ResultScreen */,
 			);
-			path = Controllers;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		085870581FCB5B1D000F973A /* ResultScreen */ = {
 			isa = PBXGroup;
 			children = (
-				A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */,
-				085870591FCB5B41000F973A /* ResultActionHandler.swift */,
+				08691DB82041D2B0003D3205 /* Views */,
+				08691DB52041D27C003D3205 /* Controllers */,
 			);
 			path = ResultScreen;
 			sourceTree = "<group>";
@@ -303,6 +311,48 @@
 				0858D7581FDDE3610057AD3B /* ResultActionHandlerTests.swift */,
 			);
 			path = ResultScreen;
+			sourceTree = "<group>";
+		};
+		08691DB52041D27C003D3205 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */,
+				085870591FCB5B41000F973A /* ResultActionHandler.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		08691DB62041D289003D3205 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08914F09203294FE003AA7DF /* PhotoViewerViewController.swift */,
+				08914F0B203295B7003AA7DF /* PhotoViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		08691DB72041D29F003D3205 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08914F25203BA300003AA7DF /* InfoViewController.swift */,
+				08691D87203BD556003D3205 /* InfoActionHandler.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		08691DB82041D2B0003D3205 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				085870451FC57146000F973A /* ResultCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		08691DB92041D2EC003D3205 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		087648A21FB8FF190058E110 = {
@@ -333,9 +383,10 @@
 		087648AD1FB8FF190058E110 /* project-alpha */ = {
 			isa = PBXGroup;
 			children = (
+				08914F21203BA072003AA7DF /* Animators */,
 				08EAD6931FDDDDD90082DAA6 /* Enums */,
 				08D74CDE1FD4FE1E00306586 /* Utilities */,
-				085870571FCB5B16000F973A /* Controllers */,
+				085870571FCB5B16000F973A /* Screens */,
 				085870471FC57912000F973A /* Models */,
 				085870441FC5712C000F973A /* Views */,
 				0858702C1FC3E9A9000F973A /* Extensions */,
@@ -376,8 +427,7 @@
 		08914F08203294DC003AA7DF /* PhotoViewerScreen */ = {
 			isa = PBXGroup;
 			children = (
-				08914F09203294FE003AA7DF /* PhotoViewerViewController.swift */,
-				08914F0B203295B7003AA7DF /* PhotoViewController.swift */,
+				08691DB62041D289003D3205 /* Controllers */,
 			);
 			path = PhotoViewerScreen;
 			sourceTree = "<group>";
@@ -397,6 +447,23 @@
 				08914F0D203295E7003AA7DF /* PAViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		08914F21203BA072003AA7DF /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				08914F22203BA08B003AA7DF /* PopAnimator.swift */,
+			);
+			path = Animators;
+			sourceTree = "<group>";
+		};
+		08914F24203BA2EF003AA7DF /* InfoScreen */ = {
+			isa = PBXGroup;
+			children = (
+				08691DB92041D2EC003D3205 /* Views */,
+				08691DB72041D29F003D3205 /* Controllers */,
+			);
+			path = InfoScreen;
 			sourceTree = "<group>";
 		};
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
@@ -424,6 +491,7 @@
 				08D74CDF1FD4FE2F00306586 /* LocationManager.swift */,
 				08D74CE11FD5005D00306586 /* Weak.swift */,
 				08FEB65F1FE5010600E43632 /* Assertion.swift */,
+				08914F1F2038B8F2003AA7DF /* DependencyContext.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -651,12 +719,15 @@
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
 				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
+				08914F202038B8F2003AA7DF /* DependencyContext.swift in Sources */,
 				08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */,
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
+				08691D88203BD556003D3205 /* InfoActionHandler.swift in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
 				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
+				08914F23203BA08B003AA7DF /* PopAnimator.swift in Sources */,
 				08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */,
 				08914F1120329668003AA7DF /* PAImageView.swift in Sources */,
 				0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */,
@@ -668,6 +739,7 @@
 				08914F142032B0D7003AA7DF /* PAView.swift in Sources */,
 				08914F0A203294FE003AA7DF /* PhotoViewerViewController.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
+				08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
 				08914F0E203295E7003AA7DF /* PAViewController.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,

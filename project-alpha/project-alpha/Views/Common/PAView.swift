@@ -9,6 +9,22 @@
 import Foundation
 
 class PAView: UIView {
+  private var tapGesture: UITapGestureRecognizer? = nil
+  var tapAction: (() -> Void)? = nil {
+    willSet {
+      guard self.tapGesture == nil else { return }
+      
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapTargetAction))
+      addGestureRecognizer(tapGesture)
+      self.tapGesture = tapGesture
+    }
+  }
+  
+  @objc
+  private func tapTargetAction() {
+    tapAction?()
+  }
+  
   init() {
     super.init(frame: CGRect.zero)
   }

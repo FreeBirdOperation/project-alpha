@@ -19,6 +19,8 @@ extension YelpV3Response {
       return .tokenMissing
     case "BAD_CLIENT_ID_OR_SECRET"?:
       return .badAuth
+    case "TOO_MANY_REQUESTS_PER_SECOND"?:
+      return .tooManyRequestsPerSecond
     case let error:
       return .unknownError(cause: UnknownErrorCode(code: error))
     }

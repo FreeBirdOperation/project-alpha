@@ -10,6 +10,7 @@ import Foundation
 
 struct ImageGalleryViewDisplayModel {
   var imageModels: [PAImageViewDisplayModel]
+  var isUserInteractionEnabled: Bool = true
   
   init(imageModels: [PAImageViewDisplayModel]) {
     self.imageModels = imageModels
@@ -40,12 +41,35 @@ class ImageGalleryView: PAView {
       imageView.displayModel = displayModel.imageModels.first
       
       pageControl.numberOfPages = displayModel.imageModels.count
+      
+      isUserInteractionEnabled = displayModel.isUserInteractionEnabled
+    }
+  }
+  
+  override var isUserInteractionEnabled: Bool {
+    didSet {
+      if isUserInteractionEnabled {
+        pageControl.isHidden = false
+        leftTapGestureRecognizer.isEnabled = true
+        rightTapGestureRecognizer.isEnabled = true
+      }
+      else {
+        pageControl.isHidden = true
+        leftTapGestureRecognizer.isEnabled = false
+        rightTapGestureRecognizer.isEnabled = false
+      }
     }
   }
   
   let imageView: PAImageView
   let leftTapArea: PAView
+  lazy var leftTapGestureRecognizer: UITapGestureRecognizer = {
+    return UITapGestureRecognizer(target: self, action: #selector(showPreviousImage))
+  }()
   let rightTapArea: PAView
+  lazy var rightTapGestureRecognizer: UITapGestureRecognizer = {
+    return UITapGestureRecognizer(target: self, action: #selector(showNextImage))
+  }()
   let pageControl: UIPageControl
   private var currentIndex: Int {
     didSet {
@@ -68,14 +92,19 @@ class ImageGalleryView: PAView {
     addSubview(leftTapArea)
     leftTapArea.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .right)
     leftTapArea.autoMatch(.width, to: .width, of: self, withMultiplier: 0.5, relation: .equal)
-    leftTapArea.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showPreviousImage)))
+    leftTapArea.addGestureRecognizer(leftTapGestureRecognizer)
+    
     addSubview(rightTapArea)
     rightTapArea.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .left)
     rightTapArea.autoMatch(.width, to: .width, of: self, withMultiplier: 0.5, relation: .equal)
-    rightTapArea.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNextImage)))
+    rightTapArea.addGestureRecognizer(rightTapGestureRecognizer)
     
     addSubview(pageControl)
     pageControl.autoPinEdges(toSuperviewMarginsExcludingEdge: .top)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   @objc func showNextImage() {
@@ -100,9 +129,5 @@ class ImageGalleryView: PAView {
     
     currentIndex -= 1
     imageView.displayModel = imageModels[currentIndex]
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 }

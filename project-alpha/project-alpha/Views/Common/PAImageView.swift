@@ -31,19 +31,12 @@ struct PAImageViewDisplayModel {
 }
 
 class PAImageView: UIImageView {
-  private var _displayModel: PAImageViewDisplayModel?
   var displayModel: PAImageViewDisplayModel? {
-    get {
-      return _displayModel
-    }
-    set {
-      guard let displayModel = newValue else {
-        _displayModel = nil
+    didSet {
+      guard let displayModel = displayModel else {
         removeImage(showPlaceholder: false)
         return
       }
-      
-      _displayModel = displayModel
       
       switch displayModel.imageSource {
       case .image(let image):

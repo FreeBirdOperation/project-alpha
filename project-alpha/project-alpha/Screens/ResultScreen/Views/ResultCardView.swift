@@ -22,6 +22,10 @@ class ResultCardViewModel {
   }
 }
 
+struct ResultCardViewDisplayModel {
+  
+}
+
 protocol ResultDisplayable {
   func display(businessModel: BusinessModel?)
   func startChoosing(direction: SwipeDirection)
@@ -30,29 +34,30 @@ protocol ResultDisplayable {
   func unblurImage()
 }
 
-class ResultCardView: UIView {
+class ResultCardView: PAView {
   var titleLabel: UILabel
   var imageView: ImageGalleryView
   var choiceImageView: UIImageView
-  let idLabel: UILabel
   let blurFilterView: UIVisualEffectView
   
-  override init(frame: CGRect = CGRect.zero) {
+  override init() {
     self.titleLabel = UILabel()
     self.imageView = ImageGalleryView()
     self.choiceImageView = UIImageView()
-    self.idLabel = UILabel()
     self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
-    super.init(frame: frame)
+    super.init()
 
     self.addSubview(titleLabel)
     self.addSubview(imageView)
+    imageView.backgroundColor = UIColor.black
     self.addSubview(choiceImageView)
-    self.addSubview(idLabel)
     self.addSubview(blurFilterView)
     self.setupConstraints()
     self.setupBlur()
+    
+    self.layoutMargins = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    self.layoutMarginsDidChange()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -60,19 +65,18 @@ class ResultCardView: UIView {
   }
   
   private func setupConstraints() {
-    titleLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-    titleLabel.autoPinEdges(toSuperviewMarginsExcludingEdge: .bottom)
-    
-    imageView.autoPinEdges(toSuperviewMarginsExcludingEdge: .top)
-    imageView.autoPinEdge(.top, to: .bottom, of: titleLabel)
+    imageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+    imageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.33)
     imageView.contentMode = .scaleAspectFit
+    
+    titleLabel.autoPinEdge(toSuperviewMargin: .left)
+    titleLabel.autoPinEdge(toSuperviewMargin: .right)
+    titleLabel.autoPinEdge(.top, to: .bottom, of: imageView)
+    titleLabel.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
     
     choiceImageView.autoCenterInSuperview()
     choiceImageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.25)
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
-    
-    idLabel.autoPinEdge(toSuperviewMargin: .bottom)
-    idLabel.autoAlignAxis(toSuperviewAxis: .vertical)
   }
   
   func setupBlur() {
@@ -99,8 +103,12 @@ extension ResultCardView: ResultDisplayable {
     
     isHidden = false
     titleLabel.text = businessModel.name
-    idLabel.text = businessModel.id
-    imageView.displayModel = ImageGalleryViewDisplayModel(imageModels: businessModel.imageReferences.map { PAImageViewDisplayModel(imageReference: $0) })
+
+    var displayModel = ImageGalleryViewDisplayModel(imageModels: businessModel.imageReferences.map { PAImageViewDisplayModel(imageReference: $0) })
+    if businessModel.imageReferences.count <= 1 {
+      displayModel.isUserInteractionEnabled = false
+    }
+    imageView.displayModel = displayModel
   }
   
   func startChoosing(direction: SwipeDirection) {

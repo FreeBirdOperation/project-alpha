@@ -51,6 +51,7 @@ private struct YelpV3CountryModel: CountryModel {
 final class YelpV3NetworkAdapter: NetworkAdapter {
   // TESTING: Get the next chunk of restauraunts for the next request
   var offset: Int = 0
+  private let limit: Int = 10
 
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let radius = YelpV3SearchParameters.Radius(params.distance)
@@ -58,11 +59,12 @@ final class YelpV3NetworkAdapter: NetworkAdapter {
 
     // TESTING: Get the next chunk of restauraunts for the next request
     let offset = YelpV3SearchParameters.Offset(self.offset)
-    let yelpSearchParams = YelpV3SearchParameters(location: location, radius: radius, offset: offset)
+    let limit = YelpV3SearchParameters.Limit(self.limit)
+    let yelpSearchParams = YelpV3SearchParameters(location: location, radius: radius, limit: limit, offset: offset)
     let request = APIFactory.Yelp.V3.makeSearchRequest(with: yelpSearchParams)
     
     // TESTING: Get the next chunk of restauraunts for the next request
-    self.offset += 20
+    self.offset += self.limit
     
     request.send { result in
       completionHandler(result.map { $0.businesses })

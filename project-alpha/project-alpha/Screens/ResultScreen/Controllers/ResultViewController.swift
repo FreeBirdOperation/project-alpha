@@ -12,15 +12,18 @@ import YAPI
 
 struct ResultViewControllerPageModel {
   let delegate: ResultViewControllerDelegate
+  let infoViewControllerDelegate: InfoViewControllerDelegate
   let searchParameters: SearchParameters
 
   /// Minimum number of businesses loaded before preloading another batch of businesses
   let refreshThreshold: UInt
   
   init(delegate: ResultViewControllerDelegate,
+       infoViewControllerDelegate: InfoViewControllerDelegate,
        searchParameters: SearchParameters,
        refreshThreshold: UInt = 5) {
     self.delegate = delegate
+    self.infoViewControllerDelegate = infoViewControllerDelegate
     self.searchParameters = searchParameters
     self.refreshThreshold = refreshThreshold
   }
@@ -29,7 +32,19 @@ struct ResultViewControllerPageModel {
 class ResultViewController: PAViewController {
   lazy private var cardViewModel: ResultCardViewModel = {
     return ResultCardViewModel(updateBlock: { [weak self] businessModel in
-      self?.card.display(businessModel: businessModel)
+      guard let card = self?.card, let delegate = self?.infoViewControllerDelegate else { return }
+      
+      if let businessModel = businessModel {
+        card.tapAction = {
+          let pageModel = InfoViewControllerPageModelObject(delegate: delegate, businessModel: businessModel)
+          let vc = InfoViewController(pageModel: pageModel)
+          let animator = PopAnimator()
+          animator.originFrame = card.frame
+          vc.transitioningDelegate = animator
+          self?.present(vc, animated: true, completion: nil)
+        }
+      }
+      card.display(businessModel: businessModel)
     })
   }()
   
@@ -41,14 +56,17 @@ class ResultViewController: PAViewController {
 
   private(set) var businesses: [BusinessModel] = []
 
-  private let card: UIView & ResultDisplayable
-  private let backupCard: UIView & ResultDisplayable
+  private let card: PAView & ResultDisplayable
+  private let backupCard: PAView & ResultDisplayable
   private let delegate: ResultViewControllerDelegate
   private let searchParameters: SearchParameters
   private let refreshThreshold: UInt
+
+  private let infoViewControllerDelegate: InfoViewControllerDelegate
   
   init(pageModel: ResultViewControllerPageModel) {
     self.delegate = pageModel.delegate
+    self.infoViewControllerDelegate = pageModel.infoViewControllerDelegate
     self.searchParameters = pageModel.searchParameters
     self.refreshThreshold = pageModel.refreshThreshold
     self.card = ResultCardView()
@@ -86,8 +104,10 @@ class ResultViewController: PAViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setup(card: UIView, withGestureRecognizer: Bool) {
-    card.frame.size = CGSize(width: view.frame.width - 20, height: view.frame.height - 20)
+  private func setup(card: PAView, withGestureRecognizer: Bool) {
+    let width = view.frame.width * 0.75
+    let height = view.frame.height * 0.75
+    card.frame.size = CGSize(width: width, height: height)
     card.center = view.center
     card.backgroundColor = .red
     view.addSubview(card)

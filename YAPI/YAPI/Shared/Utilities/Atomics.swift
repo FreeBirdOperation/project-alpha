@@ -8,26 +8,26 @@
 
 import Foundation
 
-struct Atomic<T> {
+public struct Atomic<T> {
   private var value: T
   private let lock: NSLock
 
-  init(_ value: T) {
+  public init(_ value: T) {
     self.value = value
     self.lock = NSLock()
   }
   
-  mutating func set(_ value: T) {
+  public mutating func set(_ value: T) {
     execute {
       self.value = value
     }
   }
   
-  func get() -> T {
+  public func get() -> T {
     return execute { return self.value }
   }
   
-  mutating func swap(_ newValue: T) -> T {
+  public mutating func swap(_ newValue: T) -> T {
     return execute {
       let oldValue = self.value
       self.value = newValue
@@ -35,9 +35,9 @@ struct Atomic<T> {
     }
   }
   
-  mutating func update(updateBlock: (inout T) -> T) {
+  public mutating func update(updateBlock: (T) -> T) {
     execute {
-      self.value = updateBlock(&self.value)
+      self.value = updateBlock(self.value)
     }
   }
   
@@ -49,7 +49,7 @@ struct Atomic<T> {
   }
 }
 
-extension Atomic where T: Equatable {
+public extension Atomic where T: Equatable {
   mutating func compareAndSwap(old: T, new: T) -> Bool {
     return execute {
       if self.value == old {

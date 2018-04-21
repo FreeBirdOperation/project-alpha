@@ -65,6 +65,8 @@ public enum YelpResponseError: APIError {
   case tokenMissing
   /// Invalid combination of client_id and client_secret.
   case badAuth
+  /// Too many requests were made concurrently
+  case tooManyRequestsPerSecond
   
   public var description: String {
     switch self {
@@ -103,6 +105,8 @@ public enum YelpResponseError: APIError {
       return "An access token must be supplied in order to use this endpoint, make sure you have authenticated through the APIFactory"
     case .badAuth:
       return "Invalid combination of client_id and client_secret."
+    case .tooManyRequestsPerSecond:
+      return "Too many requests were made concurrently"
     }
   }
 }
