@@ -30,7 +30,7 @@ extension YelpBusiness: BusinessModel {
   }
 }
 
-final class YelpV2NetworkAdapter: NetworkAdapter {
+final class YelpV2NetworkAdapter: RequestSender, NetworkAdapter {
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let searchParams = YelpV2SearchParameters(location: YelpSearchLocation("Portland, OR"))
     let result = APIFactory.Yelp.V2.makeSearchRequest(with: searchParams)

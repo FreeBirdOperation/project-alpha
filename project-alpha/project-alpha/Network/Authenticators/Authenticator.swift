@@ -9,8 +9,10 @@
 import Foundation
 import YAPI
 
+typealias AuthenticationCompletionHandler = (Result<NetworkAdapter, Error>) -> Void
+
 protocol Authenticator {
   associatedtype TokenType
   
-  static func authenticate(with token: TokenType, completionHandler: @escaping (Result<NetworkAdapter, Error>) -> Void)
+  static func authenticate(with token: TokenType, completionHandler: @escaping AuthenticationCompletionHandler)
 }

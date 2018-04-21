@@ -31,7 +31,7 @@ extension GoogleEstablishment: BusinessModel {
   }
 }
 
-final class GooglePlaceNetworkAdapter: NetworkAdapter {
+final class GooglePlaceNetworkAdapter: RequestSender, NetworkAdapter {
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let locationParam = GooglePlaceSearchParameters.Location(latitude: 45.509761, longitude: -122.679809)
     let radiusParam = GooglePlaceSearchParameters.Radius(params.distance)

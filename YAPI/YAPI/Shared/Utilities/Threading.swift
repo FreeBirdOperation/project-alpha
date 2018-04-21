@@ -8,18 +8,23 @@
 
 import Foundation
 
-class Condition<Signaled> {
+public class Condition<Signaled> {
   private let condition: NSCondition = NSCondition()
   private var value: Signaled?
   
+  public init() {}
+  
   @discardableResult
-  func wait() -> Signaled {
+  public func wait() -> Signaled {
     condition.lock()
     defer {
       condition.unlock()
     }
     
     while true {
+      if let value = value {
+        return value
+      }
       condition.wait()
       guard let value = value else {
         continue
@@ -29,7 +34,7 @@ class Condition<Signaled> {
     }
   }
   
-  func broadcast(value: Signaled) {
+  public func broadcast(value: Signaled) {
     condition.lock()
     defer {
       condition.unlock()

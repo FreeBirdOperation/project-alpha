@@ -10,11 +10,11 @@ import Foundation
 
 public struct Atomic<T> {
   private var value: T
-  private let lock: NSLock
+  private let lock: NSRecursiveLock
 
   public init(_ value: T) {
     self.value = value
-    self.lock = NSLock()
+    self.lock = NSRecursiveLock()
   }
   
   public mutating func set(_ value: T) {

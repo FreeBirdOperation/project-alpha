@@ -160,28 +160,29 @@ extension APIFactory.Yelp.V2 {
 }
 
 extension APIFactory.Yelp.V3 {
-  public static func authenticate(appId: String,
-                                  clientSecret: String,
+  public static func authenticate(apiKey: String,
                                   completionBlock: @escaping (_ error: APIError?) -> Void) {
-    AuthKeys.consumerKey = appId
-    AuthKeys.consumerSecret = clientSecret
-    
-    let clientId = YelpV3TokenParameters.ClientID(internalValue: appId)
-    let clientSecret = YelpV3TokenParameters.ClientSecret(internalValue: clientSecret)
-    
-    let request = makeTokenRequest(with: YelpV3TokenParameters(grantType: .clientCredentials,
-                                                               clientId: clientId,
-                                                               clientSecret: clientSecret))
-    
-    request.send { result in
-      switch result {
-      case .ok(let response):
-        AuthKeys.token = response.accessToken
-        completionBlock(response.error)
-      case .err(let error):
-        completionBlock(error)
-      }
-    }
+//    AuthKeys.consumerKey = appId
+//    AuthKeys.consumerSecret = clientSecret
+//
+//    let clientId = YelpV3TokenParameters.ClientID(internalValue: appId)
+//    let clientSecret = YelpV3TokenParameters.ClientSecret(internalValue: clientSecret)
+//
+//    let request = makeTokenRequest(with: YelpV3TokenParameters(grantType: .clientCredentials,
+//                                                               clientId: clientId,
+//                                                               clientSecret: clientSecret))
+//
+//    request.send { result in
+//      switch result {
+//      case .ok(let response):
+//        AuthKeys.token = response.accessToken
+//        completionBlock(response.error)
+//      case .err(let error):
+//        completionBlock(error)
+//      }
+//    }
+    AuthKeys.apiKey = apiKey
+    completionBlock(nil)
   }
   
   private static func makeTokenRequest(with parameters: YelpV3TokenParameters) -> YelpV3TokenRequest {

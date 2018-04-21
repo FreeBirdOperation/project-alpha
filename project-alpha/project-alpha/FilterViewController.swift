@@ -9,12 +9,15 @@
 //import Cocoa
 import UIKit
 import CoreLocation
+import YAPI
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
 class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
+  var networkAdaptor: Condition<NetworkAdapter> = Condition()
+  var currentLocation: Condition<CLLocation> = Condition()
   
   // Testing purposes only.
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -24,21 +27,12 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   let distanceFilter = ["5", "10", "15", "20", "50", "100"]
   let distancePicker = UIPickerView()
   
-  private func getKeys() -> [String: String] {
-    guard
-      let path = Bundle.main.path(forResource: "secrets", ofType: "plist"),
-      let keys = NSDictionary(contentsOfFile: path) as? [String: String]
-      else {
-        assertionFailure("Unable to load secrets property list, contact dnseitz@gmail.com if you need the file")
-        return [:]
-    }
-    return keys
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    locationManager.addObserver(self)
     locationManager.requestWhenInUseAuthorization()
+    locationManager.startUpdatingLocation()
     
     distancePicker.delegate = self
     distancePicker.dataSource = self
@@ -52,15 +46,27 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
     view.addSubview(self.activityIndicator)
     
-    let button = UIButton(forAutoLayout: ())
-    button.backgroundColor = UIColor.red
-    button.setTitle("Photo Viewer", for: .normal)
-    button.addTarget(self, action: #selector(photoButtonPressed), for: .touchUpInside)
+    authenticate()
+  }
+  
+  private func authenticate(numRetries: Int = 3) {
+    guard numRetries > 0 else {
+      // TODO: Error handling, try different service? Pop up error message?
+      print("Authentication failure, max retries reached")
+      return
+    }
+    let authToken: YelpV3AuthenticationToken = YelpV3AuthenticationToken.token
     
-    view.addSubview(button)
-    button.autoPinEdge(toSuperviewMargin: .bottom)
-    button.autoAlignAxis(toSuperviewAxis: .vertical)
-    button.autoPinEdge(toSuperviewMargin: .left)
+    YelpV3Authenticator.authenticate(with: authToken) { [weak self] result in
+      switch result {
+      case .err(let error):
+        print("Error authenticating: \(error)")
+        self?.authenticate(numRetries: numRetries - 1)
+        return
+      case .ok(let networkAdaptor):
+        self?.networkAdaptor.broadcast(value: networkAdaptor)
+      }
+    }
   }
   
   @objc func photoButtonPressed() {
@@ -92,59 +98,50 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   
   // action function for select button
   @IBAction func selectButton(_ sender: Any) {
-    /*
-     if(distanceLabel.text != ""){
-     performSegue(withIdentifier: "segueResult", sender: self)
-     }
-     */
     if !inProgress {
       startIndicator()
-      let keys = getKeys()
-      guard
-        let appId = keys["APP_ID"],
-        let clientSecret = keys["CLIENT_SECRET"]
-        else {
-          assertionFailure("Unable to retrieve appId or clientSecret from file")
-          return
-      }
-      let authToken = YelpV3AuthenticationToken(appId: appId, clientSecret: clientSecret)
+      let networkAdapter = networkAdaptor.wait()
+      let location: CLLocation = currentLocation.wait()
+      stopIndicator()
+
+      let params = SearchParameters(location: location, distance: (Int(self.distanceLabel.text ?? "") ?? 10) * 100)
+      let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
+                                                    infoViewControllerDelegate: InfoActionHandler(networkAdapter: networkAdapter),
+                                                    searchParameters: params)
       
-      // TODO: Authenticate on app launch, not button press
-      YelpV3Authenticator.authenticate(with: authToken) { result in
-        guard case .ok(let networkAdapter) = result else {
-          print("Error authenticating: \(result.unwrapErr())")
-          return
-        }
-
-        DispatchQueue.main.async {
-          let params = SearchParameters(distance: (Int(self.distanceLabel.text ?? "") ?? 10) * 100)
-          let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
-                                                        infoViewControllerDelegate: InfoActionHandler(networkAdapter: networkAdapter),
-                                                        searchParameters: params)
-
-          let resultVC = ResultViewController(pageModel: pageModel)
-          self.navigationController?.pushViewController(resultVC, animated: true)
-          self.stopIndicator()
-        }
-      }
+      let resultVC = ResultViewController(pageModel: pageModel)
+      self.navigationController?.pushViewController(resultVC, animated: true)
     }
   }
   
-    /*
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    var result = segue.destination as! ResultViewController
-  }*/
-    
-    func startIndicator(){
-        inProgress = true
-        self.activityIndicator.startAnimating()
-        view.isUserInteractionEnabled = false
-    }
-    
-    func stopIndicator(){
-        inProgress = false
-        self.activityIndicator.stopAnimating()
-        view.isUserInteractionEnabled = true
-    }
+  func startIndicator(){
+    inProgress = true
+    self.activityIndicator.startAnimating()
+    view.isUserInteractionEnabled = false
+  }
   
+  func stopIndicator(){
+    inProgress = false
+    self.activityIndicator.stopAnimating()
+    view.isUserInteractionEnabled = true
+  }
+  
+}
+
+extension FilterViewController: NetworkObserver {
+  func loadBegan() {
+    startIndicator()
+  }
+  
+  func loadEnded() {
+    stopIndicator()
+  }
+}
+
+extension FilterViewController: CLLocationManagerDelegate {
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let location = locations.first else { return }
+    
+    currentLocation.broadcast(value: location)
+  }
 }

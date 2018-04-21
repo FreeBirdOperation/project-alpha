@@ -11,6 +11,8 @@
 		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
 		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
 		0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */; };
+		08487405208BB69500986FD5 /* ObserverList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487404208BB69500986FD5 /* ObserverList.swift */; };
+		08487407208BC54D00986FD5 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487406208BC54D00986FD5 /* RequestSender.swift */; };
 		0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */; };
 		0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 085870341FC3F19B000F973A /* NSLayoutConstraint+PureLayout.m */; };
 		0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 085870371FC3F19B000F973A /* ALView+PureLayout.m */; };
@@ -108,6 +110,8 @@
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
 		0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3NetworkAdapter.swift; sourceTree = "<group>"; };
+		08487404208BB69500986FD5 /* ObserverList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverList.swift; sourceTree = "<group>"; };
+		08487406208BC54D00986FD5 /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+project-alpha.swift"; sourceTree = "<group>"; };
 		085870321FC3F19B000F973A /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 		085870331FC3F19B000F973A /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */,
 				08E0F68C1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift */,
 				08E0F68E1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift */,
+				08487406208BC54D00986FD5 /* RequestSender.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -492,6 +497,7 @@
 				08D74CE11FD5005D00306586 /* Weak.swift */,
 				08FEB65F1FE5010600E43632 /* Assertion.swift */,
 				08914F1F2038B8F2003AA7DF /* DependencyContext.swift */,
+				08487404208BB69500986FD5 /* ObserverList.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -716,6 +722,7 @@
 			files = (
 				08914F0C203295B7003AA7DF /* PhotoViewController.swift in Sources */,
 				08EAD6951FDDDDE80082DAA6 /* SwipeDirection.swift in Sources */,
+				08487407208BC54D00986FD5 /* RequestSender.swift in Sources */,
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
 				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
@@ -749,6 +756,7 @@
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
 				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
+				08487405208BB69500986FD5 /* ObserverList.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

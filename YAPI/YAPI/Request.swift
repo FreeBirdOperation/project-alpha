@@ -46,18 +46,27 @@ private func oAuthClient(for version: OAuthSwiftCredential.Version?) -> OAuthSwi
       return client
     }
     else {
-      guard
-        let consumerKey = AuthKeys.consumerKey,
-        let consumerSecret = AuthKeys.consumerSecret
-        else {
-          assert(false, "The request requires a consumerKey and consumerSecret in order to access the Yelp API, set these through the YelpAPIFactory")
-          return nil
+      guard let token = AuthKeys.apiKey else {
+        assert(false, "Yelp API requires an apiKey to function")
+        return nil
       }
-      let credential = OAuthSwiftCredential(consumerKey: consumerKey, consumerSecret: consumerSecret)
+      let credential = OAuthSwiftCredential(consumerKey: "", consumerSecret: "")
+      credential.oauthToken = token
       credential.version = .oauth2
-      let client = OAuthSwiftClient(credential: credential)
-      OAuth2Client = client
-      return client
+      OAuth2Client = OAuthSwiftClient(credential: credential)
+      return OAuth2Client
+//      guard
+//        let consumerKey = AuthKeys.consumerKey,
+//        let consumerSecret = AuthKeys.consumerSecret
+//        else {
+//          assert(false, "The request requires a consumerKey and consumerSecret in order to access the Yelp API, set these through the YelpAPIFactory")
+//          return nil
+//      }
+//      let credential = OAuthSwiftCredential(consumerKey: consumerKey, consumerSecret: consumerSecret)
+//      credential.version = .oauth2
+//      let client = OAuthSwiftClient(credential: credential)
+//      OAuth2Client = client
+//      return client
     }
   }
 }

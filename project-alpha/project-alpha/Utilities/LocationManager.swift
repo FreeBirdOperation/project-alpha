@@ -11,6 +11,7 @@ import CoreLocation
 import YAPI
 
 protocol LocationManagerProtocol: class {
+  var location: CLLocation? { get }
   var desiredAccuracy: CLLocationAccuracy { get set }
   
   var shouldDisplayHeadingCalibration: Bool { get set }
@@ -52,6 +53,10 @@ class LocationManager {
 }
 
 extension LocationManager: LocationManagerProtocol {
+  var location: CLLocation? {
+    return locationManager.location
+  }
+
   var desiredAccuracy: CLLocationAccuracy {
     get {
       return locationManager.desiredAccuracy

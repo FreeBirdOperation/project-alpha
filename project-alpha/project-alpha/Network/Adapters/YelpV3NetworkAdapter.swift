@@ -48,14 +48,15 @@ private struct YelpV3CountryModel: CountryModel {
   var isoCode: String? = nil
 }
 
-final class YelpV3NetworkAdapter: NetworkAdapter {
+final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
   // TESTING: Get the next chunk of restauraunts for the next request
   var offset: Int = 0
   private let limit: Int = 10
+  private var observerList: ObserverList<NetworkObserver> = ObserverList()
 
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
     let radius = YelpV3SearchParameters.Radius(params.distance)
-    let location = YelpV3LocationParameter(location: "Portland, OR")
+    let location = YelpV3LocationParameter(coreLocation: params.location)
 
     // TESTING: Get the next chunk of restauraunts for the next request
     let offset = YelpV3SearchParameters.Offset(self.offset)
@@ -66,7 +67,7 @@ final class YelpV3NetworkAdapter: NetworkAdapter {
     // TESTING: Get the next chunk of restauraunts for the next request
     self.offset += self.limit
     
-    request.send { result in
+    sendRequest(request) { result in
       completionHandler(result.map { $0.businesses })
     }
   }
@@ -76,7 +77,7 @@ final class YelpV3NetworkAdapter: NetworkAdapter {
     
     let request = APIFactory.Yelp.V3.makeLookupRequest(with: yelpLookupParams)
     
-    request.send { result in
+    sendRequest(request) { result in
       completionHandler(result.map { $0.business })
     }
   }

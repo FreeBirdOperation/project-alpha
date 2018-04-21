@@ -63,8 +63,21 @@ internal enum AuthKeys {
     }
   }
   
+  static var apiKey: String? {
+    get {
+      return _token
+    }
+    set {
+      guard _token == nil else {
+        assert(false, "Only set the apiKey once")
+        return
+      }
+      _token = newValue
+    }
+  }
+  
   static var areSet: Bool {
-    return (_consumerKey != nil) && (_consumerSecret != nil) && (_token != nil) && (_tokenSecret != nil)
+    return ((_consumerKey != nil) && (_consumerSecret != nil) && (_token != nil) && (_tokenSecret != nil))
   }
   
   static func clearAuthentication() {
