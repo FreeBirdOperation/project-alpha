@@ -13,7 +13,7 @@ import YAPI
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class FilterViewController: UIViewController {
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   var networkAdaptor: Condition<NetworkAdapter> = Condition()
@@ -23,9 +23,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
   
   // Properties
-  @IBOutlet weak var distanceLabel: UITextField!
-  let distanceFilter = ["5", "10", "15", "20", "50", "100"]
-  let distancePicker = UIPickerView()
+  @IBOutlet weak var distanceEntryField: UITextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,19 +32,27 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     locationManager.requestWhenInUseAuthorization()
     locationManager.startUpdatingLocation()
     
-    distancePicker.delegate = self
-    distancePicker.dataSource = self
-    
-    //Binding textfield to picker
-    distanceLabel.inputView = distancePicker
-    
     // Acitivity Indicator settings
     self.activityIndicator.center = self.view.center
     self.activityIndicator.hidesWhenStopped = true
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
     view.addSubview(self.activityIndicator)
     
+    // Map View Button
+    let button = UIButton(forAutoLayout: ())
+    button.titleLabel?.text = "To Map View"
+    button.backgroundColor = UIColor.green
+    view.addSubview(button)
+    button.autoPinEdges(toSuperviewMarginsExcludingEdge: .top)
+    button.addTarget(self, action: #selector(goToMapView), for: .touchUpInside)
+    
     authenticate()
+    setupTextField()
+  }
+  @objc func goToMapView() {
+    let viewController = MapSearchViewController(currentLocation: currentLocation.wait(),
+                                                 networkAdapter: networkAdaptor.wait())
+    navigationController?.pushViewController(viewController, animated: true)
   }
   
   private func authenticate(numRetries: Int = 3) {
@@ -69,31 +75,10 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
   }
   
-  @objc func photoButtonPressed() {
-    let dataSource = PhotoViewerDataSourceModel(transitionStyle: .scroll,
-                                                images: [PAImageViewDisplayModel(image: #imageLiteral(resourceName: "fork-and-knife")),
-                                                         PAImageViewDisplayModel(image: #imageLiteral(resourceName: "fork-and-plate"))])
-    let photoViewer = PhotoViewerViewController(dataSource: dataSource)
-    navigationController?.pushViewController(photoViewer, animated: true)
-  }
-  
-  
-  // These next four functions are for UIPickerViewDelegate and UIPickerViewDataSource
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return distanceFilter[row]
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return distanceFilter.count
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    distanceLabel.text = distanceFilter[row]
-    self.view.endEditing(false)
+  private func setupTextField() {
+    distanceEntryField.placeholder = "Miles"
+    distanceEntryField.keyboardType = .numberPad
+    distanceEntryField.delegate = self
   }
   
   // action function for select button
@@ -104,7 +89,7 @@ class FilterViewController: UIViewController, UIPickerViewDelegate, UIPickerView
       let location: CLLocation = currentLocation.wait()
       stopIndicator()
 
-      let params = SearchParameters(location: location, distance: (Int(self.distanceLabel.text ?? "") ?? 10) * 100)
+      let params = SearchParameters(location: location, distance: (Int(self.distanceEntryField.text ?? "") ?? 10) * 100, limit: 10)
       let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
                                                     infoViewControllerDelegate: InfoActionHandler(networkAdapter: networkAdapter),
                                                     searchParameters: params)
@@ -143,5 +128,11 @@ extension FilterViewController: CLLocationManagerDelegate {
     guard let location = locations.first else { return }
     
     currentLocation.broadcast(value: location)
+  }
+}
+
+extension FilterViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
   }
 }

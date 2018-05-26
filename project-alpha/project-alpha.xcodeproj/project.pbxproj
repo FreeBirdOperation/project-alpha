@@ -11,6 +11,7 @@
 		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
 		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
 		0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */; };
+		084729A820B897ED00D1B1C6 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084729A720B897EB00D1B1C6 /* MapSearchViewController.swift */; };
 		08487405208BB69500986FD5 /* ObserverList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487404208BB69500986FD5 /* ObserverList.swift */; };
 		08487407208BC54D00986FD5 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08487406208BC54D00986FD5 /* RequestSender.swift */; };
 		0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */; };
@@ -36,6 +37,8 @@
 		087648B91FB8FF190058E110 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087648B71FB8FF190058E110 /* LaunchScreen.storyboard */; };
 		087648C41FB8FF190058E110 /* project_alphaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648C31FB8FF190058E110 /* project_alphaTests.swift */; };
 		087648CF1FB8FF190058E110 /* project_alphaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648CE1FB8FF190058E110 /* project_alphaUITests.swift */; };
+		0881DE3E20B8A68900251057 /* PAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0881DE3D20B8A68900251057 /* PAButton.swift */; };
+		0881DE4020B8A71000251057 /* PALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0881DE3F20B8A71000251057 /* PALabel.swift */; };
 		08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE3200DAAF4003AA7DF /* AddressModel.swift */; };
 		08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */; };
 		08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F062032875D003AA7DF /* ImageGalleryView.swift */; };
@@ -48,6 +51,8 @@
 		08914F202038B8F2003AA7DF /* DependencyContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F1F2038B8F2003AA7DF /* DependencyContext.swift */; };
 		08914F23203BA08B003AA7DF /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F22203BA08B003AA7DF /* PopAnimator.swift */; };
 		08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F25203BA300003AA7DF /* InfoViewController.swift */; };
+		089C069620B9C7F600A42B43 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C069420B9C7F600A42B43 /* Localizable.strings */; };
+		089C069C20B9CADE00A42B43 /* PALocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C069B20B9CADE00A42B43 /* PALocale.swift */; };
 		08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CCBE931FB96D8D007EC96E /* secrets.plist */; };
 		08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CDF1FD4FE2F00306586 /* LocationManager.swift */; };
@@ -110,6 +115,7 @@
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
 		0846EBAB1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3NetworkAdapter.swift; sourceTree = "<group>"; };
+		084729A720B897EB00D1B1C6 /* MapSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewController.swift; sourceTree = "<group>"; };
 		08487404208BB69500986FD5 /* ObserverList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverList.swift; sourceTree = "<group>"; };
 		08487406208BC54D00986FD5 /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
 		0858702D1FC3E9C0000F973A /* UIView+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+project-alpha.swift"; sourceTree = "<group>"; };
@@ -145,6 +151,8 @@
 		087648CA1FB8FF190058E110 /* project-alphaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "project-alphaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		087648CE1FB8FF190058E110 /* project_alphaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = project_alphaUITests.swift; sourceTree = "<group>"; };
 		087648D01FB8FF190058E110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0881DE3D20B8A68900251057 /* PAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAButton.swift; sourceTree = "<group>"; };
+		0881DE3F20B8A71000251057 /* PALabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PALabel.swift; sourceTree = "<group>"; };
 		08914EE3200DAAF4003AA7DF /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapItem+project-alpha.swift"; sourceTree = "<group>"; };
 		08914F062032875D003AA7DF /* ImageGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryView.swift; sourceTree = "<group>"; };
@@ -157,6 +165,11 @@
 		08914F1F2038B8F2003AA7DF /* DependencyContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContext.swift; sourceTree = "<group>"; };
 		08914F22203BA08B003AA7DF /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		08914F25203BA300003AA7DF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		089C069120B9C6F300A42B43 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		089C069220B9C6F300A42B43 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		089C069520B9C7F600A42B43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "project-alpha/Base.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
+		089C069720B9C80C00A42B43 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "../project-alpha/es.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		089C069B20B9CADE00A42B43 /* PALocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PALocale.swift; sourceTree = "<group>"; };
 		08CCBE901FB8FF9D007EC96E /* YAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CCBE931FB96D8D007EC96E /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		08D74CDF1FD4FE2F00306586 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -244,6 +257,22 @@
 			path = Adapters;
 			sourceTree = "<group>";
 		};
+		084729A520B897C900D1B1C6 /* MapSearch */ = {
+			isa = PBXGroup;
+			children = (
+				084729A620B897D700D1B1C6 /* Controllers */,
+			);
+			path = MapSearch;
+			sourceTree = "<group>";
+		};
+		084729A620B897D700D1B1C6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				084729A720B897EB00D1B1C6 /* MapSearchViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		0858702C1FC3E9A9000F973A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +321,7 @@
 		085870571FCB5B16000F973A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				084729A520B897C900D1B1C6 /* MapSearch */,
 				08914F122032968D003AA7DF /* Common */,
 				08914F24203BA2EF003AA7DF /* InfoScreen */,
 				08914F08203294DC003AA7DF /* PhotoViewerScreen */,
@@ -363,6 +393,7 @@
 		087648A21FB8FF190058E110 = {
 			isa = PBXGroup;
 			children = (
+				089C069320B9C7AC00A42B43 /* Localization */,
 				085870541FC96A43000F973A /* OAuthSwift.framework */,
 				085870431FC3F33C000F973A /* project_alpha-Bridging-Header.h */,
 				085870311FC3F19B000F973A /* PureLayout */,
@@ -442,6 +473,8 @@
 			children = (
 				08914F1020329668003AA7DF /* PAImageView.swift */,
 				08914F132032B0D7003AA7DF /* PAView.swift */,
+				0881DE3D20B8A68900251057 /* PAButton.swift */,
+				0881DE3F20B8A71000251057 /* PALabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -471,6 +504,14 @@
 			path = InfoScreen;
 			sourceTree = "<group>";
 		};
+		089C069320B9C7AC00A42B43 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				089C069420B9C7F600A42B43 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +539,7 @@
 				08FEB65F1FE5010600E43632 /* Assertion.swift */,
 				08914F1F2038B8F2003AA7DF /* DependencyContext.swift */,
 				08487404208BB69500986FD5 /* ObserverList.swift */,
+				089C069B20B9CADE00A42B43 /* PALocale.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -656,6 +698,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 087648A21FB8FF190058E110;
 			productRefGroup = 087648AC1FB8FF190058E110 /* Products */;
@@ -675,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */,
+				089C069620B9C7F600A42B43 /* Localizable.strings in Resources */,
 				087648B91FB8FF190058E110 /* LaunchScreen.storyboard in Resources */,
 				A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */,
 				087648B61FB8FF190058E110 /* Assets.xcassets in Resources */,
@@ -732,13 +776,16 @@
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
 				08691D88203BD556003D3205 /* InfoActionHandler.swift in Sources */,
+				089C069C20B9CADE00A42B43 /* PALocale.swift in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
 				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
+				0881DE4020B8A71000251057 /* PALabel.swift in Sources */,
 				08914F23203BA08B003AA7DF /* PopAnimator.swift in Sources */,
 				08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */,
 				08914F1120329668003AA7DF /* PAImageView.swift in Sources */,
 				0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
+				084729A820B897ED00D1B1C6 /* MapSearchViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08FEB6601FE5010600E43632 /* Assertion.swift in Sources */,
 				08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */,
@@ -749,6 +796,7 @@
 				08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
 				08914F0E203295E7003AA7DF /* PAViewController.swift in Sources */,
+				0881DE3E20B8A68900251057 /* PAButton.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
 				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
@@ -809,6 +857,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				087648B31FB8FF190058E110 /* Base */,
+				089C069120B9C6F300A42B43 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -817,8 +866,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				087648B81FB8FF190058E110 /* Base */,
+				089C069220B9C6F300A42B43 /* es */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		089C069420B9C7F600A42B43 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C069520B9C7F600A42B43 /* Base */,
+				089C069720B9C80C00A42B43 /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -828,6 +887,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -872,7 +932,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -885,6 +945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -923,7 +984,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

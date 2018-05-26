@@ -31,6 +31,10 @@ extension YelpV3Business: BusinessModel {
   var address: AddressModel? {
     return location
   }
+  
+  var businessCategories: [String] {
+    return categories.map { $0.categoryName }
+  }
 }
 
 extension YelpV3Location: AddressModel {
@@ -49,23 +53,13 @@ private struct YelpV3CountryModel: CountryModel {
 }
 
 final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
-  // TESTING: Get the next chunk of restauraunts for the next request
-  var offset: Int = 0
-  private let limit: Int = 10
   private var observerList: ObserverList<NetworkObserver> = ObserverList()
 
   func makeSearchRequest(with params: SearchParameters, completionHandler: @escaping (SearchResult) -> Void) {
-    let radius = YelpV3SearchParameters.Radius(params.distance)
-    let location = YelpV3LocationParameter(coreLocation: params.location)
 
-    // TESTING: Get the next chunk of restauraunts for the next request
-    let offset = YelpV3SearchParameters.Offset(self.offset)
-    let limit = YelpV3SearchParameters.Limit(self.limit)
-    let yelpSearchParams = YelpV3SearchParameters(location: location, radius: radius, limit: limit, offset: offset)
-    let request = APIFactory.Yelp.V3.makeSearchRequest(with: yelpSearchParams)
+    let yelpSearchParams = params.yelpV3SearchParameters()
     
-    // TESTING: Get the next chunk of restauraunts for the next request
-    self.offset += self.limit
+    let request = APIFactory.Yelp.V3.makeSearchRequest(with: yelpSearchParams)
     
     sendRequest(request) { result in
       completionHandler(result.map { $0.businesses })
@@ -80,5 +74,41 @@ final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
     sendRequest(request) { result in
       completionHandler(result.map { $0.business })
     }
+  }
+}
+
+private extension SearchParameters {
+  func yelpV3SearchParameters() -> YelpV3SearchParameters {
+    let location = YelpV3LocationParameter(coreLocation: self.location)
+    let radius = YelpV3SearchParameters.Radius(self.distance)
+    let offset = YelpV3SearchParameters.Offset(self.offset)
+    let limit = YelpV3SearchParameters.Limit(self.limit)
+    let locale = self.locale?.yelpV3Locale()
+        
+    return YelpV3SearchParameters(location: location, radius: radius, locale: locale, limit: limit, offset: offset)
+  }
+}
+
+private extension PALocale {
+  func yelpV3Locale() -> LocaleParameter {
+    let language: Language
+    switch self.language {
+    case .english:
+      guard let country = country else {
+        language = YelpLocale.English.defaultValue
+        break
+      }
+      let localeString = "\(self.language.rawValue)_\(country)"
+      language = YelpLocale.English(rawValue: localeString) ?? YelpLocale.English.defaultValue
+    case .spanish:
+      guard let country = country else {
+        language = YelpLocale.Spanish.defaultValue
+        break
+      }
+      let localeString = "\(self.language.rawValue)_\(country)"
+      language = YelpLocale.Spanish(rawValue: localeString) ?? YelpLocale.Spanish.defaultValue
+    }
+    
+    return LocaleParameter(language: language)
   }
 }

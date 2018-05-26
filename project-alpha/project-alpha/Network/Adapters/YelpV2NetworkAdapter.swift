@@ -28,6 +28,10 @@ extension YelpBusiness: BusinessModel {
     // TODO: Implement this, we should have the required information
     return nil
   }
+  
+  var businessCategories: [String] {
+    return categories.map { $0.categoryName }
+  }
 }
 
 final class YelpV2NetworkAdapter: RequestSender, NetworkAdapter {

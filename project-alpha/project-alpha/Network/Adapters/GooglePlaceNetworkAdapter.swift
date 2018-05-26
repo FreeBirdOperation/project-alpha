@@ -29,6 +29,11 @@ extension GoogleEstablishment: BusinessModel {
   var address: AddressModel? {
     return nil
   }
+  
+  var businessCategories: [String] {
+    // TODO: Implement this
+    return []
+  }
 }
 
 final class GooglePlaceNetworkAdapter: RequestSender, NetworkAdapter {

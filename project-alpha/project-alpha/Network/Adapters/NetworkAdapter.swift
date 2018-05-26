@@ -14,8 +14,31 @@ typealias SearchResult = Result<[BusinessModel], APIError>
 typealias LookupResult = Result<BusinessModel, APIError>
 
 struct SearchParameters {
-  var location: CLLocation
-  var distance: Int
+  let location: CLLocation
+  let distance: Int
+  let offset: Int
+  let limit: Int
+  let locale: PALocale?
+  
+  init(location: CLLocation, distance: Int, limit: Int, locale: PALocale? = nil) {
+    self.location = location
+    self.distance = distance
+    self.limit = limit
+    self.offset = 0
+    self.locale = locale
+  }
+  
+  private init(withOffsetFor searchParams: SearchParameters) {
+    self.location = searchParams.location
+    self.distance = searchParams.distance
+    self.limit = searchParams.limit
+    self.offset = searchParams.offset + searchParams.limit
+    self.locale = searchParams.locale
+  }
+  
+  func nextOffset() -> SearchParameters {
+    return SearchParameters(withOffsetFor: self)
+  }
 }
 
 struct LookupParameters {

@@ -38,12 +38,14 @@ class ResultCardView: PAView {
   var titleLabel: UILabel
   var imageView: ImageGalleryView
   var choiceImageView: UIImageView
+  var categoryLabel: UILabel
   let blurFilterView: UIVisualEffectView
   
   override init() {
     self.titleLabel = UILabel()
     self.imageView = ImageGalleryView()
     self.choiceImageView = UIImageView()
+    self.categoryLabel = UILabel()
     self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
     super.init()
@@ -52,6 +54,7 @@ class ResultCardView: PAView {
     self.addSubview(imageView)
     imageView.backgroundColor = UIColor.black
     self.addSubview(choiceImageView)
+    self.addSubview(categoryLabel)
     self.addSubview(blurFilterView)
     self.setupConstraints()
     self.setupBlur()
@@ -77,6 +80,10 @@ class ResultCardView: PAView {
     choiceImageView.autoCenterInSuperview()
     choiceImageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.25)
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
+    
+    categoryLabel.autoPinEdge(toSuperviewMargin: .left)
+    categoryLabel.autoPinEdge(toSuperviewMargin: .left)
+    categoryLabel.autoPinEdge(.top, to: .bottom, of: titleLabel)
   }
   
   func setupBlur() {
@@ -103,6 +110,7 @@ extension ResultCardView: ResultDisplayable {
     
     isHidden = false
     titleLabel.text = businessModel.name
+    categoryLabel.text = businessModel.businessCategories.joined(separator: ", ")
 
     var displayModel = ImageGalleryViewDisplayModel(imageModels: businessModel.imageReferences.map { PAImageViewDisplayModel(imageReference: $0) })
     if businessModel.imageReferences.count <= 1 {

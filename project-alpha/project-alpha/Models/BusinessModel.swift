@@ -16,6 +16,7 @@ protocol BusinessModel {
   var imageReferences: [ImageReference] { get }
   var coordinate: CLLocationCoordinate2D { get }
   var address: AddressModel? { get }
+  var businessCategories: [String] { get }
 }
 
 struct MutableBusinessModel: BusinessModel {
@@ -24,6 +25,7 @@ struct MutableBusinessModel: BusinessModel {
   var imageReferences: [ImageReference]
   var coordinate: CLLocationCoordinate2D
   var address: AddressModel?
+  var businessCategories: [String]
   
   init(businessModel: BusinessModel) {
     self.id = businessModel.id
@@ -31,5 +33,6 @@ struct MutableBusinessModel: BusinessModel {
     self.imageReferences = businessModel.imageReferences
     self.coordinate = businessModel.coordinate
     self.address = businessModel.address
+    self.businessCategories = businessModel.businessCategories
   }
 }

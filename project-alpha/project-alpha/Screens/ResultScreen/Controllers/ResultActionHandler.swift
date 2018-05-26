@@ -12,11 +12,13 @@ import AddressBook
 import Contacts
 import YAPI
 
+typealias RetrieveBusinessesCompletionHandler = (Result<[BusinessModel], APIError>) -> Void
+
 protocol ResultViewControllerDelegate: class {
   var viewController: ResultViewController? { get set }
   
   func retrieveBusinesses(with params: SearchParameters,
-                          completionHandler: @escaping (Result<[BusinessModel], APIError>) -> Void)
+                          completionHandler: @escaping RetrieveBusinessesCompletionHandler)
   func selectOption(_ businessModel: BusinessModel?)
   func discardOption(_ businessModel: BusinessModel?)
 }
@@ -46,7 +48,7 @@ class ResultActionHandler: ResultViewControllerDelegate {
   }
   
   func retrieveBusinesses(with params: SearchParameters,
-                          completionHandler: @escaping (Result<[BusinessModel], APIError>) -> Void) {
+                          completionHandler: @escaping RetrieveBusinessesCompletionHandler) {
     // So we don't have to worry about non-atomic operations when setting the searchInProgress flag
     assert(Thread.isMainThread, "Only request new businesses from the main thread")
 

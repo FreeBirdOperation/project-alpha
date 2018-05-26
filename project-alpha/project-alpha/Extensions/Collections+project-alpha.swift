@@ -37,6 +37,6 @@ extension Collection {
 
 extension Array {
   mutating func popFirst() -> Element? {
-    return self.count > 1 ? self.removeFirst() : nil
+    return self.count > 0 ? self.removeFirst() : nil
   }
 }

@@ -38,9 +38,8 @@ class ResultViewController: PAViewController {
         card.tapAction = {
           let pageModel = InfoViewControllerPageModelObject(delegate: delegate, businessModel: businessModel)
           let vc = InfoViewController(pageModel: pageModel)
-          let animator = PopAnimator()
-          animator.originFrame = card.frame
-          vc.transitioningDelegate = animator
+          self?.popAnimator.originFrame = card.frame
+          vc.transitioningDelegate = self?.popAnimator
           self?.present(vc, animated: true, completion: nil)
         }
       }
@@ -59,10 +58,13 @@ class ResultViewController: PAViewController {
   private let card: PAView & ResultDisplayable
   private let backupCard: PAView & ResultDisplayable
   private let delegate: ResultViewControllerDelegate
-  private let searchParameters: SearchParameters
+  private var searchParameters: SearchParameters
   private let refreshThreshold: UInt
+  private let popAnimator = PopAnimator()
 
   private let infoViewControllerDelegate: InfoViewControllerDelegate
+  
+  private var isOutOfOptions: Bool = false
   
   init(pageModel: ResultViewControllerPageModel) {
     self.delegate = pageModel.delegate
@@ -79,7 +81,7 @@ class ResultViewController: PAViewController {
     self.setup(card: backupCard, withGestureRecognizer: false)
     self.setup(card: card, withGestureRecognizer: true)
 
-    delegate.retrieveBusinesses(with: searchParameters) { result in
+    retrieveBusinesses { result in
       guard case .ok(let businesses) = result else {
         log(.error, for: .network, message: "Error retrieving business results: \(result.unwrapErr())")
         return
@@ -134,6 +136,11 @@ class ResultViewController: PAViewController {
     else {
       resetBlock()
     }
+  }
+  
+  private func retrieveBusinesses(completionHandler: @escaping RetrieveBusinessesCompletionHandler) {
+    delegate.retrieveBusinesses(with: searchParameters, completionHandler: completionHandler)
+    searchParameters = searchParameters.nextOffset()
   }
 }
 
@@ -212,6 +219,9 @@ extension ResultViewController {
       switch direction {
       case .left:
         self.delegate.discardOption(self.cardViewModel.businessModel)
+        if self.isOutOfOptions && self.cardViewModel.businessModel == nil {
+          self.navigationController?.popViewController(animated: true)
+        }
       case .right:
         self.delegate.selectOption(self.cardViewModel.businessModel)
       }
@@ -239,9 +249,21 @@ extension ResultViewController {
 
     if businesses.count < refreshThreshold {
       // Get the next block of restauraunts
-      delegate.retrieveBusinesses(with: searchParameters) { [weak self] result in
+      retrieveBusinesses { [weak self] result in
         guard case .ok(let businesses) = result else {
           print("Error: \(result.unwrapErr())")
+          return
+        }
+        
+        guard businesses.isEmpty == false else {
+          // TODO: Display error screen saying there's no more options
+          print("Error: Businesses Empty")
+          self?.isOutOfOptions = true
+          if self?.cardViewModel.businessModel == nil {
+            DispatchQueue.main.async {
+              self?.navigationController?.popViewController(animated: true)
+            }
+          }
           return
         }
         
