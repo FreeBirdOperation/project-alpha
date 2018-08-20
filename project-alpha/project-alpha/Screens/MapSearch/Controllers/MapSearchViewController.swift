@@ -45,7 +45,7 @@ class MapSearchViewController: PAViewController {
       let pageModel = ResultViewControllerPageModel(networkAdapter: strongSelf.networkAdapter,
                                                     searchParameters: searchParameters)
       
-      let resultViewController = ResultViewController(pageModel: pageModel)
+      let resultViewController = ResultViewController(pageModel: pageModel, popToViewController: strongSelf)
       strongSelf.navigationController?.pushViewController(resultViewController, animated: true)
     }
   }

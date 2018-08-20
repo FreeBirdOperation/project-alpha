@@ -132,7 +132,8 @@ private extension SearchParameters {
                                   radius: radius,
                                   locale: locale,
                                   limit: limit,
-                                  offset: offset)
+                                  offset: offset,
+                                  openNow: true)
   }
 }
 

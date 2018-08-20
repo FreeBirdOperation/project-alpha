@@ -13,7 +13,7 @@ import YAPI
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: UIViewController {
+class FilterViewController: PAViewController {
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   var networkAdaptor: Condition<NetworkAdapter> = Condition()
@@ -113,7 +113,7 @@ class FilterViewController: UIViewController {
       let pageModel = ResultViewControllerPageModel(networkAdapter: networkAdapter,
                                                     searchParameters: params)
       
-      let resultVC = ResultViewController(pageModel: pageModel)
+      let resultVC = ResultViewController(pageModel: pageModel, popToViewController: self)
       self.navigationController?.pushViewController(resultVC, animated: true)
     }
   }

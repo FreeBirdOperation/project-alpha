@@ -67,16 +67,19 @@ class ResultViewController: PAViewController {
   private let refreshThreshold: UInt
   private let popAnimator = PopAnimator()
   private let networkAdapter: NetworkAdapter
+  private let popToViewController: PAViewController
   
   private var isOutOfOptions: Bool = false
+  private var didNavigateToEmptyScreen: Bool = false
   
-  init(pageModel: ResultViewControllerPageModel) {
+  init(pageModel: ResultViewControllerPageModel, popToViewController: PAViewController) {
     self.networkAdapter = pageModel.networkAdapter
     self.delegate = ResultActionHandler(networkAdapter: networkAdapter)
     self.searchParameters = pageModel.searchParameters
     self.refreshThreshold = pageModel.refreshThreshold
     self.card = ResultCardView(imageHeight: 120)
     self.backupCard = ResultCardView(imageHeight: 120)
+    self.popToViewController = popToViewController
     
     super.init()
     
@@ -223,8 +226,10 @@ extension ResultViewController {
       switch direction {
       case .left:
         self.delegate.discardOption(self.cardViewModel.businessModel)
-        if self.isOutOfOptions && self.cardViewModel.businessModel == nil {
-          self.navigationController?.popViewController(animated: true)
+        if self.isOutOfOptions && self.cardViewModel.businessModel == nil && self.didNavigateToEmptyScreen == false {
+          self.didNavigateToEmptyScreen = true
+          let noResultsViewController = NoResultsFoundViewController(popToViewController: self.popToViewController)
+          self.navigationController?.pushViewController(noResultsViewController, animated: false)
         }
       case .right:
         self.delegate.selectOption(self.cardViewModel.businessModel)
@@ -263,9 +268,12 @@ extension ResultViewController {
           // TODO: Display error screen saying there's no more options
           print("Error: Businesses Empty")
           self?.isOutOfOptions = true
-          if self?.cardViewModel.businessModel == nil {
+          if self?.cardViewModel.businessModel == nil && self?.didNavigateToEmptyScreen == false {
+            self?.didNavigateToEmptyScreen = true
             DispatchQueue.main.async {
-              self?.navigationController?.popViewController(animated: true)
+              guard let strongSelf = self else { return }
+              let noResultsViewController = NoResultsFoundViewController(popToViewController: strongSelf.popToViewController)
+              strongSelf.navigationController?.pushViewController(noResultsViewController, animated: false)
             }
           }
           return

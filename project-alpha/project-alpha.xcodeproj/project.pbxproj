@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08369286212A982D0000AE78 /* NoResultsFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369285212A982D0000AE78 /* NoResultsFoundViewController.swift */; };
+		08369288212A9CE80000AE78 /* ResultsCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369287212A9CE80000AE78 /* ResultsCacheController.swift */; };
 		0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */; };
 		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
 		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
@@ -123,6 +125,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08369285212A982D0000AE78 /* NoResultsFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsFoundViewController.swift; sourceTree = "<group>"; };
+		08369287212A9CE80000AE78 /* ResultsCacheController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCacheController.swift; sourceTree = "<group>"; };
 		0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
@@ -379,6 +383,8 @@
 			children = (
 				A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */,
 				085870591FCB5B41000F973A /* ResultActionHandler.swift */,
+				08369285212A982D0000AE78 /* NoResultsFoundViewController.swift */,
+				08369287212A9CE80000AE78 /* ResultsCacheController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -841,6 +847,7 @@
 				084729A820B897ED00D1B1C6 /* MapSearchViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08FEB6601FE5010600E43632 /* Assertion.swift in Sources */,
+				08369286212A982D0000AE78 /* NoResultsFoundViewController.swift in Sources */,
 				0884301A20C61CD8004A1340 /* CallToActionButton.swift in Sources */,
 				089C06BC20C304B200A42B43 /* BufferingOverlay.swift in Sources */,
 				08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */,
@@ -864,6 +871,7 @@
 				089C06B420BDA98000A42B43 /* WebsiteView.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
+				08369288212A9CE80000AE78 /* ResultsCacheController.swift in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
 				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
 				08487405208BB69500986FD5 /* ObserverList.swift in Sources */,
