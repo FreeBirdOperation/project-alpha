@@ -40,6 +40,13 @@ class CarouselView: PAView, UICollectionViewDelegate {
   public var displayModel: CarouselViewModel? {
     didSet {
       internalCollectionView.dataSource = displayModel
+      internalCollectionView.reloadData()
+    }
+  }
+  
+  override var backgroundColor: UIColor? {
+    didSet {
+      internalCollectionView.backgroundColor = backgroundColor
     }
   }
   
@@ -53,6 +60,8 @@ class CarouselView: PAView, UICollectionViewDelegate {
     
     internalCollectionView.delegate = self
     internalCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CarouselCellIdentifier)
+    internalCollectionView.showsHorizontalScrollIndicator = false
+    internalCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
   }
   
   required init?(coder aDecoder: NSCoder) {

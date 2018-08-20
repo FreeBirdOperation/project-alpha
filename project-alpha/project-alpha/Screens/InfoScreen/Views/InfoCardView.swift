@@ -14,14 +14,14 @@ protocol WebViewLauncher {
 
 class InfoCardView: ResultCardView {
 //  let reviewView: ReviewView
-//  let reviewCarousel: CarouselView
+  let reviewCarousel: CarouselView
   let websiteView: WebsiteView
   let actionDelegate: WebViewLauncher
   private var cells: [UITableViewCell] = []
   
   init(imageHeight: CGFloat, actionDelegate: WebViewLauncher) {
 //    reviewView = ReviewView()
-//    reviewCarousel = CarouselView(pageWidth: 300)
+    reviewCarousel = CarouselView()
     websiteView = WebsiteView()
     self.actionDelegate = actionDelegate
     super.init(imageHeight: imageHeight)
@@ -34,15 +34,17 @@ class InfoCardView: ResultCardView {
   }
   
   private func setupView() {
+    reviewCarousel.backgroundColor = .clear
 //    supplementaryContentContainer.addSubview(reviewView)
-//    supplementaryContentContainer.addSubview(reviewCarousel)
+    supplementaryContentContainer.addSubview(reviewCarousel)
     supplementaryContentContainer.addSubview(websiteView)
     
 //    reviewView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-//    reviewCarousel.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+    reviewCarousel.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+    reviewCarousel.autoSetDimension(.height, toSize: 300.0)
     
 //    websiteView.autoPinEdge(.top, to: .bottom, of: reviewView)
-//    websiteView.autoPinEdge(.top, to: .bottom, of: reviewCarousel)
+    websiteView.autoPinEdge(.top, to: .bottom, of: reviewCarousel)
     websiteView.autoPinEdge(toSuperviewEdge: .left)
     websiteView.autoPinEdge(toSuperviewEdge: .right)
     websiteView.autoPinEdge(toSuperviewEdge: .bottom)
@@ -62,6 +64,9 @@ class InfoCardView: ResultCardView {
       reviewView.displayModel = displayModel
       return reviewView
     }
+    let carouselModel = CarouselViewModel()
+    carouselModel.carouselViews = reviewViews
+    reviewCarousel.displayModel = carouselModel
 //    reviewCarousel.addViews(reviewViews)
 //    if let review = businessModel?.reviews.first {
 //      reviewView.displayModel = ReviewViewDisplayModel(review: review)
