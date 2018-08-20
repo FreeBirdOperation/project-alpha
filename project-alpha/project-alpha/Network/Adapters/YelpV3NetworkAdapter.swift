@@ -10,7 +10,29 @@ import Foundation
 import CoreLocation
 import YAPI
 
+private struct YelpRating: RatingModel {
+  var value: Double
+}
+
+extension YelpPrice: PriceModel {
+  var value: Double {
+    return Double(rawValue)
+  }
+}
+
 extension YelpV3Business: BusinessModel {
+  var businessRating: RatingModel {
+    return YelpRating(value: rating)
+  }
+  
+  var businessPrice: PriceModel? {
+    return price
+  }
+  
+  var reviews: [ReviewModel] {
+    return []
+  }
+  
   var imageReferences: [ImageReference] {
     guard !self.photos.isEmpty else {
       if let imageReference = self.image {
@@ -52,6 +74,16 @@ private struct YelpV3CountryModel: CountryModel {
   var isoCode: String? = nil
 }
 
+extension YelpReview: ReviewModel {
+  var userImage: ImageReference? {
+    return user.image
+  }
+  
+  var userName: String {
+    return user.name
+  }
+}
+
 final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
   private var observerList: ObserverList<NetworkObserver> = ObserverList()
 
@@ -75,6 +107,17 @@ final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
       completionHandler(result.map { $0.business })
     }
   }
+  
+  func makeReviewRequest(with params: ReviewParameters, completionHandler: @escaping (ReviewResult) -> Void) {
+    let yelpReviewParams = YelpV3ReviewParameters(id: params.id,
+                                                  locale: params.locale?.yelpV3Locale())
+    
+    let request = APIFactory.Yelp.V3.makeReviewRequest(with: yelpReviewParams)
+    
+    sendRequest(request) { result in
+      completionHandler(result.map { $0.reviews })
+    }
+  }
 }
 
 private extension SearchParameters {
@@ -85,30 +128,32 @@ private extension SearchParameters {
     let limit = YelpV3SearchParameters.Limit(self.limit)
     let locale = self.locale?.yelpV3Locale()
         
-    return YelpV3SearchParameters(location: location, radius: radius, locale: locale, limit: limit, offset: offset)
+    return YelpV3SearchParameters(location: location,
+                                  radius: radius,
+                                  locale: locale,
+                                  limit: limit,
+                                  offset: offset)
   }
 }
 
 private extension PALocale {
   func yelpV3Locale() -> LocaleParameter {
-    let language: Language
-    switch self.language {
+    switch language {
     case .english:
-      guard let country = country else {
-        language = YelpLocale.English.defaultValue
-        break
-      }
-      let localeString = "\(self.language.rawValue)_\(country)"
-      language = YelpLocale.English(rawValue: localeString) ?? YelpLocale.English.defaultValue
+      let language: YelpLocale.English = yelpLanguage(for: self.language)
+      return LocaleParameter(language: language)
     case .spanish:
-      guard let country = country else {
-        language = YelpLocale.Spanish.defaultValue
-        break
-      }
-      let localeString = "\(self.language.rawValue)_\(country)"
-      language = YelpLocale.Spanish(rawValue: localeString) ?? YelpLocale.Spanish.defaultValue
+      let language: YelpLocale.Spanish = yelpLanguage(for: self.language)
+      return LocaleParameter(language: language)
     }
-    
-    return LocaleParameter(language: language)
+  }
+  
+  private func yelpLanguage<T: YelpLocaleProtocol>(for language: PALanguage) -> T {
+    guard let country = country else {
+      return T.defaultValue
+    }
+
+    let localeString = "\(language.rawValue)_\(country)"
+    return T.init(rawValue: localeString) ?? T.defaultValue
   }
 }

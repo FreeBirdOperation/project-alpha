@@ -12,7 +12,7 @@ typealias PAButtonActionBlock = () -> Void
 
 class PAButton: UIButton {
   var actionBlock: PAButtonActionBlock?
-  
+
   init(actionBlock: PAButtonActionBlock? = nil) {
     super.init(frame: CGRect.zero)
     

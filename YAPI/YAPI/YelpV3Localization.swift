@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias YelpLocaleProtocol = Language & Default
+
 public struct LocaleParameter: Parameter {
   let internalValue: Language
   
@@ -23,11 +25,12 @@ public struct LocaleParameter: Parameter {
 }
 
 public protocol Language {
+  init?(rawValue: String)
   var rawValue: String { get }
 }
 
 public enum YelpLocale {
-  public enum Czech : String, Language {
+  public enum Czech : String, YelpLocaleProtocol {
     case czechRepublic = "cs_CZ"
     
     public static var defaultValue: Czech {
@@ -35,7 +38,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Danish : String, Language {
+  public enum Danish : String, YelpLocaleProtocol {
     case denmark = "da_DK"
     
     public static var defaultValue: Danish {
@@ -43,7 +46,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum German : String, Language {
+  public enum German : String, YelpLocaleProtocol {
     case austria = "de_AT"
     case switzerland = "de_CH"
     case germany = "de_DE"
@@ -53,7 +56,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum English : String, Language {
+  public enum English : String, YelpLocaleProtocol {
     case belgium = "en_BE"
     case canada = "en_CA"
     case switzerland = "en_CH"
@@ -71,7 +74,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Spanish : String, Language {
+  public enum Spanish : String, YelpLocaleProtocol {
     case argentina = "es_AR"
     case chile = "es_CL"
     case spain = "es_ES"
@@ -82,7 +85,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Finnish : String, Language {
+  public enum Finnish : String, YelpLocaleProtocol {
     case finland = "fi_FI"
     
     public static var defaultValue: Finnish {
@@ -90,7 +93,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Filipino : String, Language {
+  public enum Filipino : String, YelpLocaleProtocol {
     case philippines = "fil_PH"
     
     public static var defaultValue: Filipino {
@@ -98,7 +101,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum French : String, Language {
+  public enum French : String, YelpLocaleProtocol {
     case belgium = "fr_BE"
     case canada = "fr_CA"
     case switzerland = "fr_CH"
@@ -109,7 +112,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Italian : String, Language {
+  public enum Italian : String, YelpLocaleProtocol {
     case switzerland = "it_CH"
     case italy = "it_IT"
     
@@ -118,7 +121,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Japanese : String, Language {
+  public enum Japanese : String, YelpLocaleProtocol {
     case japan = "ja_JP"
     
     public static var defaultValue: Japanese {
@@ -126,7 +129,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Malay : String, Language {
+  public enum Malay : String, YelpLocaleProtocol {
     case malaysia = "ms_MY"
     
     public static var defaultValue: Malay {
@@ -134,7 +137,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Norwegian : String, Language {
+  public enum Norwegian : String, YelpLocaleProtocol {
     case norway = "nb_NO"
     
     public static var defaultValue: Norwegian {
@@ -142,7 +145,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Dutch : String, Language {
+  public enum Dutch : String, YelpLocaleProtocol {
     case belgium = "nl_BE"
     case theNetherlands = "nl_NL"
     
@@ -151,7 +154,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Polish : String, Language {
+  public enum Polish : String, YelpLocaleProtocol {
     case poland = "pl_PL"
     
     public static var defaultValue: Polish {
@@ -159,7 +162,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Portuguese : String, Language {
+  public enum Portuguese : String, YelpLocaleProtocol {
     case brazil = "pt_BR"
     case portugal = "pt_PT"
     
@@ -168,7 +171,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Swedish : String, Language {
+  public enum Swedish : String, YelpLocaleProtocol {
     case finland = "sv_FI"
     case sweden = "sv_SE"
     
@@ -177,7 +180,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Turkish : String, Language {
+  public enum Turkish : String, YelpLocaleProtocol {
     case turkey = "tr_TR"
     
     public static var defaultValue: Turkish {
@@ -185,7 +188,7 @@ public enum YelpLocale {
     }
   }
   
-  public enum Chinese : String, Language {
+  public enum Chinese : String, YelpLocaleProtocol {
     case hongKong = "zh_HK"
     case taiwan = "zh_TW"
     

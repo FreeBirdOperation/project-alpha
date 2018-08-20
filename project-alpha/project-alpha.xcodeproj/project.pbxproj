@@ -39,6 +39,9 @@
 		087648CF1FB8FF190058E110 /* project_alphaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087648CE1FB8FF190058E110 /* project_alphaUITests.swift */; };
 		0881DE3E20B8A68900251057 /* PAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0881DE3D20B8A68900251057 /* PAButton.swift */; };
 		0881DE4020B8A71000251057 /* PALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0881DE3F20B8A71000251057 /* PALabel.swift */; };
+		0884301A20C61CD8004A1340 /* CallToActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884301920C61CD8004A1340 /* CallToActionButton.swift */; };
+		0884301C20C6612B004A1340 /* PAScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884301B20C6612B004A1340 /* PAScrollView.swift */; };
+		0890F2D320CC57C200E1DF24 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890F2D220CC57C200E1DF24 /* CarouselView.swift */; };
 		08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE3200DAAF4003AA7DF /* AddressModel.swift */; };
 		08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */; };
 		08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F062032875D003AA7DF /* ImageGalleryView.swift */; };
@@ -53,6 +56,15 @@
 		08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08914F25203BA300003AA7DF /* InfoViewController.swift */; };
 		089C069620B9C7F600A42B43 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C069420B9C7F600A42B43 /* Localizable.strings */; };
 		089C069C20B9CADE00A42B43 /* PALocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C069B20B9CADE00A42B43 /* PALocale.swift */; };
+		089C06A920BA1B7C00A42B43 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06A820BA1B7C00A42B43 /* ReviewModel.swift */; };
+		089C06AB20BA2B5F00A42B43 /* InfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06AA20BA2B5F00A42B43 /* InfoCardView.swift */; };
+		089C06B020BCFE3A00A42B43 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06AF20BCFE3A00A42B43 /* WebViewController.swift */; };
+		089C06B220BD21D800A42B43 /* PATableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06B120BD21D800A42B43 /* PATableView.swift */; };
+		089C06B420BDA98000A42B43 /* WebsiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06B320BDA98000A42B43 /* WebsiteView.swift */; };
+		089C06B620BE638500A42B43 /* PATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06B520BE638500A42B43 /* PATableViewCell.swift */; };
+		089C06B820BE69EC00A42B43 /* ReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06B720BE69EC00A42B43 /* ReviewsCell.swift */; };
+		089C06BA20BEE89D00A42B43 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06B920BEE89D00A42B43 /* ReviewView.swift */; };
+		089C06BC20C304B200A42B43 /* BufferingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C06BB20C304B200A42B43 /* BufferingOverlay.swift */; };
 		08CCBE8F1FB8FF9D007EC96E /* YAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CCBE901FB8FF9D007EC96E /* YAPI.framework */; };
 		08CCBE941FB96D8D007EC96E /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CCBE931FB96D8D007EC96E /* secrets.plist */; };
 		08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D74CDF1FD4FE2F00306586 /* LocationManager.swift */; };
@@ -153,6 +165,9 @@
 		087648D01FB8FF190058E110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0881DE3D20B8A68900251057 /* PAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAButton.swift; sourceTree = "<group>"; };
 		0881DE3F20B8A71000251057 /* PALabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PALabel.swift; sourceTree = "<group>"; };
+		0884301920C61CD8004A1340 /* CallToActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallToActionButton.swift; sourceTree = "<group>"; };
+		0884301B20C6612B004A1340 /* PAScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAScrollView.swift; sourceTree = "<group>"; };
+		0890F2D220CC57C200E1DF24 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		08914EE3200DAAF4003AA7DF /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		08914EE5200DB486003AA7DF /* MKMapItem+project-alpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapItem+project-alpha.swift"; sourceTree = "<group>"; };
 		08914F062032875D003AA7DF /* ImageGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryView.swift; sourceTree = "<group>"; };
@@ -170,6 +185,15 @@
 		089C069520B9C7F600A42B43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "project-alpha/Base.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
 		089C069720B9C80C00A42B43 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "../project-alpha/es.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		089C069B20B9CADE00A42B43 /* PALocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PALocale.swift; sourceTree = "<group>"; };
+		089C06A820BA1B7C00A42B43 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
+		089C06AA20BA2B5F00A42B43 /* InfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCardView.swift; sourceTree = "<group>"; };
+		089C06AF20BCFE3A00A42B43 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		089C06B120BD21D800A42B43 /* PATableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PATableView.swift; sourceTree = "<group>"; };
+		089C06B320BDA98000A42B43 /* WebsiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteView.swift; sourceTree = "<group>"; };
+		089C06B520BE638500A42B43 /* PATableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PATableViewCell.swift; sourceTree = "<group>"; };
+		089C06B720BE69EC00A42B43 /* ReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCell.swift; sourceTree = "<group>"; };
+		089C06B920BEE89D00A42B43 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		089C06BB20C304B200A42B43 /* BufferingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferingOverlay.swift; sourceTree = "<group>"; };
 		08CCBE901FB8FF9D007EC96E /* YAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CCBE931FB96D8D007EC96E /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		08D74CDF1FD4FE2F00306586 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -314,6 +338,7 @@
 			children = (
 				085870481FC5791F000F973A /* BusinessModel.swift */,
 				08914EE3200DAAF4003AA7DF /* AddressModel.swift */,
+				089C06A820BA1B7C00A42B43 /* ReviewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +346,7 @@
 		085870571FCB5B16000F973A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				089C06AD20BCFE1800A42B43 /* WebViewScreen */,
 				084729A520B897C900D1B1C6 /* MapSearch */,
 				08914F122032968D003AA7DF /* Common */,
 				08914F24203BA2EF003AA7DF /* InfoScreen */,
@@ -386,6 +412,10 @@
 		08691DB92041D2EC003D3205 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				089C06AA20BA2B5F00A42B43 /* InfoCardView.swift */,
+				089C06B320BDA98000A42B43 /* WebsiteView.swift */,
+				089C06B720BE69EC00A42B43 /* ReviewsCell.swift */,
+				089C06B920BEE89D00A42B43 /* ReviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,6 +505,12 @@
 				08914F132032B0D7003AA7DF /* PAView.swift */,
 				0881DE3D20B8A68900251057 /* PAButton.swift */,
 				0881DE3F20B8A71000251057 /* PALabel.swift */,
+				089C06B120BD21D800A42B43 /* PATableView.swift */,
+				089C06B520BE638500A42B43 /* PATableViewCell.swift */,
+				089C06BB20C304B200A42B43 /* BufferingOverlay.swift */,
+				0884301920C61CD8004A1340 /* CallToActionButton.swift */,
+				0884301B20C6612B004A1340 /* PAScrollView.swift */,
+				0890F2D220CC57C200E1DF24 /* CarouselView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -510,6 +546,22 @@
 				089C069420B9C7F600A42B43 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		089C06AD20BCFE1800A42B43 /* WebViewScreen */ = {
+			isa = PBXGroup;
+			children = (
+				089C06AE20BCFE2800A42B43 /* Controllers */,
+			);
+			path = WebViewScreen;
+			sourceTree = "<group>";
+		};
+		089C06AE20BCFE2800A42B43 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				089C06AF20BCFE3A00A42B43 /* WebViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		08CCBE8E1FB8FF9D007EC96E /* Frameworks */ = {
@@ -777,6 +829,7 @@
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
 				08691D88203BD556003D3205 /* InfoActionHandler.swift in Sources */,
 				089C069C20B9CADE00A42B43 /* PALocale.swift in Sources */,
+				0884301C20C6612B004A1340 /* PAScrollView.swift in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
 				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
 				0881DE4020B8A71000251057 /* PALabel.swift in Sources */,
@@ -788,23 +841,34 @@
 				084729A820B897ED00D1B1C6 /* MapSearchViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08FEB6601FE5010600E43632 /* Assertion.swift in Sources */,
+				0884301A20C61CD8004A1340 /* CallToActionButton.swift in Sources */,
+				089C06BC20C304B200A42B43 /* BufferingOverlay.swift in Sources */,
 				08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */,
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
 				08914F142032B0D7003AA7DF /* PAView.swift in Sources */,
+				089C06A920BA1B7C00A42B43 /* ReviewModel.swift in Sources */,
+				089C06B020BCFE3A00A42B43 /* WebViewController.swift in Sources */,
 				08914F0A203294FE003AA7DF /* PhotoViewerViewController.swift in Sources */,
+				089C06BA20BEE89D00A42B43 /* ReviewView.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
 				08914F0E203295E7003AA7DF /* PAViewController.swift in Sources */,
 				0881DE3E20B8A68900251057 /* PAButton.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
+				0890F2D320CC57C200E1DF24 /* CarouselView.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
+				089C06B620BE638500A42B43 /* PATableViewCell.swift in Sources */,
 				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
+				089C06B820BE69EC00A42B43 /* ReviewsCell.swift in Sources */,
+				089C06B420BDA98000A42B43 /* WebsiteView.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
 				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
 				08487405208BB69500986FD5 /* ObserverList.swift in Sources */,
+				089C06AB20BA2B5F00A42B43 /* InfoCardView.swift in Sources */,
+				089C06B220BD21D800A42B43 /* PATableView.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

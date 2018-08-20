@@ -46,6 +46,26 @@ class FilterViewController: UIViewController {
     button.autoPinEdges(toSuperviewMarginsExcludingEdge: .top)
     button.addTarget(self, action: #selector(goToMapView), for: .touchUpInside)
     
+    // TEMP
+    let carousel = CarouselView()
+    view.addSubview(carousel)
+    carousel.autoPinEdge(.bottom, to: .top, of: button)
+    carousel.backgroundColor = UIColor.orange
+    carousel.autoPinEdge(toSuperviewEdge: .left)
+    carousel.autoPinEdge(toSuperviewEdge: .right)
+    carousel.autoSetDimension(.height, toSize: 250)
+    
+    let views = [UIColor.blue, UIColor.brown, UIColor.purple].map { color -> PAView in
+      let view = PAView()
+      view.backgroundColor = color
+      return view
+    }
+    
+    let displayModel = CarouselViewModel()
+    displayModel.carouselViews = views
+    
+    carousel.displayModel = displayModel
+    
     authenticate()
     setupTextField()
   }
@@ -90,8 +110,7 @@ class FilterViewController: UIViewController {
       stopIndicator()
 
       let params = SearchParameters(location: location, distance: (Int(self.distanceEntryField.text ?? "") ?? 10) * 100, limit: 10)
-      let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: networkAdapter),
-                                                    infoViewControllerDelegate: InfoActionHandler(networkAdapter: networkAdapter),
+      let pageModel = ResultViewControllerPageModel(networkAdapter: networkAdapter,
                                                     searchParameters: params)
       
       let resultVC = ResultViewController(pageModel: pageModel)

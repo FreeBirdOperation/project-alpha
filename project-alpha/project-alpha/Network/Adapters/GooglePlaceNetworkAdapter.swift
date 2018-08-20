@@ -10,7 +10,33 @@ import Foundation
 import CoreLocation
 import YAPI
 
+private struct GoogleRating: RatingModel {
+  var value: Double
+}
+
+extension GoogleEstablishment.PriceLevel: PriceModel {
+  var value: Double {
+    return Double(rawValue)
+  }
+}
+
 extension GoogleEstablishment: BusinessModel {
+  var businessRating: RatingModel {
+    return GoogleRating(value: self.rating ?? 0)
+  }
+  
+  var businessPrice: PriceModel? {
+    return price_level
+  }
+  
+  var url: URL? {
+    return nil
+  }
+  
+  var reviews: [ReviewModel] {
+    return []
+  }
+  
   var imageReferences: [ImageReference] {
     return []
   }
@@ -60,6 +86,11 @@ final class GooglePlaceNetworkAdapter: RequestSender, NetworkAdapter {
   }
   
   func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void) {
+    // TODO: Implement
+    return
+  }
+  
+  func makeReviewRequest(with params: ReviewParameters, completionHandler: @escaping (ReviewResult) -> Void) {
     // TODO: Implement
     return
   }

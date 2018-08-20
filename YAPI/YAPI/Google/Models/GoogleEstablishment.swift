@@ -23,7 +23,7 @@ public struct GoogleEstablishment: Decodable {
   }
   
   public struct Photo: Decodable {
-    public final class PhotoReference: ImageReference, Decodable {
+    public final class PhotoReference: ImageReference {
       private enum Params {
         static let key = "key"
         static let photoreference = "photoreference"
@@ -52,7 +52,7 @@ public struct GoogleEstablishment: Decodable {
         return url
       }
       
-      public convenience init(from decoder: Decoder) throws {
+      public required convenience init(from decoder: Decoder) throws {
         let value = try decoder.singleValueContainer()
         let reference = try value.decode(String.self)
         
@@ -86,16 +86,7 @@ public struct GoogleEstablishment: Decodable {
     case four
   }
   
-  public final class Icon: ImageReference, Decodable {
-    public convenience init(from decoder: Decoder) throws {
-      let value = try decoder.singleValueContainer()
-      let url = try value.decode(URL.self)
-      
-      self.init(from: url)
-    }
-  }
-  
-  public let icon: Icon
+  public let icon: ImageReference
   public let geometry: Geometry
   public let name: String
   public let opening_hours: OpeningHours?

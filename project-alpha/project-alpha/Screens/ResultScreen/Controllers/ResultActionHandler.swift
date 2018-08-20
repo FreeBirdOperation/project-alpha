@@ -71,7 +71,12 @@ class ResultActionHandler: ResultViewControllerDelegate {
 
     print("Selected \(businessModel.name)")
     print("Coordinate: \(businessModel.coordinate)")
+    let pageModel = InfoViewControllerPageModelObject(networkAdapter: networkAdapter,
+                                                      businessModel: businessModel)
+    let vc = InfoViewController(pageModel: pageModel)
+    viewController?.navigationController?.pushViewController(vc, animated: true)
     
+    /*
     let mapLaunchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     
     if let address = businessModel.address {
@@ -107,7 +112,7 @@ class ResultActionHandler: ResultViewControllerDelegate {
         mapItem.openInMaps(launchOptions: mapLaunchOptions)
       }
     }
-    
+    */
   }
   
   func discardOption(_ businessModel: BusinessModel?) {

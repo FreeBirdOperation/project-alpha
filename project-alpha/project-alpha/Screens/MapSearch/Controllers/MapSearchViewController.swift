@@ -13,14 +13,16 @@ import YAPI
 class MapSearchViewController: PAViewController {
   let mapView: MKMapView
   let centerView: PAView
-  let searchButton: PAButton
+//  let searchButton: PAButton
+  let searchButton: CallToActionButton
   
   let networkAdapter: NetworkAdapter
   
   init(currentLocation: CLLocation, networkAdapter: NetworkAdapter) {
     mapView = MKMapView(forAutoLayout: ())
     centerView = PAView()
-    searchButton = PAButton()
+//    searchButton = PAButton()
+    searchButton = CallToActionButton()
     
     self.networkAdapter = networkAdapter
     
@@ -40,8 +42,7 @@ class MapSearchViewController: PAViewController {
                                               distance: Int(distance),
                                               limit: limit,
                                               locale: locale)
-      let pageModel = ResultViewControllerPageModel(delegate: ResultActionHandler(networkAdapter: strongSelf.networkAdapter),
-                                                    infoViewControllerDelegate: InfoActionHandler(networkAdapter: strongSelf.networkAdapter),
+      let pageModel = ResultViewControllerPageModel(networkAdapter: strongSelf.networkAdapter,
                                                     searchParameters: searchParameters)
       
       let resultViewController = ResultViewController(pageModel: pageModel)
@@ -87,16 +88,16 @@ class MapSearchViewController: PAViewController {
     searchButton.autoPinEdge(toSuperviewEdge: .bottom, withInset: 50)
     searchButton.backgroundColor = .red
     searchButton.setTitle(NSLocalizedString("Search", comment: ""), for: .normal)
-
-    searchButton.layer.cornerRadius = 5
-    searchButton.layer.masksToBounds = false
-    searchButton.layer.borderWidth = 0.5
-    
-    // Setup drop shadow
-    searchButton.layer.shadowColor = UIColor.black.cgColor
-    searchButton.layer.shadowOpacity = 0.8
-    searchButton.layer.shadowRadius = 5
-    searchButton.layer.shadowOffset = CGSize(width: 0, height: 6)
+//
+//    searchButton.layer.cornerRadius = 5
+//    searchButton.layer.masksToBounds = false
+//    searchButton.layer.borderWidth = 0.5
+//    
+//    // Setup drop shadow
+//    searchButton.layer.shadowColor = UIColor.black.cgColor
+//    searchButton.layer.shadowOpacity = 0.8
+//    searchButton.layer.shadowRadius = 5
+//    searchButton.layer.shadowOffset = CGSize(width: 0, height: 6)
   }
   
   required init?(coder aDecoder: NSCoder) {

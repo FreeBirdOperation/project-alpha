@@ -35,7 +35,7 @@ public typealias ImageLoadResult = Result<UIImage, ImageLoadError>
       imageReference.cachedImage // COULD BE NIL HERE EVEN IF THE IMAGE WILL BE SUCCESSFULLY LOADED
     ```
  */
-open class ImageReference {
+open class ImageReference: Decodable {
   public static let globalCache: Cache<ImageReference> = Cache(identifier: "ImageCache")
 
   // The networking state of the image reference, used to defer
@@ -107,6 +107,13 @@ open class ImageReference {
                            session: HTTPClient = HTTPClient.sharedSession) {
     guard let url = URL(string: string) else { return nil }
     self.init(from: url, using: cache, session: session)
+  }
+  
+  public required convenience init(from decoder: Decoder) throws {
+    let value = try decoder.singleValueContainer()
+    let url = try value.decode(URL.self)
+    
+    self.init(from: url)
   }
   
   /**

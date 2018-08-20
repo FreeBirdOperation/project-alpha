@@ -74,7 +74,7 @@ public struct YelpV3Business {
   public let reviewCount: Int
 
   /// url for business page on Yelp
-  public let url: URL
+  public let url: URL?
 
   /// A list of Yelp transactions that the business is registered for. Current supported values are "pickup", "delivery", and "restaurant_reservation".
   public let transactions: [YelpTransaction]
@@ -99,7 +99,7 @@ public struct YelpV3Business {
     self.phoneNumber = try dict.parseParam(key: Params.phone)
     
     let photoUrls: [String]? = try? dict.parseParam(key: Params.photos)
-    self.photos = photoUrls?.flatMap { ImageReference(from: $0) } ?? []
+    self.photos = photoUrls?.compactMap { ImageReference(from: $0) } ?? []
     
     let rawPrice: String? = try? dict.parseParam(key: Params.price)
     if let rawPrice = rawPrice {

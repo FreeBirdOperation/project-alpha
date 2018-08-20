@@ -10,6 +10,14 @@ import Foundation
 import CoreLocation
 import YAPI
 
+protocol RatingModel {
+  var value: Double { get }
+}
+
+protocol PriceModel {
+  var value: Double { get }
+}
+
 protocol BusinessModel {
   var id: String { get }
   var name: String { get }
@@ -17,6 +25,10 @@ protocol BusinessModel {
   var coordinate: CLLocationCoordinate2D { get }
   var address: AddressModel? { get }
   var businessCategories: [String] { get }
+  var reviews: [ReviewModel] { get }
+  var url: URL? { get }
+  var businessRating: RatingModel { get }
+  var businessPrice: PriceModel? { get }
 }
 
 struct MutableBusinessModel: BusinessModel {
@@ -26,6 +38,10 @@ struct MutableBusinessModel: BusinessModel {
   var coordinate: CLLocationCoordinate2D
   var address: AddressModel?
   var businessCategories: [String]
+  var reviews: [ReviewModel]
+  var url: URL?
+  var businessRating: RatingModel
+  var businessPrice: PriceModel?
   
   init(businessModel: BusinessModel) {
     self.id = businessModel.id
@@ -34,5 +50,9 @@ struct MutableBusinessModel: BusinessModel {
     self.coordinate = businessModel.coordinate
     self.address = businessModel.address
     self.businessCategories = businessModel.businessCategories
+    self.reviews = businessModel.reviews
+    self.url = businessModel.url
+    self.businessRating = businessModel.businessRating
+    self.businessPrice = businessModel.businessPrice
   }
 }

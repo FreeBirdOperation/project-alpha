@@ -10,7 +10,29 @@ import Foundation
 import CoreLocation
 import YAPI
 
+extension YelpRating: RatingModel {
+  var value: Double {
+    return Double(self.rating)
+  }
+}
+
 extension YelpBusiness: BusinessModel {
+  var businessRating: RatingModel {
+    return self.rating
+  }
+  
+  var businessPrice: PriceModel? {
+    return nil
+  }
+  
+  var url: URL? {
+    return self.mobileURL
+  }
+  
+  var reviews: [ReviewModel] {
+    return []
+  }
+  
   var imageReferences: [ImageReference] {
     return []
   }
@@ -44,6 +66,11 @@ final class YelpV2NetworkAdapter: RequestSender, NetworkAdapter {
   }
   
   func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void) {
+    // TODO: Implement
+    return
+  }
+  
+  func makeReviewRequest(with params: ReviewParameters, completionHandler: @escaping (ReviewResult) -> Void) {
     // TODO: Implement
     return
   }

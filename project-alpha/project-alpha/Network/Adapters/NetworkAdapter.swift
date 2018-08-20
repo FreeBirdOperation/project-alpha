@@ -12,6 +12,7 @@ import YAPI
 
 typealias SearchResult = Result<[BusinessModel], APIError>
 typealias LookupResult = Result<BusinessModel, APIError>
+typealias ReviewResult = Result<[ReviewModel], APIError>
 
 struct SearchParameters {
   let location: CLLocation
@@ -43,6 +44,12 @@ struct SearchParameters {
 
 struct LookupParameters {
   var id: String
+  var locale: PALocale?
+}
+
+struct ReviewParameters {
+  var id: String
+  var locale: PALocale?
 }
 
 @objc
@@ -56,6 +63,44 @@ protocol NetworkAdapter {
   
   func makeLookupRequest(with params: LookupParameters, completionHandler: @escaping (LookupResult) -> Void)
   
+  func makeReviewRequest(with params: ReviewParameters, completionHandler: @escaping (ReviewResult) -> Void)
+  
   func addObserver(_ observer: NetworkObserver)
   func removeObserver(_ observer: NetworkObserver)
+}
+
+extension NetworkAdapter {
+  // TODO: Examine ways to make this type signature better (AnyRequest?)
+  func coalesceRequests(with requestParamsList: [Any], completionHandler: @escaping ([Any]) -> Void) {
+    DispatchQueue.global(qos: .background).async {
+      let dispatchGroup = DispatchGroup()
+      var results: [Any] = []
+      
+      for params in requestParamsList {
+        if let params = params as? SearchParameters {
+          dispatchGroup.enter()
+          self.makeSearchRequest(with: params) { result in
+            results.append(result)
+            dispatchGroup.leave()
+          }
+        } else if let params = params as? LookupParameters {
+          dispatchGroup.enter()
+          self.makeLookupRequest(with: params) { result in
+            results.append(result)
+            dispatchGroup.leave()
+          }
+        } else if let params = params as? ReviewParameters {
+          dispatchGroup.enter()
+          self.makeReviewRequest(with: params) { result in
+            results.append(result)
+            dispatchGroup.leave()
+          }
+        }
+      }
+      
+      dispatchGroup.notify(queue: .main) {
+        completionHandler(results)
+      }
+    }
+  }
 }

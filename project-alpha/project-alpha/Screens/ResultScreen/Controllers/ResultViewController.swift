@@ -11,19 +11,16 @@ import MapKit
 import YAPI
 
 struct ResultViewControllerPageModel {
-  let delegate: ResultViewControllerDelegate
-  let infoViewControllerDelegate: InfoViewControllerDelegate
+  let networkAdapter: NetworkAdapter
   let searchParameters: SearchParameters
 
   /// Minimum number of businesses loaded before preloading another batch of businesses
   let refreshThreshold: UInt
   
-  init(delegate: ResultViewControllerDelegate,
-       infoViewControllerDelegate: InfoViewControllerDelegate,
+  init(networkAdapter: NetworkAdapter,
        searchParameters: SearchParameters,
        refreshThreshold: UInt = 5) {
-    self.delegate = delegate
-    self.infoViewControllerDelegate = infoViewControllerDelegate
+    self.networkAdapter = networkAdapter
     self.searchParameters = searchParameters
     self.refreshThreshold = refreshThreshold
   }
@@ -32,15 +29,23 @@ struct ResultViewControllerPageModel {
 class ResultViewController: PAViewController {
   lazy private var cardViewModel: ResultCardViewModel = {
     return ResultCardViewModel(updateBlock: { [weak self] businessModel in
-      guard let card = self?.card, let delegate = self?.infoViewControllerDelegate else { return }
+      guard
+        let card = self?.card,
+        let networkAdapter = self?.networkAdapter
+        else {
+          return
+      }
       
       if let businessModel = businessModel {
         card.tapAction = {
-          let pageModel = InfoViewControllerPageModelObject(delegate: delegate, businessModel: businessModel)
+          /*
+          let pageModel = InfoViewControllerPageModelObject(networkAdapter: networkAdapter,
+                                                            businessModel: businessModel)
           let vc = InfoViewController(pageModel: pageModel)
           self?.popAnimator.originFrame = card.frame
           vc.transitioningDelegate = self?.popAnimator
           self?.present(vc, animated: true, completion: nil)
+           */
         }
       }
       card.display(businessModel: businessModel)
@@ -61,18 +66,17 @@ class ResultViewController: PAViewController {
   private var searchParameters: SearchParameters
   private let refreshThreshold: UInt
   private let popAnimator = PopAnimator()
-
-  private let infoViewControllerDelegate: InfoViewControllerDelegate
+  private let networkAdapter: NetworkAdapter
   
   private var isOutOfOptions: Bool = false
   
   init(pageModel: ResultViewControllerPageModel) {
-    self.delegate = pageModel.delegate
-    self.infoViewControllerDelegate = pageModel.infoViewControllerDelegate
+    self.networkAdapter = pageModel.networkAdapter
+    self.delegate = ResultActionHandler(networkAdapter: networkAdapter)
     self.searchParameters = pageModel.searchParameters
     self.refreshThreshold = pageModel.refreshThreshold
-    self.card = ResultCardView()
-    self.backupCard = ResultCardView()
+    self.card = ResultCardView(imageHeight: 120)
+    self.backupCard = ResultCardView(imageHeight: 120)
     
     super.init()
     

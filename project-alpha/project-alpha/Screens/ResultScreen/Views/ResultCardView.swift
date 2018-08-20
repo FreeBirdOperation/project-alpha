@@ -34,19 +34,27 @@ protocol ResultDisplayable {
   func unblurImage()
 }
 
-class ResultCardView: PAView {
-  var titleLabel: UILabel
+class ResultCardView: PAView, ResultDisplayable {
+  var titleLabel: PALabel
   var imageView: ImageGalleryView
   var choiceImageView: UIImageView
-  var categoryLabel: UILabel
+  var categoryLabel: PALabel
+  // TODO: Replace with dollar sign view
+  var costLabel: PALabel
+  // TODO: Replace with star view
+  var ratingLabel: PALabel
   let blurFilterView: UIVisualEffectView
+  let supplementaryContentContainer: PAView
   
-  override init() {
-    self.titleLabel = UILabel()
+  init(imageHeight: CGFloat) {
+    self.titleLabel = PALabel()
     self.imageView = ImageGalleryView()
     self.choiceImageView = UIImageView()
-    self.categoryLabel = UILabel()
+    self.categoryLabel = PALabel()
+    self.costLabel = PALabel()
+    self.ratingLabel = PALabel()
     self.blurFilterView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    self.supplementaryContentContainer = PAView()
 
     super.init()
 
@@ -55,8 +63,11 @@ class ResultCardView: PAView {
     imageView.backgroundColor = UIColor.black
     self.addSubview(choiceImageView)
     self.addSubview(categoryLabel)
+    self.addSubview(costLabel)
+    self.addSubview(ratingLabel)
     self.addSubview(blurFilterView)
-    self.setupConstraints()
+    self.addSubview(supplementaryContentContainer)
+    self.setupConstraints(with: imageHeight)
     self.setupBlur()
     
     self.layoutMargins = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -67,9 +78,10 @@ class ResultCardView: PAView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setupConstraints() {
+  private func setupConstraints(with imageHeight: CGFloat) {
     imageView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-    imageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.33)
+    imageView.autoSetDimension(.height, toSize: imageHeight)
+//    imageView.autoMatch(.height, to: .height, of: self, withMultiplier: 0.33)
     imageView.contentMode = .scaleAspectFit
     
     titleLabel.autoPinEdge(toSuperviewMargin: .left)
@@ -82,8 +94,21 @@ class ResultCardView: PAView {
     choiceImageView.autoMatch(.width, to: .height, of: self, withMultiplier: 0.25)
     
     categoryLabel.autoPinEdge(toSuperviewMargin: .left)
-    categoryLabel.autoPinEdge(toSuperviewMargin: .left)
+    categoryLabel.autoPinEdge(toSuperviewMargin: .right)
     categoryLabel.autoPinEdge(.top, to: .bottom, of: titleLabel)
+    categoryLabel.numberOfLines = 0
+    categoryLabel.lineBreakMode = .byWordWrapping
+    
+    costLabel.autoPinEdge(toSuperviewMargin: .left)
+    costLabel.autoPinEdge(toSuperviewMargin: .right)
+    costLabel.autoPinEdge(.top, to: .bottom, of: categoryLabel)
+
+    ratingLabel.autoPinEdge(toSuperviewMargin: .left)
+    ratingLabel.autoPinEdge(toSuperviewMargin: .right)
+    ratingLabel.autoPinEdge(.top, to: .bottom, of: costLabel)
+    
+    supplementaryContentContainer.autoPinEdges(toSuperviewMarginsExcludingEdge: .top)
+    supplementaryContentContainer.autoPinEdge(.top, to: .bottom, of: ratingLabel)
   }
   
   func setupBlur() {
@@ -94,9 +119,8 @@ class ResultCardView: PAView {
     // Remove this to default to blurred, just using for testing for now
     blurFilterView.isHidden = true
   }
-}
-
-extension ResultCardView: ResultDisplayable {
+  
+  // MARK: - Result Displayable Conformance
   private static let leftChoiceImage = #imageLiteral(resourceName: "fork-and-knife")
   private static let rightChoiceImage = #imageLiteral(resourceName: "fork-and-plate")
   
@@ -111,6 +135,11 @@ extension ResultCardView: ResultDisplayable {
     isHidden = false
     titleLabel.text = businessModel.name
     categoryLabel.text = businessModel.businessCategories.joined(separator: ", ")
+    
+    if let price = businessModel.businessPrice {
+      costLabel.text = String.init(repeating: "$", count: Int(price.value))
+    }
+    ratingLabel.text = String(repeating: "*", count: Int(businessModel.businessRating.value))
 
     var displayModel = ImageGalleryViewDisplayModel(imageModels: businessModel.imageReferences.map { PAImageViewDisplayModel(imageReference: $0) })
     if businessModel.imageReferences.count <= 1 {
