@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import YAPI
 
-typealias SearchResult = Result<[BusinessModel], APIError>
+typealias SearchResult = Result<[BusinessModel], ResultError>
 typealias LookupResult = Result<BusinessModel, APIError>
 typealias ReviewResult = Result<[ReviewModel], APIError>
 

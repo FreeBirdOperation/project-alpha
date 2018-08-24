@@ -12,7 +12,21 @@ import AddressBook
 import Contacts
 import YAPI
 
-typealias RetrieveBusinessesCompletionHandler = (Result<[BusinessModel], APIError>) -> Void
+typealias RetrieveBusinessesCompletionHandler = (Result<[BusinessModel], ResultError>) -> Void
+
+enum ResultError: APIError {
+  case emptyResponse
+  case apiError(APIError)
+  
+  var description: String {
+    switch self {
+    case .emptyResponse:
+      return "The response containted no businesses"
+    case .apiError(let error):
+      return error.description
+    }
+  }
+}
 
 protocol ResultViewControllerDelegate: class {
   var viewController: ResultViewController? { get set }
@@ -59,7 +73,28 @@ class ResultActionHandler: ResultViewControllerDelegate {
     searchInProgress = true
     networkAdapter.makeSearchRequest(with: params) { [weak self] result in
       self?.searchInProgress = false
-      completionHandler(result)
+      let filteredResult = result.mapErr {
+        .apiError($0)
+      }.flatMap { results -> Result<[BusinessModel], ResultError> in
+        guard results.isEmpty == false else {
+          return .err(.emptyResponse)
+        }
+        
+        return .ok(results.filter { ResultsCacheController.contains(businessID: $0.id) == false })
+      }
+      
+      if let businesses = filteredResult.intoOk() {
+        guard businesses.isEmpty == false else {
+          DispatchQueue.main.async {
+            self?._viewController?.retrieveBusinesses(completionHandler: completionHandler)
+          }
+          return
+        }
+        completionHandler(.ok(businesses))
+      }
+      else {
+        completionHandler(filteredResult)
+      }
     }
   }
   

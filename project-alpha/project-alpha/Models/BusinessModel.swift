@@ -18,13 +18,18 @@ protocol PriceModel {
   var value: Double { get }
 }
 
+protocol CategoryModel {
+  var name: String { get }
+  var displayName: String { get }
+}
+
 protocol BusinessModel {
   var id: String { get }
   var name: String { get }
   var imageReferences: [ImageReference] { get }
   var coordinate: CLLocationCoordinate2D { get }
   var address: AddressModel? { get }
-  var businessCategories: [String] { get }
+  var businessCategories: [CategoryModel] { get }
   var reviews: [ReviewModel] { get }
   var url: URL? { get }
   var businessRating: RatingModel { get }
@@ -37,7 +42,7 @@ struct MutableBusinessModel: BusinessModel {
   var imageReferences: [ImageReference]
   var coordinate: CLLocationCoordinate2D
   var address: AddressModel?
-  var businessCategories: [String]
+  var businessCategories: [CategoryModel]
   var reviews: [ReviewModel]
   var url: URL?
   var businessRating: RatingModel

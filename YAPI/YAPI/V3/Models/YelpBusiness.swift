@@ -31,7 +31,7 @@ public struct YelpV3Business {
   }
   
   /// A list of category title and alias pairs associated with this business.
-  public let categories: [YelpCategory]
+  public let categories: [YelpV2Category]
 
   /// The coordinates of this business.
   public let coordinates: Coordinate
@@ -81,7 +81,7 @@ public struct YelpV3Business {
   
   init(withDict dict: [String: AnyObject]) throws {
     let categories: [[String: AnyObject]] = try dict.parseParam(key: Params.categories)
-    self.categories = try categories.map { try YelpCategory(withDict: $0) }
+    self.categories = try categories.map { try YelpV2Category(withDict: $0) }
     
     let coordinates: [String: AnyObject] = try dict.parseParam(key: Params.coordinates)
     self.coordinates = try Coordinate(withDict: coordinates)

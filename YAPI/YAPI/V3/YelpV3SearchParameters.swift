@@ -87,7 +87,7 @@ public struct YelpV3SearchParameters {
       let lowValue = min(low.rawValue, high.rawValue)
       let highValue = max(low.rawValue, high.rawValue)
       
-      let range = Array(lowValue...highValue).flatMap { Element(rawValue: $0) }
+      let range = Array(lowValue...highValue).compactMap { Element(rawValue: $0) }
       self.init(range)
     }
   }

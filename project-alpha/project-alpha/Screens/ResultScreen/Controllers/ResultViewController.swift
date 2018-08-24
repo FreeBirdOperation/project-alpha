@@ -26,7 +26,7 @@ struct ResultViewControllerPageModel {
   }
 }
 
-class ResultViewController: PAViewController {
+class ResultViewController: PAViewController, NVActivityIndicatorViewable {
   lazy private var cardViewModel: ResultCardViewModel = {
     return ResultCardViewModel(updateBlock: { [weak self] businessModel in
       guard
@@ -84,6 +84,7 @@ class ResultViewController: PAViewController {
     super.init()
     
     self.delegate.viewController = self
+    self.view.backgroundColor = .lightGray
     
     self.setup(card: backupCard, withGestureRecognizer: false)
     self.setup(card: card, withGestureRecognizer: true)
@@ -145,8 +146,32 @@ class ResultViewController: PAViewController {
     }
   }
   
-  private func retrieveBusinesses(completionHandler: @escaping RetrieveBusinessesCompletionHandler) {
-    delegate.retrieveBusinesses(with: searchParameters, completionHandler: completionHandler)
+  func retrieveBusinesses(completionHandler: @escaping RetrieveBusinessesCompletionHandler) {
+    if cardViewModel.businessModel == nil {
+      startAnimating(message: "Finding Food...")
+    }
+    delegate.retrieveBusinesses(with: searchParameters, completionHandler: { [weak self] result in
+      defer {
+        DispatchQueue.main.async {
+          self?.stopAnimating()
+          completionHandler(result)
+        }
+      }
+      if case .emptyResponse? = result.intoErr() {
+        // TODO: Display error screen saying there's no more options
+        print("Error: Businesses Empty")
+        self?.isOutOfOptions = true
+        if self?.cardViewModel.businessModel == nil && self?.didNavigateToEmptyScreen == false {
+          self?.didNavigateToEmptyScreen = true
+          DispatchQueue.main.async {
+            guard let strongSelf = self else { return }
+            let noResultsViewController = NoResultsFoundViewController(popToViewController: strongSelf.popToViewController)
+            strongSelf.navigationController?.pushViewController(noResultsViewController, animated: false)
+          }
+          return
+        }
+      }
+    })
     searchParameters = searchParameters.nextOffset()
   }
 }
@@ -222,6 +247,10 @@ extension ResultViewController {
   }
   
   func swipe(_ direction: SwipeDirection, animated: Bool) {
+    if let id = cardViewModel.businessModel?.id {
+      ResultsCacheController.add(businessID: id)
+    }
+
     let completionBlock: (Bool) -> Void = { success in
       switch direction {
       case .left:
@@ -256,26 +285,12 @@ extension ResultViewController {
       self?.resetCard(animated: false)
     }
 
+    displayOption()
     if businesses.count < refreshThreshold {
       // Get the next block of restauraunts
       retrieveBusinesses { [weak self] result in
         guard case .ok(let businesses) = result else {
           print("Error: \(result.unwrapErr())")
-          return
-        }
-        
-        guard businesses.isEmpty == false else {
-          // TODO: Display error screen saying there's no more options
-          print("Error: Businesses Empty")
-          self?.isOutOfOptions = true
-          if self?.cardViewModel.businessModel == nil && self?.didNavigateToEmptyScreen == false {
-            self?.didNavigateToEmptyScreen = true
-            DispatchQueue.main.async {
-              guard let strongSelf = self else { return }
-              let noResultsViewController = NoResultsFoundViewController(popToViewController: strongSelf.popToViewController)
-              strongSelf.navigationController?.pushViewController(noResultsViewController, animated: false)
-            }
-          }
           return
         }
         
@@ -288,6 +303,5 @@ extension ResultViewController {
         }
       }
     }
-    displayOption()
   }
 }

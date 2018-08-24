@@ -9,6 +9,52 @@
 /* Begin PBXBuildFile section */
 		08369286212A982D0000AE78 /* NoResultsFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369285212A982D0000AE78 /* NoResultsFoundViewController.swift */; };
 		08369288212A9CE80000AE78 /* ResultsCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369287212A9CE80000AE78 /* ResultsCacheController.swift */; };
+		083692B6212BBFE80000AE78 /* NVActivityIndicatorAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836928C212BBFE80000AE78 /* NVActivityIndicatorAnimationDelegate.swift */; };
+		083692B7212BBFE80000AE78 /* NVActivityIndicatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836928E212BBFE80000AE78 /* NVActivityIndicatorPresenter.swift */; };
+		083692B8212BBFE80000AE78 /* NVActivityIndicatorViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836928F212BBFE80000AE78 /* NVActivityIndicatorViewable.swift */; };
+		083692B9212BBFE80000AE78 /* NVActivityIndicatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369291212BBFE80000AE78 /* NVActivityIndicatorShape.swift */; };
+		083692BA212BBFE80000AE78 /* NVActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369292212BBFE80000AE78 /* NVActivityIndicatorView.swift */; };
+		083692BB212BBFE80000AE78 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08369293212BBFE80000AE78 /* Info.plist */; };
+		083692BC212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369295212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotate.swift */; };
+		083692BD212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369296212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridPulse.swift */; };
+		083692BE212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369297212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotate.swift */; };
+		083692BF212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369298212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift */; };
+		083692C0212BBFE80000AE78 /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08369299212BBFE80000AE78 /* NVActivityIndicatorAnimationBallTrianglePath.swift */; };
+		083692C1212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929A212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOut.swift */; };
+		083692C2212BBFE80000AE78 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929B212BBFE80000AE78 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift */; };
+		083692C3212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929C212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift */; };
+		083692C4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929D212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScale.swift */; };
+		083692C5212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929E212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZag.swift */; };
+		083692C6212BBFE80000AE78 /* NVActivityIndicatorAnimationBallBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0836929F212BBFE80000AE78 /* NVActivityIndicatorAnimationBallBeat.swift */; };
+		083692C7212BBFE80000AE78 /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A0212BBFE80000AE78 /* NVActivityIndicatorAnimationSemiCircleSpin.swift */; };
+		083692C8212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRipple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRipple.swift */; };
+		083692C9212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotatePulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A2212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotatePulse.swift */; };
+		083692CA212BBFE80000AE78 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A3212BBFE80000AE78 /* NVActivityIndicatorAnimationSquareSpin.swift */; };
+		083692CB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotateChase.swift */; };
+		083692CC212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A5212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulse.swift */; };
+		083692CD212BBFE80000AE78 /* NVActivityIndicatorAnimationBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A6212BBFE80000AE78 /* NVActivityIndicatorAnimationBlank.swift */; };
+		083692CE212BBFE80000AE78 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A7212BBFE80000AE78 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift */; };
+		083692CF212BBFE80000AE78 /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A8212BBFE80000AE78 /* NVActivityIndicatorAnimationAudioEqualizer.swift */; };
+		083692D0212BBFE80000AE78 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692A9212BBFE80000AE78 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift */; };
+		083692D1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AA212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridBeat.swift */; };
+		083692D2212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */; };
+		083692D3212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AC212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScale.swift */; };
+		083692D4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AD212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift */; };
+		083692D5212BBFE80000AE78 /* NVActivityIndicatorAnimationPacman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AE212BBFE80000AE78 /* NVActivityIndicatorAnimationPacman.swift */; };
+		083692D6212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692AF212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseSync.swift */; };
+		083692D7212BBFE80000AE78 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B0212BBFE80000AE78 /* NVActivityIndicatorAnimationCubeTransition.swift */; };
+		083692D8212BBFE80000AE78 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift */; };
+		083692D9212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B2212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScaleParty.swift */; };
+		083692DA212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B3212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */; };
+		083692DB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseRise.swift */; };
+		083692DC212BBFE80000AE78 /* NVActivityIndicatorAnimationOrbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692B5212BBFE80000AE78 /* NVActivityIndicatorAnimationOrbit.swift */; };
+		083692E0212F150B0000AE78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692DF212F150B0000AE78 /* FilterViewController.swift */; };
+		083692E2212F3D510000AE78 /* PACollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692E1212F3D510000AE78 /* PACollectionView.swift */; };
+		083692E4212F3D940000AE78 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692E3212F3D940000AE78 /* FilterManager.swift */; };
+		083692E9212F78720000AE78 /* YelpCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692E8212F78720000AE78 /* YelpCategory.swift */; };
+		083692EB212F79330000AE78 /* YelpCategoryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692EA212F79330000AE78 /* YelpCategoryParser.swift */; };
+		083692ED212F79530000AE78 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 083692EC212F79520000AE78 /* categories.json */; };
+		083692EF212F811C0000AE78 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083692EE212F811C0000AE78 /* CategoryModel.swift */; };
 		0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */; };
 		0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */; };
 		0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */; };
@@ -88,7 +134,7 @@
 		08FEB6601FE5010600E43632 /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEB65F1FE5010600E43632 /* Assertion.swift */; };
 		A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */; };
 		A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A34B34541FBD4D52005A8C24 /* secrets.plist */; };
-		A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController.swift */; };
+		A34B34571FBD675E005A8C24 /* FilterViewController_LEGACY.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34B34561FBD675E005A8C24 /* FilterViewController_LEGACY.swift */; };
 		A3DFFC571FCCD028006A3555 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +173,53 @@
 /* Begin PBXFileReference section */
 		08369285212A982D0000AE78 /* NoResultsFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsFoundViewController.swift; sourceTree = "<group>"; };
 		08369287212A9CE80000AE78 /* ResultsCacheController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCacheController.swift; sourceTree = "<group>"; };
+		0836928C212BBFE80000AE78 /* NVActivityIndicatorAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationDelegate.swift; sourceTree = "<group>"; };
+		0836928E212BBFE80000AE78 /* NVActivityIndicatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorPresenter.swift; sourceTree = "<group>"; };
+		0836928F212BBFE80000AE78 /* NVActivityIndicatorViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorViewable.swift; sourceTree = "<group>"; };
+		08369290212BBFE80000AE78 /* NVActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVActivityIndicatorView.h; sourceTree = "<group>"; };
+		08369291212BBFE80000AE78 /* NVActivityIndicatorShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorShape.swift; sourceTree = "<group>"; };
+		08369292212BBFE80000AE78 /* NVActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorView.swift; sourceTree = "<group>"; };
+		08369293212BBFE80000AE78 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08369295212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallRotate.swift; sourceTree = "<group>"; };
+		08369296212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridPulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallGridPulse.swift; sourceTree = "<group>"; };
+		08369297212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallClipRotate.swift; sourceTree = "<group>"; };
+		08369298212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallClipRotateMultiple.swift; sourceTree = "<group>"; };
+		08369299212BBFE80000AE78 /* NVActivityIndicatorAnimationBallTrianglePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallTrianglePath.swift; sourceTree = "<group>"; };
+		0836929A212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScalePulseOut.swift; sourceTree = "<group>"; };
+		0836929B212BBFE80000AE78 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineSpinFadeLoader.swift; sourceTree = "<group>"; };
+		0836929C212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallZigZagDeflect.swift; sourceTree = "<group>"; };
+		0836929D212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallScale.swift; sourceTree = "<group>"; };
+		0836929E212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallZigZag.swift; sourceTree = "<group>"; };
+		0836929F212BBFE80000AE78 /* NVActivityIndicatorAnimationBallBeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallBeat.swift; sourceTree = "<group>"; };
+		083692A0212BBFE80000AE78 /* NVActivityIndicatorAnimationSemiCircleSpin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationSemiCircleSpin.swift; sourceTree = "<group>"; };
+		083692A1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRipple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallScaleRipple.swift; sourceTree = "<group>"; };
+		083692A2212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotatePulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallClipRotatePulse.swift; sourceTree = "<group>"; };
+		083692A3212BBFE80000AE78 /* NVActivityIndicatorAnimationSquareSpin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationSquareSpin.swift; sourceTree = "<group>"; };
+		083692A4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotateChase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallRotateChase.swift; sourceTree = "<group>"; };
+		083692A5212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulse.swift; sourceTree = "<group>"; };
+		083692A6212BBFE80000AE78 /* NVActivityIndicatorAnimationBlank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBlank.swift; sourceTree = "<group>"; };
+		083692A7212BBFE80000AE78 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationCircleStrokeSpin.swift; sourceTree = "<group>"; };
+		083692A8212BBFE80000AE78 /* NVActivityIndicatorAnimationAudioEqualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationAudioEqualizer.swift; sourceTree = "<group>"; };
+		083692A9212BBFE80000AE78 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationTriangleSkewSpin.swift; sourceTree = "<group>"; };
+		083692AA212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridBeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallGridBeat.swift; sourceTree = "<group>"; };
+		083692AB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallScaleMultiple.swift; sourceTree = "<group>"; };
+		083692AC212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScale.swift; sourceTree = "<group>"; };
+		083692AD212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallScaleRippleMultiple.swift; sourceTree = "<group>"; };
+		083692AE212BBFE80000AE78 /* NVActivityIndicatorAnimationPacman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationPacman.swift; sourceTree = "<group>"; };
+		083692AF212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulseSync.swift; sourceTree = "<group>"; };
+		083692B0212BBFE80000AE78 /* NVActivityIndicatorAnimationCubeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationCubeTransition.swift; sourceTree = "<group>"; };
+		083692B1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallSpinFadeLoader.swift; sourceTree = "<group>"; };
+		083692B2212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScaleParty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScaleParty.swift; sourceTree = "<group>"; };
+		083692B3212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScalePulseOutRapid.swift; sourceTree = "<group>"; };
+		083692B4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseRise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulseRise.swift; sourceTree = "<group>"; };
+		083692B5212BBFE80000AE78 /* NVActivityIndicatorAnimationOrbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationOrbit.swift; sourceTree = "<group>"; };
+		083692DF212F150B0000AE78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		083692E1212F3D510000AE78 /* PACollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PACollectionView.swift; sourceTree = "<group>"; };
+		083692E3212F3D940000AE78 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
+		083692E8212F78720000AE78 /* YelpCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpCategory.swift; sourceTree = "<group>"; };
+		083692EA212F79330000AE78 /* YelpCategoryParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpCategoryParser.swift; sourceTree = "<group>"; };
+		083692EC212F79520000AE78 /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		083692EE212F811C0000AE78 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		0846EBA31FBC156E001B0F69 /* NetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAdapter.swift; sourceTree = "<group>"; };
 		0846EBA61FBC1CE1001B0F69 /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		0846EBA91FBC1D23001B0F69 /* YelpV3Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpV3Authenticator.swift; sourceTree = "<group>"; };
@@ -219,7 +312,7 @@
 		08FEB65F1FE5010600E43632 /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
 		A3452E6F1FBEADE900EAF5B0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		A34B34541FBD4D52005A8C24 /* secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
-		A34B34561FBD675E005A8C24 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		A34B34561FBD675E005A8C24 /* FilterViewController_LEGACY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController_LEGACY.swift; sourceTree = "<group>"; };
 		A3DFFC561FCCD00F006A3555 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -253,6 +346,95 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0836928B212BBFE80000AE78 /* NVActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				0836928C212BBFE80000AE78 /* NVActivityIndicatorAnimationDelegate.swift */,
+				0836928D212BBFE80000AE78 /* Presenter */,
+				08369290212BBFE80000AE78 /* NVActivityIndicatorView.h */,
+				08369291212BBFE80000AE78 /* NVActivityIndicatorShape.swift */,
+				08369292212BBFE80000AE78 /* NVActivityIndicatorView.swift */,
+				08369293212BBFE80000AE78 /* Info.plist */,
+				08369294212BBFE80000AE78 /* Animations */,
+			);
+			path = NVActivityIndicatorView;
+			sourceTree = "<group>";
+		};
+		0836928D212BBFE80000AE78 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0836928E212BBFE80000AE78 /* NVActivityIndicatorPresenter.swift */,
+				0836928F212BBFE80000AE78 /* NVActivityIndicatorViewable.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		08369294212BBFE80000AE78 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				08369295212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotate.swift */,
+				08369296212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridPulse.swift */,
+				08369297212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotate.swift */,
+				08369298212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift */,
+				08369299212BBFE80000AE78 /* NVActivityIndicatorAnimationBallTrianglePath.swift */,
+				0836929A212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOut.swift */,
+				0836929B212BBFE80000AE78 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift */,
+				0836929C212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift */,
+				0836929D212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScale.swift */,
+				0836929E212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZag.swift */,
+				0836929F212BBFE80000AE78 /* NVActivityIndicatorAnimationBallBeat.swift */,
+				083692A0212BBFE80000AE78 /* NVActivityIndicatorAnimationSemiCircleSpin.swift */,
+				083692A1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRipple.swift */,
+				083692A2212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotatePulse.swift */,
+				083692A3212BBFE80000AE78 /* NVActivityIndicatorAnimationSquareSpin.swift */,
+				083692A4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotateChase.swift */,
+				083692A5212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulse.swift */,
+				083692A6212BBFE80000AE78 /* NVActivityIndicatorAnimationBlank.swift */,
+				083692A7212BBFE80000AE78 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift */,
+				083692A8212BBFE80000AE78 /* NVActivityIndicatorAnimationAudioEqualizer.swift */,
+				083692A9212BBFE80000AE78 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift */,
+				083692AA212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridBeat.swift */,
+				083692AB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */,
+				083692AC212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScale.swift */,
+				083692AD212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift */,
+				083692AE212BBFE80000AE78 /* NVActivityIndicatorAnimationPacman.swift */,
+				083692AF212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseSync.swift */,
+				083692B0212BBFE80000AE78 /* NVActivityIndicatorAnimationCubeTransition.swift */,
+				083692B1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift */,
+				083692B2212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScaleParty.swift */,
+				083692B3212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */,
+				083692B4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseRise.swift */,
+				083692B5212BBFE80000AE78 /* NVActivityIndicatorAnimationOrbit.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		083692DD212F13CF0000AE78 /* FilterScreen */ = {
+			isa = PBXGroup;
+			children = (
+				083692DE212F14F90000AE78 /* Controllers */,
+			);
+			path = FilterScreen;
+			sourceTree = "<group>";
+		};
+		083692DE212F14F90000AE78 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				083692DF212F150B0000AE78 /* FilterViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		083692E7212F785D0000AE78 /* YelpUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				083692E8212F78720000AE78 /* YelpCategory.swift */,
+				083692EA212F79330000AE78 /* YelpCategoryParser.swift */,
+				083692EC212F79520000AE78 /* categories.json */,
+			);
+			path = YelpUtilities;
+			sourceTree = "<group>";
+		};
 		0846EBA21FBC1544001B0F69 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +525,7 @@
 				085870481FC5791F000F973A /* BusinessModel.swift */,
 				08914EE3200DAAF4003AA7DF /* AddressModel.swift */,
 				089C06A820BA1B7C00A42B43 /* ReviewModel.swift */,
+				083692EE212F811C0000AE78 /* CategoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,6 +533,7 @@
 		085870571FCB5B16000F973A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				083692DD212F13CF0000AE78 /* FilterScreen */,
 				089C06AD20BCFE1800A42B43 /* WebViewScreen */,
 				084729A520B897C900D1B1C6 /* MapSearch */,
 				08914F122032968D003AA7DF /* Common */,
@@ -455,6 +639,7 @@
 		087648AD1FB8FF190058E110 /* project-alpha */ = {
 			isa = PBXGroup;
 			children = (
+				083692E7212F785D0000AE78 /* YelpUtilities */,
 				08914F21203BA072003AA7DF /* Animators */,
 				08EAD6931FDDDDD90082DAA6 /* Enums */,
 				08D74CDE1FD4FE1E00306586 /* Utilities */,
@@ -466,7 +651,7 @@
 				087648AE1FB8FF190058E110 /* AppDelegate.swift */,
 				087648B01FB8FF190058E110 /* ViewController.swift */,
 				087648B21FB8FF190058E110 /* Main.storyboard */,
-				A34B34561FBD675E005A8C24 /* FilterViewController.swift */,
+				A34B34561FBD675E005A8C24 /* FilterViewController_LEGACY.swift */,
 				087648B51FB8FF190058E110 /* Assets.xcassets */,
 				087648B71FB8FF190058E110 /* LaunchScreen.storyboard */,
 				087648BA1FB8FF190058E110 /* Info.plist */,
@@ -517,6 +702,7 @@
 				0884301920C61CD8004A1340 /* CallToActionButton.swift */,
 				0884301B20C6612B004A1340 /* PAScrollView.swift */,
 				0890F2D220CC57C200E1DF24 /* CarouselView.swift */,
+				083692E1212F3D510000AE78 /* PACollectionView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -532,6 +718,7 @@
 		08914F21203BA072003AA7DF /* Animators */ = {
 			isa = PBXGroup;
 			children = (
+				0836928B212BBFE80000AE78 /* NVActivityIndicatorView */,
 				08914F22203BA08B003AA7DF /* PopAnimator.swift */,
 			);
 			path = Animators;
@@ -598,6 +785,7 @@
 				08914F1F2038B8F2003AA7DF /* DependencyContext.swift */,
 				08487404208BB69500986FD5 /* ObserverList.swift */,
 				089C069B20B9CADE00A42B43 /* PALocale.swift */,
+				083692E3212F3D940000AE78 /* FilterManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -780,7 +968,9 @@
 				087648B91FB8FF190058E110 /* LaunchScreen.storyboard in Resources */,
 				A34B34551FBD4D52005A8C24 /* secrets.plist in Resources */,
 				087648B61FB8FF190058E110 /* Assets.xcassets in Resources */,
+				083692ED212F79530000AE78 /* categories.json in Resources */,
 				087648B41FB8FF190058E110 /* Main.storyboard in Resources */,
+				083692BB212BBFE80000AE78 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,60 +1014,104 @@
 			files = (
 				08914F0C203295B7003AA7DF /* PhotoViewController.swift in Sources */,
 				08EAD6951FDDDDE80082DAA6 /* SwipeDirection.swift in Sources */,
+				083692DA212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */,
+				083692C9212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotatePulse.swift in Sources */,
 				08487407208BC54D00986FD5 /* RequestSender.swift in Sources */,
 				0858702E1FC3E9C0000F973A /* UIView+project-alpha.swift in Sources */,
-				A34B34571FBD675E005A8C24 /* FilterViewController.swift in Sources */,
+				A34B34571FBD675E005A8C24 /* FilterViewController_LEGACY.swift in Sources */,
 				0846EBA41FBC156E001B0F69 /* NetworkAdapter.swift in Sources */,
 				08914F202038B8F2003AA7DF /* DependencyContext.swift in Sources */,
 				08914EE4200DAAF4003AA7DF /* AddressModel.swift in Sources */,
+				083692D6212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */,
 				0846EBAA1FBC1D23001B0F69 /* YelpV3Authenticator.swift in Sources */,
 				0858703D1FC3F19C000F973A /* NSArray+PureLayout.m in Sources */,
+				083692EF212F811C0000AE78 /* CategoryModel.swift in Sources */,
 				08D74CE21FD5005D00306586 /* Weak.swift in Sources */,
+				083692D8212BBFE80000AE78 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				08691D88203BD556003D3205 /* InfoActionHandler.swift in Sources */,
+				083692B9212BBFE80000AE78 /* NVActivityIndicatorShape.swift in Sources */,
 				089C069C20B9CADE00A42B43 /* PALocale.swift in Sources */,
+				083692D9212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
+				083692CE212BBFE80000AE78 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
 				0884301C20C6612B004A1340 /* PAScrollView.swift in Sources */,
+				083692D0212BBFE80000AE78 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				085870491FC5791F000F973A /* BusinessModel.swift in Sources */,
+				083692D2212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
 				0858704B1FC96651000F973A /* Collections+project-alpha.swift in Sources */,
+				083692C0212BBFE80000AE78 /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
 				0881DE4020B8A71000251057 /* PALabel.swift in Sources */,
 				08914F23203BA08B003AA7DF /* PopAnimator.swift in Sources */,
 				08D74CE01FD4FE2F00306586 /* LocationManager.swift in Sources */,
 				08914F1120329668003AA7DF /* PAImageView.swift in Sources */,
 				0858705A1FCB5B41000F973A /* ResultActionHandler.swift in Sources */,
 				A3452E701FBEADE900EAF5B0 /* ResultViewController.swift in Sources */,
+				083692B8212BBFE80000AE78 /* NVActivityIndicatorViewable.swift in Sources */,
 				084729A820B897ED00D1B1C6 /* MapSearchViewController.swift in Sources */,
 				08E0F6911FBDAA31004C3D24 /* GooglePlaceAuthenticator.swift in Sources */,
 				08FEB6601FE5010600E43632 /* Assertion.swift in Sources */,
+				083692BD212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
 				08369286212A982D0000AE78 /* NoResultsFoundViewController.swift in Sources */,
+				083692D7212BBFE80000AE78 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
 				0884301A20C61CD8004A1340 /* CallToActionButton.swift in Sources */,
+				083692DC212BBFE80000AE78 /* NVActivityIndicatorAnimationOrbit.swift in Sources */,
+				083692E2212F3D510000AE78 /* PACollectionView.swift in Sources */,
 				089C06BC20C304B200A42B43 /* BufferingOverlay.swift in Sources */,
 				08914F072032875D003AA7DF /* ImageGalleryView.swift in Sources */,
 				08E0F68D1FBDA550004C3D24 /* YelpV2NetworkAdapter.swift in Sources */,
+				083692CD212BBFE80000AE78 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
+				083692C2212BBFE80000AE78 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				08914F142032B0D7003AA7DF /* PAView.swift in Sources */,
+				083692C1212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */,
 				089C06A920BA1B7C00A42B43 /* ReviewModel.swift in Sources */,
+				083692EB212F79330000AE78 /* YelpCategoryParser.swift in Sources */,
+				083692CF212BBFE80000AE78 /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,
 				089C06B020BCFE3A00A42B43 /* WebViewController.swift in Sources */,
+				083692C5212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
+				083692D1212BBFE80000AE78 /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */,
+				083692CB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				08914F0A203294FE003AA7DF /* PhotoViewerViewController.swift in Sources */,
 				089C06BA20BEE89D00A42B43 /* ReviewView.swift in Sources */,
 				0858703B1FC3F19C000F973A /* NSLayoutConstraint+PureLayout.m in Sources */,
 				08914F26203BA300003AA7DF /* InfoViewController.swift in Sources */,
 				0846EBA71FBC1CE1001B0F69 /* Authenticator.swift in Sources */,
 				08914F0E203295E7003AA7DF /* PAViewController.swift in Sources */,
+				083692BA212BBFE80000AE78 /* NVActivityIndicatorView.swift in Sources */,
+				083692CA212BBFE80000AE78 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
+				083692BE212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
 				0881DE3E20B8A68900251057 /* PAButton.swift in Sources */,
 				0846EBAC1FBC1D7A001B0F69 /* YelpV3NetworkAdapter.swift in Sources */,
+				083692D5212BBFE80000AE78 /* NVActivityIndicatorAnimationPacman.swift in Sources */,
+				083692B7212BBFE80000AE78 /* NVActivityIndicatorPresenter.swift in Sources */,
+				083692C7212BBFE80000AE78 /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */,
 				0890F2D320CC57C200E1DF24 /* CarouselView.swift in Sources */,
 				087648B11FB8FF190058E110 /* ViewController.swift in Sources */,
 				089C06B620BE638500A42B43 /* PATableViewCell.swift in Sources */,
 				08E0F68F1FBDAA12004C3D24 /* GooglePlaceNetworkAdapter.swift in Sources */,
+				083692BC212BBFE80000AE78 /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
 				089C06B820BE69EC00A42B43 /* ReviewsCell.swift in Sources */,
+				083692E4212F3D940000AE78 /* FilterManager.swift in Sources */,
+				083692D3212BBFE80000AE78 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
+				083692BF212BBFE80000AE78 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
+				083692B6212BBFE80000AE78 /* NVActivityIndicatorAnimationDelegate.swift in Sources */,
 				089C06B420BDA98000A42B43 /* WebsiteView.swift in Sources */,
 				087648AF1FB8FF190058E110 /* AppDelegate.swift in Sources */,
 				0858703C1FC3F19C000F973A /* ALView+PureLayout.m in Sources */,
 				08369288212A9CE80000AE78 /* ResultsCacheController.swift in Sources */,
+				083692C3212BBFE80000AE78 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */,
+				083692CC212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
 				08E0F68B1FBDA4AA004C3D24 /* YelpV2Authenticator.swift in Sources */,
+				083692DB212BBFE80000AE78 /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */,
 				08914EE6200DB486003AA7DF /* MKMapItem+project-alpha.swift in Sources */,
+				083692C6212BBFE80000AE78 /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
+				083692C4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
+				083692C8212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRipple.swift in Sources */,
+				083692E0212F150B0000AE78 /* FilterViewController.swift in Sources */,
 				08487405208BB69500986FD5 /* ObserverList.swift in Sources */,
+				083692E9212F78720000AE78 /* YelpCategory.swift in Sources */,
 				089C06AB20BA2B5F00A42B43 /* InfoCardView.swift in Sources */,
 				089C06B220BD21D800A42B43 /* PATableView.swift in Sources */,
 				085870461FC57146000F973A /* ResultCardView.swift in Sources */,
+				083692D4212BBFE80000AE78 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

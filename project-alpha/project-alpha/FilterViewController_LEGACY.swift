@@ -1,5 +1,5 @@
 //
-//  FilterViewController.swift
+//  FilterViewController_LEGACY.swift
 //  project-alpha
 //
 //  Created by Cher Moua on 11/15/17.
@@ -13,7 +13,7 @@ import YAPI
 // Global for testing, get rid of this (Replace with loading spinner or some progress indicator)
 var inProgress: Bool = false
 
-class FilterViewController: PAViewController {
+class FilterViewController_LEGACY: PAViewController {
   // TODO: Inject this
   let locationManager: LocationManagerProtocol = LocationManager.sharedManager
   var networkAdaptor: Condition<NetworkAdapter> = Condition()
@@ -27,6 +27,17 @@ class FilterViewController: PAViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // ----------- Categories --------------
+    let categoryParser = YelpCategoryParser(allowableCategories: ["food", "restaurants"],
+                                            allowCategoryIfParentIsAllowed: true,
+                                            allowableSites: ["US"])
+    
+    let categories = categoryParser.getCategories()
+    
+    print("Num categories: \(categories.count)")
+    print(categories)
+    // ----------- Categories --------------
     
     locationManager.addObserver(self)
     locationManager.requestWhenInUseAuthorization()
@@ -132,7 +143,7 @@ class FilterViewController: PAViewController {
   
 }
 
-extension FilterViewController: NetworkObserver {
+extension FilterViewController_LEGACY: NetworkObserver {
   func loadBegan() {
     startIndicator()
   }
@@ -142,7 +153,7 @@ extension FilterViewController: NetworkObserver {
   }
 }
 
-extension FilterViewController: CLLocationManagerDelegate {
+extension FilterViewController_LEGACY: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard let location = locations.first else { return }
     
@@ -150,7 +161,7 @@ extension FilterViewController: CLLocationManagerDelegate {
   }
 }
 
-extension FilterViewController: UITextFieldDelegate {
+extension FilterViewController_LEGACY: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
   }

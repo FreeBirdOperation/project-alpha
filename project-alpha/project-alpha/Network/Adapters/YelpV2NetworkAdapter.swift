@@ -51,8 +51,8 @@ extension YelpBusiness: BusinessModel {
     return nil
   }
   
-  var businessCategories: [String] {
-    return categories.map { $0.categoryName }
+  var businessCategories: [CategoryModel] {
+    return categories
   }
 }
 
@@ -61,7 +61,7 @@ final class YelpV2NetworkAdapter: RequestSender, NetworkAdapter {
     let searchParams = YelpV2SearchParameters(location: YelpSearchLocation("Portland, OR"))
     let result = APIFactory.Yelp.V2.makeSearchRequest(with: searchParams)
     result.send { result in
-      completionHandler(result.map { $0.businesses ?? [] })
+      completionHandler(result.map { $0.businesses ?? [] }.mapErr { .apiError($0) })
     }
   }
   

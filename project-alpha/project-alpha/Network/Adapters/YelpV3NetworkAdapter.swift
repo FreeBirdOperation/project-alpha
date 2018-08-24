@@ -20,6 +20,16 @@ extension YelpPrice: PriceModel {
   }
 }
 
+extension YelpV2Category: CategoryModel {
+  var name: String {
+    return alias
+  }
+  
+  var displayName: String {
+    return categoryName
+  }
+}
+
 extension YelpV3Business: BusinessModel {
   var businessRating: RatingModel {
     return YelpRating(value: rating)
@@ -54,8 +64,8 @@ extension YelpV3Business: BusinessModel {
     return location
   }
   
-  var businessCategories: [String] {
-    return categories.map { $0.categoryName }
+  var businessCategories: [CategoryModel] {
+    return categories
   }
 }
 
@@ -94,7 +104,7 @@ final class YelpV3NetworkAdapter: RequestSender, NetworkAdapter {
     let request = APIFactory.Yelp.V3.makeSearchRequest(with: yelpSearchParams)
     
     sendRequest(request) { result in
-      completionHandler(result.map { $0.businesses })
+      completionHandler(result.map { $0.businesses }.mapErr { .apiError($0) })
     }
   }
   

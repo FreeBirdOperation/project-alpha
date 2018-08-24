@@ -134,7 +134,7 @@ class ResultCardView: PAView, ResultDisplayable {
     
     isHidden = false
     titleLabel.text = businessModel.name
-    categoryLabel.text = businessModel.businessCategories.joined(separator: ", ")
+    categoryLabel.text = businessModel.businessCategories.map { $0.displayName }.joined(separator: ", ")
     
     if let price = businessModel.businessPrice {
       costLabel.text = String.init(repeating: "$", count: Int(price.value))

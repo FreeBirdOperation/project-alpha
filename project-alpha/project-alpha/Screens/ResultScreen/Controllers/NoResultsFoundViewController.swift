@@ -18,6 +18,8 @@ class NoResultsFoundViewController: PAViewController {
     
     super.init()
     
+    view.backgroundColor = .lightGray
+    
     view.addSubview(label)
     view.addSubview(backButton)
     

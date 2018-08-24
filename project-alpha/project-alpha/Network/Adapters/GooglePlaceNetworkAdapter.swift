@@ -56,7 +56,7 @@ extension GoogleEstablishment: BusinessModel {
     return nil
   }
   
-  var businessCategories: [String] {
+  var businessCategories: [CategoryModel] {
     // TODO: Implement this
     return []
   }
@@ -77,10 +77,10 @@ final class GooglePlaceNetworkAdapter: RequestSender, NetworkAdapter {
     
     switch result {
     case .err(let error):
-      completionHandler(.err(error))
+      completionHandler(.err(.apiError(error)))
     case .ok(let request):
       request.send { result in
-        completionHandler(result.map { $0.results })
+        completionHandler(result.map { $0.results }.mapErr { .apiError($0) })
       }
     }
   }

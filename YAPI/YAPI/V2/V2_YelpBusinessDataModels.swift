@@ -31,7 +31,7 @@ public struct YelpBusiness {
   /// Number of reviews for this business
   public let reviewCount: Int
   /// Provides a list of category name, alias pairs that this business is associated with. For example, [["Local Flavor", "localflavor"], ["Active Life", "active"], ["Mass Media", "massmedia"]] The alias is provided so you can search with the category_filter.
-  public let categories: [YelpCategory]
+  public let categories: [YelpV2Category]
   public let rating: YelpRating
   public let snippet: YelpSnippet
   /// Location data for this business
@@ -65,9 +65,9 @@ public struct YelpBusiness {
     self.phoneNumber = dict["phone"] as? String
     self.displayPhoneNumber = dict["display_phone"] as? String
     self.reviewCount = dict["review_count"] as! Int
-    var categories = [YelpCategory]()
+    var categories = [YelpV2Category]()
     for category in dict["categories"] as! [[String]] {
-      let yelpCategory = YelpCategory(withTuple: category)
+      let yelpCategory = YelpV2Category(withTuple: category)
       categories.append(yelpCategory)
     }
     self.categories = categories
@@ -113,7 +113,7 @@ public struct YelpBusiness {
   }
 }
 
-public struct YelpCategory {
+public struct YelpV2Category {
   private enum Params {
     static let alias = "alias"
     static let title = "title"

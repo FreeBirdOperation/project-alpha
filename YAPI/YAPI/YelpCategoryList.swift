@@ -45,7 +45,7 @@ struct YelpCategoryList {
     self.categories = yelpCategories
   }
   
-  init(categories: [String: [YelpCategory]]) {
+  init(categories: [String: [YelpV2Category]]) {
     var yelpCategories = [String: [YelpCategoryWrapper]](minimumCapacity: categories.count)
     for (key, category) in categories {
       yelpCategories[key] = category.map { YelpCategoryWrapper(category: $0) }
@@ -61,8 +61,8 @@ struct YelpCategoryList {
    
       - Returns: An array of YelpCategories that start with the given prefix
    */
-  func categoriesBeginning(with prefix: String) -> [YelpCategory] {
-    guard let yelpCategories = self.categories[prefix[0].uppercased()] else { return [YelpCategory]() }
+  func categoriesBeginning(with prefix: String) -> [YelpV2Category] {
+    guard let yelpCategories = self.categories[prefix[0].uppercased()] else { return [YelpV2Category]() }
     
     return yelpCategories.filter { $0.category.categoryName.uppercased().hasPrefix(prefix.uppercased()) }.map { $0.category }
   }
@@ -74,7 +74,7 @@ struct YelpCategoryList {
    
       - Returns: The YelpCategory with the given name or nil if none exists
    */
-  func category(named name: String) -> YelpCategory? {
+  func category(named name: String) -> YelpV2Category? {
     let yelpCategories = self.categoriesBeginning(with: name)
     
     return yelpCategories.filter { $0.categoryName == name }.first
@@ -82,17 +82,17 @@ struct YelpCategoryList {
 }
 
 private struct YelpCategoryWrapper {
-  let category: YelpCategory
+  let category: YelpV2Category
   let whitelist: [String]?
   let parents: [String]
   
   init(title: String, alias: String, whitelist: [String]?, parents: [String]) {
-    self.category = YelpCategory(withTuple: [title, alias])
+    self.category = YelpV2Category(withTuple: [title, alias])
     self.whitelist = whitelist
     self.parents = parents
   }
   
-  init(category: YelpCategory) {
+  init(category: YelpV2Category) {
     self.category = category
     self.whitelist = nil
     self.parents = [String]()
